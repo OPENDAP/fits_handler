@@ -1,0 +1,81 @@
+@SET_MAKE@
+
+prefix = @prefix@
+exec_prefix = $(prefix)
+bindir = $(exec_prefix)/cgi-bin
+libdir = $(exec_prefix)/lib
+includedir = $(exec_prefix)/include
+infodir = $(exec_prefix)/info
+
+AR = ar
+AR_FLAGS= cru
+CXX = @CXX@
+RANLIB = @RANLIB@
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+
+LIB=libfits-handler.a
+INCS:=-I. @INCS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+MODS = @MODS@
+DEFS:=@DEFS@
+#CXXFLAGS_DEBUG = -g3 -O0 -Wall -fno-default-inline -fno-defer-pop -Wno-deprecated
+#CXXFLAGS:=$(CXXFLAGS_DEBUG)
+CXXFLAGS:=@CXXFLAGS@ -Wall -Wno-deprecated
+CPPFLAGS:=$(CXXFLAGS) $(DEFS) $(INCS)
+
+# Definition of target and object modules.
+SRCS=fits_module.cc fits_read_attributes.cc fits_read_descriptors.cc FitsRequestHandler.cc
+OBJS=fits_read_attributes.o fits_read_descriptors.o FitsRequestHandler.o
+
+MODOBJS:=fits_module.o
+HANDLER:=fits_handler
+
+all : $(HANDLER)
+
+$(HANDLER) : $(LIB) $(MODOBJS) $(HANDLER).o $(MODS)
+	$(CXX) -o $(HANDLER) $(HANDLER).o $(MODS) $(MODOBJS) $(LIB) $(LIBS)
+
+$(LIB): $(OBJS)
+	$(AR) $(AR_FLAGS) $@ $?
+	$(RANLIB) $(LIB)
+
+%.o : %.cc
+	$(CXX) -c $(CPPFLAGS) $<
+
+install: $(HANDLER) install-mods install-progs
+	-mkdir -p $(libdir)
+	$(INSTALL_DATA) $(LIB) $(libdir)
+	$(RANLIB) $(libdir)/$(LIB)
+
+install-mods:
+	-mkdir -p $(libdir)
+	for h in $(MODOBJS); \
+	    do $(INSTALL_DATA) $$h $(libdir); done
+
+install-progs:
+	-mkdir -p $(bindir)
+	$(INSTALL_PROGRAM) -s $(HANDLER) $(bindir)
+
+clean:
+	rm -f *~ *.bak *.o *.out *.a core $(HANDLER)
+
+distclean : clean
+	-rm -f config.status config.log config.cache Makefile config_fits.h
+
+Makefile: Makefile.in
+	if [ -x ./config.status ]; \
+	then \
+	    ${SHELL} ./config.status; \
+	else \
+	    ./configure; \
+	fi
+
+.PHONY: depend
+depend: 
+	@depend@ -m Makefile.in -- $(CPPFLAGS) -- $(SRCS)
+	$(MAKE) $(MFLAGS) Makefile
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
