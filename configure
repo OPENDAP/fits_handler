@@ -4082,7 +4082,7 @@ echo "$as_me: error: Could not find opendap-g daemon library" >&2;}
     else
 	INCS="$INCS -I${DAEMON_PATH}/include/opendap-g"
 	LIBS="$LIBS -L${DAEMON_PATH}/lib -ldispatch"
-	MODS="$MODS ${DAEMON_PATH}/lib/dods_module.o ${DAEMON_PATH}/lib/test_authenticator.o ${DAEMON_PATH}/lib/no_aggserver.o"
+	MODS="$MODS ${DAEMON_PATH}/lib/dods_module.o ${DAEMON_PATH}/lib/test_authenticator.o"
 
 
 
