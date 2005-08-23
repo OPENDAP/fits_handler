@@ -31,12 +31,14 @@ SRCS=fits_module.cc fits_read_attributes.cc fits_read_descriptors.cc FitsRequest
 OBJS=fits_read_attributes.o fits_read_descriptors.o FitsRequestHandler.o
 
 MODOBJS:=fits_module.o
+HANDLER_SRCS:=fits_handler.cc FitsHandlerApp.cc
+HANDLER_OBJS:=fits_handler.o FitsHandlerApp.o
 HANDLER:=fits_handler
 
 all : $(HANDLER)
 
-$(HANDLER) : $(LIB) $(MODOBJS) $(HANDLER).o $(MODS)
-	$(CXX) -o $(HANDLER) $(HANDLER).o $(MODS) $(MODOBJS) $(LIB) $(LIBS)
+$(HANDLER) : $(HANDLER_OBJS) $(LIB) $(MODOBJS) $(MODS)
+	$(CXX) -o $(HANDLER) $(HANDLER_OBJS) $(MODS) $(MODOBJS) $(LIB) $(LIBS)
 
 $(LIB): $(OBJS)
 	$(AR) $(AR_FLAGS) $@ $?
@@ -60,7 +62,7 @@ install-progs:
 	$(INSTALL_PROGRAM) -s $(HANDLER) $(bindir)
 
 clean:
-	rm -f *~ *.bak *.o *.out *.a core $(HANDLER)
+	rm -f *~ *.bak *.out *.a core $(HANDLER) $(OBJS) $(HANDLER_OBJS)
 
 distclean : clean
 	-rm -f config.status config.log config.cache Makefile config_fits.h
@@ -75,7 +77,7 @@ Makefile: Makefile.in
 
 .PHONY: depend
 depend: 
-	@depend@ -m Makefile.in -- $(CPPFLAGS) -- $(SRCS)
+	@depend@ -m Makefile.in -- $(CPPFLAGS) -- $(SRCS) $(HANDLER_SRCS)
 	$(MAKE) $(MFLAGS) Makefile
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.

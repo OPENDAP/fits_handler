@@ -26,36 +26,13 @@
 //
 // You can contact OPeNDAP, Inc. at PO Box 112, Saunderstown, RI. 02874-0112.
  
-#include "config_fits.h"
-
-#include "FitsResponseNames.h"
-#include "DODSCgi.h"
-#include "DODSFilter.h"
-#include "DODSGlobalIQ.h"
-#include "DODSException.h"
+#include "FitsHandlerApp.h"
 
 int 
 main(int argc, char *argv[])
 {
-    try
-    {
-	DODSGlobalIQ::DODSGlobalInit( argc, argv ) ;
-    }
-    catch( DODSException &e )
-    {
-	cerr << "Error initializing application" << endl ;
-	cerr << "    " << e.get_error_description() << endl ;
-	return 1 ;
-    }
-
-    DODSFilter df(argc, argv);
-
-    DODSCgi d( FITS_NAME, df ) ;
-    d.execute_request() ;
-
-    DODSGlobalIQ::DODSGlobalQuit() ;
-
-    return 0;
+    FitsHandlerApp app ;
+    return app.main( argc, argv ) ;
 }
 
 // $Log: fits_handler.cc,v $
