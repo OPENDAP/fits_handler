@@ -6,7 +6,6 @@ AC_REVISION($Id$)
 
 AC_INIT(fits_handler.cc)
 AC_CONFIG_HEADER(config_fits.h)
-AC_CONFIG_AUX_DIR(../etc)
 
 AC_PREFIX_DEFAULT("${OPENDAP_ROOT}")
 
@@ -25,7 +24,7 @@ FITS_VERSION="OPeNDAP Fits Handler/$VERSION"
 AC_DEFINE_UNQUOTED(FITS_VERSION, "$FITS_VERSION", [Fits Version])
 AC_SUBST(FITS_VERSION)
 
-depend=${DODS_ROOT}/etc/depend.sh
+depend=./depend.sh
 AC_SUBST(depend)
 
 dnl flags for the compilers and linkers - set these before locating the
