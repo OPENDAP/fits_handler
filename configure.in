@@ -90,9 +90,9 @@ AC_DEFUN(DAEMON_PACKAGE, [dnl
     then
 	AC_MSG_ERROR([Could not find opendap-g daemon library])
     else
-	INCS="$INCS -I${DAEMON_PATH}/include/opendap-g"
+	INCS="$INCS -I${DAEMON_PATH}/include/bes"
 	LIBS="$LIBS -L${DAEMON_PATH}/lib -ldispatch"
-	MODS="$MODS ${DAEMON_PATH}/lib/dods_module.o ${DAEMON_PATH}/lib/test_authenticator.o"
+	MODS="$MODS ${DAEMON_PATH}/lib/bes/dods_module.o"
 	AC_SUBST(INCS)
 	AC_SUBST(LIBS)
 	AC_SUBST(MODS)
