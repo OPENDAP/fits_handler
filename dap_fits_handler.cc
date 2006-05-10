@@ -35,6 +35,7 @@
 
 #include "ObjectType.h"
 #include "cgi_util.h"
+#include "ConstraintEvaluator.h"
 
 #include "fits_read_attributes.h"
 #include "fits_read_descriptors.h"
@@ -67,7 +68,8 @@ main(int argc, char *argv[])
 	  }
 
 	  case DODSFilter::DDS_Response: {
-	    DDS dds;
+	    DDS dds( NULL ) ;
+            ConstraintEvaluator ce;
 
 	    string dsn = df.get_dataset_name();
 	    string name = name_path( dsn ) ;
@@ -77,12 +79,13 @@ main(int argc, char *argv[])
 		throw InternalErr( __FILE__, __LINE__, fits_err ) ;
 	    }
 	    df.read_ancillary_dds(dds);
-	    df.send_dds(dds, true);
+	    df.send_dds(dds, ce, true);
 	    break;
 	  }
 
 	  case DODSFilter::DataDDS_Response: {
-	    DDS dds;
+	    DDS dds( NULL ) ;
+            ConstraintEvaluator ce;
 
 	    string dsn = df.get_dataset_name();
 	    string name = name_path( dsn ) ;
@@ -93,13 +96,14 @@ main(int argc, char *argv[])
 		throw InternalErr( __FILE__, __LINE__, fits_err ) ;
 	    }
 	    df.read_ancillary_dds(dds);
-	    df.send_data(dds, stdout);
+	    df.send_data(dds, ce, stdout);
 	    break;
 	  }
 
 	  case DODSFilter::DDX_Response: {
-	    DDS dds;
+	    DDS dds( NULL ) ;
 	    DAS das;
+            ConstraintEvaluator ce;
 
 	    string dsn = df.get_dataset_name();
 	    string name = name_path( dsn ) ;
@@ -122,7 +126,7 @@ main(int argc, char *argv[])
 
 	    dds.transfer_attributes(&das);
 
-	    df.send_ddx(dds, stdout);
+	    df.send_ddx(dds, ce, stdout);
 	    break;
 	  }
 
@@ -137,8 +141,8 @@ main(int argc, char *argv[])
 	}
     }
     catch (Error &e) {
-	set_mime_text(cout, dods_error, cgi_version);
-	e.print(cout);
+	set_mime_text(stdout, dods_error, cgi_version);
+	e.print(stdout);
 	return 1;
     }
 

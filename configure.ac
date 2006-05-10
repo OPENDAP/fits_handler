@@ -27,6 +27,8 @@ AC_CHECK_TYPES([ptrdiff_t])
 # Checks for library functions.
 AC_CHECK_FUNCS([strchr])
 
+AC_PROG_LIBTOOL
+
 dnl Checks for specific libraries
 AC_CHECK_LIBDAP([3.5.3],
  [
@@ -37,13 +39,9 @@ AC_CHECK_LIBDAP([3.5.3],
 ])
   
 AC_CHECK_BES([3.1.0],
- [
-  LDFLAGS="$LDFLAGS $BES_LDFLAGS"
-  CPPFLAGS="$CPPFLAGS $BES_CFLAGS"
-  LDADD="$LDADD $BES_LDADD"
- ],
- [ AC_MSG_ERROR([Cannot find libdap])
-])
+ [ AC_MSG_RESULT([$BES_PATH]) ],
+ [ AC_MSG_ERROR([Cannot find libdap]) ]
+)
   
 dnl Check for the cfits library.
 AC_DEFUN([AC_CHECK_CFITS],

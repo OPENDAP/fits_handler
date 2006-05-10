@@ -11,7 +11,7 @@
 #include "DAS.h"
 #include "fits_read_descriptors.h"
 #include "DDS.h"
-#include "DODSTextInfo.h"
+#include "DODSVersionInfo.h"
 #include "fits_version.h"
 #include "DODSConstraintFuncs.h"
 
@@ -81,13 +81,16 @@ bool
 FitsRequestHandler::fits_build_vers( DODSDataHandlerInterface &dhi )
 {
     bool ret = true ;
-    DODSTextInfo *info = dynamic_cast<DODSTextInfo *>(dhi.response_handler->get_response_object());
+    DODSVersionInfo *info = dynamic_cast<DODSVersionInfo *>(dhi.response_handler->get_response_object());
+    info->addHandlerVersion( PACKAGE_NAME, PACKAGE_VERSION ) ;
+    /*
     info->add_data( (string)"    " + fits_version() + "\n" ) ;
     float vers = 0.0 ;
     vers = ffvers( &vers ) ;
     char buf[16] ;
     sprintf( buf, "%.3f",vers ) ;
     info->add_data( (string)"        cfitsio: " + buf + "\n" ) ;
+    */
     return ret ;
 }
 

@@ -14,7 +14,7 @@ using std::string ;
 inline string
 fits_version()
 {
-    return (string)FITS_VERSION + ": compiled on " + __DATE__ + ":" + __TIME__ ;
+    return (string)PACKAGE_STRING + ": compiled on " + __DATE__ + ":" + __TIME__ ;
 }
 
 #endif // E_fits_version_h

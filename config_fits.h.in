@@ -6,6 +6,9 @@
 /* Set instrumentation to level 2 */
 #undef DODS_DEBUG2
 
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
 /* Define to 1 if you have the <fitsio.h> header file. */
 #undef HAVE_FITSIO_H
 
