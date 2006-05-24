@@ -14,7 +14,7 @@ using std::flush ;
 #include "FitsResponseNames.h"
 #include "DODSFilter.h"
 #include "DODSCgi.h"
-#include "dods_module.h"
+#include "default_module.h"
 #include "opendap_commands.h"
 
 FitsHandlerApp::FitsHandlerApp()
@@ -34,7 +34,7 @@ FitsHandlerApp::~FitsHandlerApp()
 int
 FitsHandlerApp::initialize( int argc, char **argv )
 {
-    dods_module::initialize( argc, argv ) ;
+    default_module::initialize( argc, argv ) ;
     opendap_commands::initialize( argc, argv ) ;
 
     OPeNDAPBaseApp::initialize( argc, argv ) ;
