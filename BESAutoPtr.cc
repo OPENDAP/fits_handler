@@ -1,10 +1,10 @@
-// OPeNDAPFitsModule.h
+// BESAutoPtr.cc
 
-// This file is part of bes, A C++ back-end server implementation framework
-// for the OPeNDAP Data Access Protocol.
+// This file is part of fits_handler, a data handler for the OPeNDAP data
+// server. 
 
 // Copyright (c) 2004,2005 University Corporation for Atmospheric Research
-// Author: Patrick West <pwest@ucar.org>
+// Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,20 +28,75 @@
 //
 // Authors:
 //      pwest       Patrick West <pwest@ucar.edu>
+//      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
-#ifndef A_OPeNDAPFitsModule_H
-#define A_OPeNDAPFitsModule_H 1
+#include "BESAutoPtr.h"
 
-#include "OPeNDAPAbstractModule.h"
-
-class OPeNDAPFitsModule : public OPeNDAPAbstractModule
+template <class T>
+BESAutoPtr<T>::BESAutoPtr( T* pointed, bool v )
 {
-public:
-    				OPeNDAPFitsModule() {}
-    virtual		    	~OPeNDAPFitsModule() {}
-    virtual void		initialize() ;
-    virtual void		terminate() ;
-} ;
+    p = pointed;
+    _is_vector = v;
+}
 
-#endif // A_OPeNDAPFitsModule_H
+template <class T>
+BESAutoPtr<T>::~BESAutoPtr()
+{
+    if( _is_vector ) 
+	delete [] p; 
+    else 
+	delete p;
+    p = 0;
+}
+
+template <class T>
+T*
+BESAutoPtr<T>::set( T *pointed, bool v )
+{
+    T* temp = p;
+    p = pointed;
+    _is_vector = v;
+    return temp;
+}
+
+template <class T>
+T*
+BESAutoPtr<T>::get() const
+{
+    return p;
+}
+
+template <class T>
+T*
+BESAutoPtr<T>::operator ->() const
+{
+    return p;
+}
+
+template <class T>
+T&
+BESAutoPtr<T>::operator *() const
+{
+    return *p;
+}
+
+template <class T>
+T*
+BESAutoPtr<T>::release()
+{
+    T* old = p;
+    p = 0;
+    return old;
+}
+
+template <class T>
+void
+BESAutoPtr<T>::reset()
+{
+    if( _is_vector ) 
+	delete [] p; 
+    else 
+	delete p;
+    p = 0;
+}
 

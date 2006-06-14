@@ -1,10 +1,10 @@
-// DODSAutoPtr.cc
+// FitsModule.cc
 
 // This file is part of bes, A C++ back-end server implementation framework
 // for the OPeNDAP Data Access Protocol.
 
 // Copyright (c) 2004,2005 University Corporation for Atmospheric Research
-// Author: Patrick West <pwest@ucar.org>
+// Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,82 +28,43 @@
 //
 // Authors:
 //      pwest       Patrick West <pwest@ucar.edu>
+//      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
-#include "DODSAutoPtr.h"
+#include <iostream>
 
-template <class T>
-DODSAutoPtr<T>::DODSAutoPtr( T* pointed, bool v )
-{
-    p = pointed;
-    _is_vector = v;
-}
+using std::endl ;
 
-template <class T>
-DODSAutoPtr<T>::~DODSAutoPtr()
-{
-    if( _is_vector ) 
-	delete [] p; 
-    else 
-	delete p;
-    p = 0;
-}
+#include "FitsModule.h"
+#include "BESRequestHandlerList.h"
+#include "FitsRequestHandler.h"
+#include "BESLog.h"
+#include "FitsResponseNames.h"
 
-template <class T>
-T*
-DODSAutoPtr<T>::set( T *pointed, bool v )
-{
-    T* temp = p;
-    p = pointed;
-    _is_vector = v;
-    return temp;
-}
-
-template <class T>
-T*
-DODSAutoPtr<T>::get() const
-{
-    return p;
-}
-
-template <class T>
-T*
-DODSAutoPtr<T>::operator ->() const
-{
-    return p;
-}
-
-template <class T>
-T&
-DODSAutoPtr<T>::operator *() const
-{
-    return *p;
-}
-
-template <class T>
-T*
-DODSAutoPtr<T>::release()
-{
-    T* old = p;
-    p = 0;
-    return old;
-}
-
-template <class T>
 void
-DODSAutoPtr<T>::reset()
+FitsModule::initialize()
 {
-    if( _is_vector ) 
-	delete [] p; 
-    else 
-	delete p;
-    p = 0;
+    if( BESLog::TheLog()->is_verbose() )
+	(*BESLog::TheLog()) << "Initializing Fits Handler:" << endl ;
+
+    if( BESLog::TheLog()->is_verbose() )
+	(*BESLog::TheLog()) << "    adding " << FITS_NAME << " request handler" << endl ;
+    BESRequestHandlerList::TheList()->add_handler( FITS_NAME, new FitsRequestHandler( FITS_NAME ) ) ;
 }
 
-// $Log: DODSAutoPtr.cc,v $
-// Revision 1.2  2004/09/09 17:17:12  pwest
-// Added copywrite information
-//
-// Revision 1.1  2004/06/30 20:16:24  pwest
-// dods dispatch code, can be used for apache modules or simple cgi script
-// invocation or opendap daemon. Built during cedar server development.
-//
+void
+FitsModule::terminate()
+{
+    if( BESLog::TheLog()->is_verbose() )
+	(*BESLog::TheLog()) << "Removing Fits Handlers" << endl;
+    BESRequestHandler *rh = BESRequestHandlerList::TheList()->remove_handler( FITS_NAME ) ;
+    if( rh ) delete rh ;
+}
+
+extern "C"
+{
+    BESAbstractModule *maker()
+    {
+	return new FitsModule ;
+    }
+}
+

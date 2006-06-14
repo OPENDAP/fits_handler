@@ -1,22 +1,50 @@
 // FitsRequestHandler.cc
 
-// 2004 Copyright University Corporation for Atmospheric Research
+// This file is part of fits_handler, a data handler for the OPeNDAP data
+// server. 
+
+// Copyright (c) 2004,2005 University Corporation for Atmospheric Research
+// Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+// 
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+// You can contact University Corporation for Atmospheric Research at
+// 3080 Center Green Drive, Boulder, CO 80301
+ 
+// (c) COPYRIGHT University Corporation for Atmostpheric Research 2004-2005
+// Please read the full copyright statement in the file COPYRIGHT_UCAR.
+//
+// Authors:
+//      pwest       Patrick West <pwest@ucar.edu>
+//      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
 #include "FitsRequestHandler.h"
-#include "DODSResponseHandler.h"
-#include "DODSResponseException.h"
-#include "DODSResponseNames.h"
+#include "BESResponseHandler.h"
+#include "BESResponseException.h"
+#include "BESResponseNames.h"
 #include "FitsResponseNames.h"
 #include "fits_read_attributes.h"
 #include "DAS.h"
 #include "fits_read_descriptors.h"
 #include "DDS.h"
-#include "DODSVersionInfo.h"
+#include "BESVersionInfo.h"
 #include "fits_version.h"
-#include "DODSConstraintFuncs.h"
+#include "BESConstraintFuncs.h"
 
 FitsRequestHandler::FitsRequestHandler( string name )
-    : DODSRequestHandler( name )
+    : BESRequestHandler( name )
 {
     add_handler( DAS_RESPONSE, FitsRequestHandler::fits_build_das ) ;
     add_handler( DDS_RESPONSE, FitsRequestHandler::fits_build_dds ) ;
@@ -30,7 +58,7 @@ FitsRequestHandler::~FitsRequestHandler()
 }
 
 bool
-FitsRequestHandler::fits_build_das( DODSDataHandlerInterface &dhi )
+FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 {
     bool ret = true ;
     DAS *das = dynamic_cast<DAS *>(dhi.response_handler->get_response_object());
@@ -39,13 +67,13 @@ FitsRequestHandler::fits_build_das( DODSDataHandlerInterface &dhi )
 				dhi.container->get_real_name(),
 				fits_error ) )
     {
-	throw DODSResponseException( fits_error ) ;
+	throw BESResponseException( fits_error ) ;
     }
     return ret ;
 }
 
 bool
-FitsRequestHandler::fits_build_dds( DODSDataHandlerInterface &dhi )
+FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 {
     bool ret = true ;
     DDS *dds = dynamic_cast<DDS *>(dhi.response_handler->get_response_object());
@@ -55,14 +83,14 @@ FitsRequestHandler::fits_build_dds( DODSDataHandlerInterface &dhi )
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
-	throw DODSResponseException( fits_error ) ;
+	throw BESResponseException( fits_error ) ;
     }
-    DODSConstraintFuncs::post_append( dhi ) ;
+    BESConstraintFuncs::post_append( dhi ) ;
     return ret ;
 }
 
 bool
-FitsRequestHandler::fits_build_data( DODSDataHandlerInterface &dhi )
+FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 {
     DDS *dds = dynamic_cast<DDS *>(dhi.response_handler->get_response_object());
     string fits_error ;
@@ -71,17 +99,17 @@ FitsRequestHandler::fits_build_data( DODSDataHandlerInterface &dhi )
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
-	throw DODSResponseException( fits_error ) ;
+	throw BESResponseException( fits_error ) ;
     }
-    DODSConstraintFuncs::post_append( dhi ) ;
+    BESConstraintFuncs::post_append( dhi ) ;
     return true ;
 }
 
 bool
-FitsRequestHandler::fits_build_vers( DODSDataHandlerInterface &dhi )
+FitsRequestHandler::fits_build_vers( BESDataHandlerInterface &dhi )
 {
     bool ret = true ;
-    DODSVersionInfo *info = dynamic_cast<DODSVersionInfo *>(dhi.response_handler->get_response_object());
+    BESVersionInfo *info = dynamic_cast<BESVersionInfo *>(dhi.response_handler->get_response_object());
     info->addHandlerVersion( PACKAGE_NAME, PACKAGE_VERSION ) ;
     /*
     info->add_data( (string)"    " + fits_version() + "\n" ) ;
@@ -95,10 +123,10 @@ FitsRequestHandler::fits_build_vers( DODSDataHandlerInterface &dhi )
 }
 
 bool
-FitsRequestHandler::fits_build_help( DODSDataHandlerInterface &dhi )
+FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
 {
     bool ret = true ;
-    DODSInfo *info = dynamic_cast<DODSInfo *>(dhi.response_handler->get_response_object());
+    BESInfo *info = dynamic_cast<BESInfo *>(dhi.response_handler->get_response_object());
 
     info->add_data( (string)"fits-handler help: " + fits_version() + "\n" ) ;
 

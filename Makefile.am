@@ -12,13 +12,14 @@ ACLOCAL_AMFLAGS = -I conf
 bin_PROGRAMS = dap_fits_handler
 
 
+lib_LTLIBRARIES = libfits_handler.la
 if OPENDAPSERVER
-    noinst_PROGRAMS = bes_fits_handler
     SRCS = $(FITSSRCS) $(FITSHDRS)
-    lib_LTLIBRARIES = libfits_handler.la libfits_module.la
+    lib_besdir=$(prefix)/lib/bes
+    lib_bes_LTLIBRARIES = libfits_module.la
+    noinst_PROGRAMS = bes_fits_handler
 else
     SRCS = $(DAP_HANDLER_SRC) $(FITSSRCS) $(FITSHDRS)
-    lib_LTLIBRARIES = libfits_handler.la
 endif
 
 libfits_handler_la_SOURCES = $(SRCS)
@@ -27,11 +28,11 @@ FITSSRCS:=fits_read_attributes.cc fits_read_descriptors.cc
 
 FITSHDRS:=fits_read_attributes.h fits_read_descriptors.h config_fits.h
 
-DAP_HANDLER_SRC = DODSAutoPtr.cc
+DAP_HANDLER_SRC = BESAutoPtr.cc
 
-BES_HANDLER_SRC = FitsRequestHandler.cc OPeNDAPFitsModule.cc \
+BES_HANDLER_SRC = FitsRequestHandler.cc FitsModule.cc \
 		  FitsRequestHandler.h FitsResponseNames.h \
-		  OPeNDAPFitsModule.h
+		  FitsModule.h
 
 dap_fits_handler_SOURCES = dap_fits_handler.cc
 dap_fits_handler_LDADD = libfits_handler.la

@@ -1,10 +1,10 @@
-// OPeNDAPFitsModule.cc
+// BESAutoPtr.h
 
-// This file is part of bes, A C++ back-end server implementation framework
-// for the OPeNDAP Data Access Protocol.
+// This file is part of fits_handler, a data handler for the OPeNDAP data
+// server. 
 
 // Copyright (c) 2004,2005 University Corporation for Atmospheric Research
-// Author: Patrick West <pwest@ucar.org>
+// Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,42 +28,35 @@
 //
 // Authors:
 //      pwest       Patrick West <pwest@ucar.edu>
+//      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
-#include <iostream>
+#ifndef BESAutoPtr_h_
+#define BESAutoPtr_h_ 1
 
-using std::endl ;
-
-#include "OPeNDAPFitsModule.h"
-#include "DODSRequestHandlerList.h"
-#include "FitsRequestHandler.h"
-#include "DODSLog.h"
-#include "FitsResponseNames.h"
-
-void
-OPeNDAPFitsModule::initialize()
+template <class T>
+class BESAutoPtr
 {
-    if( DODSLog::TheLog()->is_verbose() )
-	(*DODSLog::TheLog()) << "Initializing Fits Handler:" << endl ;
+private:
+    T* p;
+    bool _is_vector;
 
-    if( DODSLog::TheLog()->is_verbose() )
-	(*DODSLog::TheLog()) << "    adding " << FITS_NAME << " request handler" << endl ;
-    DODSRequestHandlerList::TheList()->add_handler( FITS_NAME, new FitsRequestHandler( FITS_NAME ) ) ;
-}
+    // disable copy constructor.
+    template <class U> BESAutoPtr(BESAutoPtr<U> &){};
 
-void
-OPeNDAPFitsModule::terminate()
-{
-    if( DODSLog::TheLog()->is_verbose() )
-	(*DODSLog::TheLog()) << "Removing Fits Handlers" << endl;
-    DODSRequestHandler *rh = DODSRequestHandlerList::TheList()->remove_handler( FITS_NAME ) ;
-    if( rh ) delete rh ;
-}
+    // disable overloaded = operator.
+    template <class U> BESAutoPtr<T>& operator= (BESAutoPtr<U> &){ return *this ; }
 
-extern "C"
-{
-    OPeNDAPAbstractModule *maker()
-    {
-	return new OPeNDAPFitsModule ;
-    }
-}
+public:
+    explicit BESAutoPtr(T* pointed=0, bool v=false) ;
+    ~BESAutoPtr() ;
+
+    T* set(T *pointed, bool v=false) ;
+    T* get() const ;
+    T* operator ->() const ;
+    T& operator *() const ;
+    T* release() ;
+    void reset() ;
+};
+
+#endif // BESAutoPtr_h_
 

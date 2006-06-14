@@ -1,3 +1,35 @@
+// fits_read_descriptors.cc
+
+// This file is part of fits_handler, a data handler for the OPeNDAP data
+// server. 
+
+// Copyright (c) 2004,2005 University Corporation for Atmospheric Research
+// Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+// 
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+// You can contact University Corporation for Atmospheric Research at
+// 3080 Center Green Drive, Boulder, CO 80301
+ 
+// (c) COPYRIGHT University Corporation for Atmostpheric Research 2004-2005
+// Please read the full copyright statement in the file COPYRIGHT_UCAR.
+//
+// Authors:
+//      pwest       Patrick West <pwest@ucar.edu>
+//      jgarcia     Jose Garcia <jgarcia@ucar.edu>
+
 #include "fits_read_descriptors.h"
 
 using fits_handler::ltoa ;
@@ -11,7 +43,7 @@ using fits_handler::ltoa ;
 #include "PassiveInt32.h"
 #include "PassiveFloat32.h"
 #include "PassiveFloat64.h"
-#include "DODSAutoPtr.cc"
+#include "BESAutoPtr.cc"
 
 #define buffsize 1000
 
@@ -35,7 +67,7 @@ bool
 fits_handler::fits_read_descriptors( DDS &dds, const string &filename,
 				     const string &name, string &error )
 {
-  DODSAutoPtr<PassiveStructure> container(new PassiveStructure(name));
+  BESAutoPtr<PassiveStructure> container(new PassiveStructure(name));
   char tmp [100];
   fitsfile *fptr;
   int status=0;
@@ -96,7 +128,7 @@ fits_handler::fits_read_descriptors( DDS &dds, const string &filename,
 int
 fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
 {
-  DODSAutoPtr<PassiveStructure> container(new PassiveStructure(hdu));
+  BESAutoPtr<PassiveStructure> container(new PassiveStructure(hdu));
   int status=0;
   int anynull, nfound;
   long fpixel;
@@ -114,14 +146,14 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       keya+=ttt;
       if ( fits_read_keyn(fptr, jj, name, value, comment, &status) )
 	return status;
-      DODSAutoPtr<PassiveStructure> st(new PassiveStructure(keya));
-      DODSAutoPtr<PassiveStr> s1(new PassiveStr("name"));
+      BESAutoPtr<PassiveStructure> st(new PassiveStructure(keya));
+      BESAutoPtr<PassiveStr> s1(new PassiveStr("name"));
       string ppp=name;
       s1->set_value(ppp);
-      DODSAutoPtr<PassiveStr> s2(new PassiveStr("value"));
+      BESAutoPtr<PassiveStr> s2(new PassiveStr("value"));
       ppp=value;
       s2->set_value(ppp);
-      DODSAutoPtr<PassiveStr> s3(new PassiveStr("comment"));
+      BESAutoPtr<PassiveStr> s3(new PassiveStr("comment"));
       ppp=comment;
       s3->set_value(ppp);
       st->add_var(s1.get());
@@ -144,8 +176,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
     {
     case BYTE_IMG:
       {
-	DODSAutoPtr<PassiveByte> in(new PassiveByte (str));
-	DODSAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
+	BESAutoPtr<PassiveByte> in(new PassiveByte (str));
+	BESAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -156,7 +188,7 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
 	  npixels=npixels*naxes[w];
 	}
 	dods_byte nullval=0;
-	DODSAutoPtr<dods_byte> buffer(new dods_byte[npixels],true);
+	BESAutoPtr<dods_byte> buffer(new dods_byte[npixels],true);
 	fits_read_img(fptr,TBYTE, fpixel, npixels, &nullval,buffer.get(), &anynull, &status);
 	arr->set_value(buffer.get(),npixels);
 	container->add_var(arr.get());
@@ -165,8 +197,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
     case SHORT_IMG:
       {
 	
-	DODSAutoPtr<PassiveInt16> in(new PassiveInt16 (str));
-	DODSAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
+	BESAutoPtr<PassiveInt16> in(new PassiveInt16 (str));
+	BESAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -177,7 +209,7 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
 	  npixels=npixels*naxes[w];
 	}
 	dods_int16 nullval=0;
-	DODSAutoPtr<dods_int16> buffer(new dods_int16[npixels],true);
+	BESAutoPtr<dods_int16> buffer(new dods_int16[npixels],true);
 	fits_read_img(fptr,TSHORT, fpixel, npixels, &nullval,buffer.get(), &anynull, &status);
 	arr->set_value(buffer.get(),npixels);
 	container->add_var(arr.get());
@@ -185,8 +217,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       break;
     case LONG_IMG:
       {
-	DODSAutoPtr<PassiveInt32> in(new PassiveInt32 (str));
-	DODSAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
+	BESAutoPtr<PassiveInt32> in(new PassiveInt32 (str));
+	BESAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -197,7 +229,7 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
 	  npixels=npixels*naxes[w];
 	}
 	dods_int32 nullval=0;
-	DODSAutoPtr<dods_int32> buffer(new dods_int32[npixels],true);
+	BESAutoPtr<dods_int32> buffer(new dods_int32[npixels],true);
 	fits_read_img(fptr,TLONG, fpixel, npixels, &nullval,buffer.get(), &anynull, &status);
 	arr->set_value(buffer.get(),npixels);
 	container->add_var(arr.get());
@@ -205,8 +237,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       break;
     case FLOAT_IMG:
       {
-	DODSAutoPtr<PassiveFloat32> in(new PassiveFloat32 (str));
-	DODSAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
+	BESAutoPtr<PassiveFloat32> in(new PassiveFloat32 (str));
+	BESAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -217,7 +249,7 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
 	  npixels=npixels*naxes[w];
 	}
 	dods_float32 nullval=0;
-	DODSAutoPtr<dods_float32> buffer(new dods_float32[npixels],true);
+	BESAutoPtr<dods_float32> buffer(new dods_float32[npixels],true);
 	fits_read_img(fptr,TFLOAT, fpixel, npixels, &nullval,buffer.get(), &anynull, &status);
 	arr->set_value(buffer.get(),npixels);
 	container->add_var(arr.get());
@@ -225,8 +257,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       break;
     case DOUBLE_IMG:
       {
-	DODSAutoPtr<PassiveFloat64> in(new PassiveFloat64 (str));
-	DODSAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
+	BESAutoPtr<PassiveFloat64> in(new PassiveFloat64 (str));
+	BESAutoPtr<PassiveArray> arr(new PassiveArray(str,in.get()));
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -237,7 +269,7 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
 	  npixels=npixels*naxes[w];
 	}
 	dods_float64 nullval=0;
-	DODSAutoPtr<dods_float64> buffer(new dods_float64[npixels],true);
+	BESAutoPtr<dods_float64> buffer(new dods_float64[npixels],true);
 	fits_read_img(fptr,TDOUBLE, fpixel, npixels, &nullval,buffer.get(), &anynull, &status);
 	arr->set_value(buffer.get(),npixels);
 	container->add_var(arr.get());
@@ -254,7 +286,7 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
 int
 fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 {
-  DODSAutoPtr<PassiveStructure> container(new PassiveStructure(hdu));
+  BESAutoPtr<PassiveStructure> container(new PassiveStructure(hdu));
   int status=0;
   int nfound, anynull;
   int ncols;
@@ -275,14 +307,14 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
       keya+=ttt;
       if ( fits_read_keyn(fptr, jj, name, value, comment, &status) )
 	return status;
-      DODSAutoPtr<PassiveStructure> st(new PassiveStructure(keya));
-      DODSAutoPtr<PassiveStr> s1(new PassiveStr("name"));
+      BESAutoPtr<PassiveStructure> st(new PassiveStructure(keya));
+      BESAutoPtr<PassiveStr> s1(new PassiveStr("name"));
       string ppp=name;
       s1->set_value(ppp);
-      DODSAutoPtr<PassiveStr> s2(new PassiveStr("value"));
+      BESAutoPtr<PassiveStr> s2(new PassiveStr("value"));
       ppp=value;
       s2->set_value(ppp);
-      DODSAutoPtr<PassiveStr> s3(new PassiveStr("comment"));
+      BESAutoPtr<PassiveStr> s3(new PassiveStr("comment"));
       ppp=comment;
       s3->set_value(ppp);
       st->add_var(s1.get());
@@ -297,7 +329,7 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
   // I am sure this is one of the most obscure piece of code you have ever seen
   // First I get an auto pointer object to hold securely an array of auto pointer
   // objects holding securely pointers to char...
-  DODSAutoPtr< DODSAutoPtr <char> > ttype_autoptr(new DODSAutoPtr <char> [ncols],true);
+  BESAutoPtr< BESAutoPtr <char> > ttype_autoptr(new BESAutoPtr <char> [ncols],true);
   
   // Now I set each one of my auto pointer objects holding pointers to char
   // to hold the address of a dinamically allocated piece of memory (array of chars)...
@@ -307,8 +339,8 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
       (ttype_autoptr.get())[j].set(new char [FLEN_VALUE],true);
     }
   
-  // Now I align my pointers to char inside each DODSAutoPtr <char> object 
-  // inside my DODSAutoPtr< DODSAutoPtr <char> > object to a char** pointer. 
+  // Now I align my pointers to char inside each BESAutoPtr <char> object 
+  // inside my BESAutoPtr< BESAutoPtr <char> > object to a char** pointer. 
   
   // Step 1:
   // I get a insecure pointer an get some memory on it...
@@ -316,8 +348,8 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 
   // Step 2;
   // Lets secure the memory area pointed by ttype inside
-  // a DODSAutoPtr<char*> object, Lets not forget ttype is a vector
-  DODSAutoPtr<char*> secure_ttype(ttype,true);
+  // a BESAutoPtr<char*> object, Lets not forget ttype is a vector
+  BESAutoPtr<char*> secure_ttype(ttype,true);
  
   // Step 3:
   // OK here we are, now we have ncols beautifully aligned pointers to char
@@ -333,7 +365,7 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
   // wasn't that fun ? :)
 
 
-  DODSAutoPtr<PassiveStructure> table(new PassiveStructure(str));
+  BESAutoPtr<PassiveStructure> table(new PassiveStructure(str));
  
   for (int h=0; h<ncols; h++)
     {
@@ -345,15 +377,15 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	case TSTRING:
 	  {
 	    int p;
-	    DODSAutoPtr<PassiveStr> in(new PassiveStr(ttype[h]));
-	    DODSAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
+	    BESAutoPtr<PassiveStr> in(new PassiveStr(ttype[h]));
+	    BESAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
 	    arr->append_dim(nrows);
 	    char strnull[10]="";
 	    char **name=new char* [nrows];
 	    // secure the pointer for exceptions, remember is an array so second parameter is true
-	    DODSAutoPtr<char *> sa1 (name,true);
+	    BESAutoPtr<char *> sa1 (name,true);
 	    // get an auto pointer (sa3) object to hold securely an array of auto pointers to char
-	    DODSAutoPtr< DODSAutoPtr <char> > sa3(new DODSAutoPtr <char> [nrows],true);
+	    BESAutoPtr< BESAutoPtr <char> > sa3(new BESAutoPtr <char> [nrows],true);
 	    for (p=0; p<nrows;p++)
 	      {
 		// get memory
@@ -367,7 +399,7 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	    
 	    string *strings= new string[nrows];
 	    // secure the pointer for exceptions, remember is an array
-	     DODSAutoPtr<string> sa2 (strings,true);
+	     BESAutoPtr<string> sa2 (strings,true);
 	    
 	    for (int p=0; p<nrows;p++)
 		strings[p]=name[p];
@@ -378,11 +410,11 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TSHORT:
 	  {
-	    DODSAutoPtr<PassiveInt16> in (new PassiveInt16(ttype[h]));
-	    DODSAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
+	    BESAutoPtr<PassiveInt16> in (new PassiveInt16(ttype[h]));
+	    BESAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
 	    arr->append_dim(nrows);
 	    dods_int16 nullval=0;
-	    DODSAutoPtr<dods_int16> buffer(new  dods_int16 [nrows],true);
+	    BESAutoPtr<dods_int16> buffer(new  dods_int16 [nrows],true);
 	    fits_read_col(fptr,typecode,h+1,1,1,nrows,&nullval,buffer.get(),&anynull,&status);
 	    arr->set_value(buffer.get(),nrows);
 	    table->add_var(arr.get());
@@ -390,11 +422,11 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TLONG:
 	  {
-	    DODSAutoPtr<PassiveInt32> in(new PassiveInt32(ttype[h]));
-	    DODSAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
+	    BESAutoPtr<PassiveInt32> in(new PassiveInt32(ttype[h]));
+	    BESAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
 	    arr->append_dim(nrows);
 	    dods_int32 nullval=0;
-	    DODSAutoPtr<dods_int32> buffer(new dods_int32[nrows],true);
+	    BESAutoPtr<dods_int32> buffer(new dods_int32[nrows],true);
 	    fits_read_col(fptr,typecode,h+1,1,1,nrows,&nullval,buffer.get(),&anynull,&status);
 	    arr->set_value(buffer.get(),nrows);
 	    table->add_var(arr.get());
@@ -402,11 +434,11 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TFLOAT:
 	  {
-	    DODSAutoPtr<PassiveFloat32> in(new PassiveFloat32(ttype[h]));
-	    DODSAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
+	    BESAutoPtr<PassiveFloat32> in(new PassiveFloat32(ttype[h]));
+	    BESAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
 	    arr->append_dim(nrows);
 	    dods_float32 nullval=0;
-	    DODSAutoPtr<dods_float32> buffer(new dods_float32[nrows],true);
+	    BESAutoPtr<dods_float32> buffer(new dods_float32[nrows],true);
 	    fits_read_col(fptr,typecode,h+1,1,1,nrows,&nullval,buffer.get(),&anynull,&status);
 	    arr->set_value(buffer.get(),nrows);
 	    table->add_var(arr.get());
@@ -414,11 +446,11 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TDOUBLE:
 	  {
-	    DODSAutoPtr<PassiveFloat64> in(new PassiveFloat64(ttype[h]));
-	    DODSAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
+	    BESAutoPtr<PassiveFloat64> in(new PassiveFloat64(ttype[h]));
+	    BESAutoPtr<PassiveArray> arr(new PassiveArray(ttype[h],in.get()));
 	    arr->append_dim(nrows);
 	    dods_float64 nullval=0;
-	    DODSAutoPtr<dods_float64> buffer(new dods_float64[nrows],true);
+	    BESAutoPtr<dods_float64> buffer(new dods_float64[nrows],true);
 	    fits_read_col(fptr,typecode,h+1,1,1,nrows,&nullval,buffer.get(),&anynull,&status);
 	    arr->set_value(buffer.get(),nrows);
 	    table->add_var(arr.get());

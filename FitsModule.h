@@ -1,10 +1,10 @@
-// DODSAutoPtr.h
+// FitsModule.h
 
-// This file is part of bes, A C++ back-end server implementation framework
-// for the OPeNDAP Data Access Protocol.
+// This file is part of fits_handler, a data handler for the OPeNDAP data
+// server. 
 
 // Copyright (c) 2004,2005 University Corporation for Atmospheric Research
-// Author: Patrick West <pwest@ucar.org>
+// Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,45 +28,21 @@
 //
 // Authors:
 //      pwest       Patrick West <pwest@ucar.edu>
+//      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
-#ifndef DODSAutoPtr_h_
-#define DODSAutoPtr_h_ 1
+#ifndef I_FitsModule_H
+#define I_FitsModule_H 1
 
-template <class T>
-class DODSAutoPtr
+#include "BESAbstractModule.h"
+
+class FitsModule : public BESAbstractModule
 {
-private:
-    T* p;
-    bool _is_vector;
-
-    // disable copy constructor.
-    template <class U> DODSAutoPtr(DODSAutoPtr<U> &){};
-
-    // disable overloaded = operator.
-    template <class U> DODSAutoPtr<T>& operator= (DODSAutoPtr<U> &){ return *this ; }
-
 public:
-    explicit DODSAutoPtr(T* pointed=0, bool v=false) ;
-    ~DODSAutoPtr() ;
+    				FitsModule() {}
+    virtual		    	~FitsModule() {}
+    virtual void		initialize() ;
+    virtual void		terminate() ;
+} ;
 
-    T* set(T *pointed, bool v=false) ;
-    T* get() const ;
-    T* operator ->() const ;
-    T& operator *() const ;
-    T* release() ;
-    void reset() ;
-};
+#endif // I_FitsModule_H
 
-#endif // DODSAutoPtr_h_
-
-// $Log: DODSAutoPtr.h,v $
-// Revision 1.3  2005/02/09 19:43:47  pwest
-// compiler warning removed
-//
-// Revision 1.2  2004/09/09 17:17:12  pwest
-// Added copywrite information
-//
-// Revision 1.1  2004/06/30 20:16:24  pwest
-// dods dispatch code, can be used for apache modules or simple cgi script
-// invocation or opendap daemon. Built during cedar server development.
-//
