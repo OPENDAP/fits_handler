@@ -47,4 +47,3 @@ fits_version()
 
 #endif // E_fits_version_h
 
-// $Log: fits_version.h,v $

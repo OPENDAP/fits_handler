@@ -156,4 +156,3 @@ main(int argc, char *argv[])
     return 0;
 }
 
-// $Log: dap_fits_handler.cc,v $

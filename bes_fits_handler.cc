@@ -39,4 +39,3 @@ main(int argc, char *argv[])
     return app.main( argc, argv ) ;
 }
 
-// $Log: fits_handler.cc,v $

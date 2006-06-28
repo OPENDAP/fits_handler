@@ -38,7 +38,13 @@ using std::endl ;
 #include "BESRequestHandlerList.h"
 #include "FitsRequestHandler.h"
 #include "BESLog.h"
+#include "BESContainerStorageList.h"
+#include "BESContainerStorageCatalog.h"
+#include "BESCatalogDirectory.h"
+#include "BESCatalogList.h"
 #include "FitsResponseNames.h"
+
+#define FITS_CATALOG "catalog"
 
 void
 FitsModule::initialize()
@@ -49,6 +55,16 @@ FitsModule::initialize()
     if( BESLog::TheLog()->is_verbose() )
 	(*BESLog::TheLog()) << "    adding " << FITS_NAME << " request handler" << endl ;
     BESRequestHandlerList::TheList()->add_handler( FITS_NAME, new FitsRequestHandler( FITS_NAME ) ) ;
+
+    if( BESLog::TheLog()->is_verbose() )
+	(*BESLog::TheLog()) << "    adding " << FITS_CATALOG << " catalog" 
+		      << endl ;
+    BESCatalogList::TheCatalogList()->add_catalog( new BESCatalogDirectory( FITS_CATALOG) ) ;
+
+    if( BESLog::TheLog()->is_verbose() )
+	(*BESLog::TheLog()) << "Adding Catalog Container Storage" << endl;
+    BESContainerStorageCatalog *csc = new BESContainerStorageCatalog( FITS_CATALOG ) ;
+    BESContainerStorageList::TheList()->add_persistence( csc ) ;
 }
 
 void

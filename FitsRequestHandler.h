@@ -49,4 +49,3 @@ public:
 
 #endif
 
-// $Log: FitsRequestHandler.h,v $

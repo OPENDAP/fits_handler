@@ -67,7 +67,7 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 				dhi.container->get_real_name(),
 				fits_error ) )
     {
-	throw BESResponseException( fits_error ) ;
+	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
     }
     return ret ;
 }
@@ -83,7 +83,7 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
-	throw BESResponseException( fits_error ) ;
+	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
     }
     BESConstraintFuncs::post_append( dhi ) ;
     return ret ;
@@ -99,7 +99,7 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
-	throw BESResponseException( fits_error ) ;
+	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
     }
     BESConstraintFuncs::post_append( dhi ) ;
     return true ;
@@ -128,16 +128,14 @@ FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
     bool ret = true ;
     BESInfo *info = dynamic_cast<BESInfo *>(dhi.response_handler->get_response_object());
 
-    info->add_data( (string)"fits-handler help: " + fits_version() + "\n" ) ;
-
-    string key ;
-    if( dhi.transmit_protocol == "HTTP" )
-	key = (string)"Fits.Help." + dhi.transmit_protocol ;
-    else
-	key = "Fits.Help.TXT" ;
-    info->add_data_from_file( key, FITS_NAME ) ;
+    string handles = (string)DAS_RESPONSE
+                     + "," + DDS_RESPONSE
+                     + "," + DATA_RESPONSE
+                     + "," + HELP_RESPONSE
+                     + "," + VERS_RESPONSE ;
+    info->add_tag( "handles", handles ) ;
+    info->add_tag( "version", PACKAGE_STRING ) ;
 
     return ret ;
 }
 
-// $Log: FitsRequestHandler.cc,v $

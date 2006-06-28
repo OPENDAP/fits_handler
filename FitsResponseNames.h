@@ -37,4 +37,3 @@
 
 #endif // E_FitsResponseNames_H
 
-// $Log: FitsResponseNames.h,v $
