@@ -40,8 +40,8 @@
 #include "fits_read_descriptors.h"
 #include "DDS.h"
 #include "BESVersionInfo.h"
-#include "fits_version.h"
 #include "BESConstraintFuncs.h"
+#include "config_fits.h"
 
 FitsRequestHandler::FitsRequestHandler( string name )
     : BESRequestHandler( name )

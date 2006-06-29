@@ -7,7 +7,7 @@ AC_CONFIG_AUX_DIR([conf])
 
 AM_INIT_AUTOMAKE
 
-AC_CONFIG_SRCDIR([fits_version.h])
+AC_CONFIG_SRCDIR([FitsModule.h])
 AC_CONFIG_HEADER([config_fits.h])
 
 # Checks for programs.
