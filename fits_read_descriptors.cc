@@ -44,6 +44,7 @@ using fits_handler::ltoa ;
 #include "PassiveFloat32.h"
 #include "PassiveFloat64.h"
 #include "BESAutoPtr.cc"
+#include "cgi_util.h"
 
 #define buffsize 1000
 
@@ -122,6 +123,7 @@ fits_handler::fits_read_descriptors( DDS &dds, const string &filename,
       return false;
     }
   dds.add_var(container.get());
+  dds.set_dataset_name(name_path(filename));
   return true;
 }
 

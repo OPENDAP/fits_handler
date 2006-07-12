@@ -35,6 +35,10 @@
 #include <ctype.h>
 #include <assert.h>
 
+#include <string>
+
+using std::string ;
+
 #include <fitsio.h>
 
 #include "fits_read_attributes.h"
@@ -79,14 +83,33 @@ fits_handler::fits_read_attributes( DAS &das,
 	{
 	  if ( fits_read_keyn(fptr, jj, name, value, comment, &status) )
 	    return false;
+
+	  string s_name = "" ;
+	  if( name )
+	      s_name = name ;
+
+	  string s_value = "" ;
+	  if( value )
+	      s_value = value ;
+
+	  string s_comment = "" ;
+	  if( comment )
+	      s_comment = comment ;
+
+	  if( s_name == "" )
+	  {
+	    ltoa( jj, tmp, 10 ) ;
+	    s_name = (string)"key_" + tmp ;
+	  }
+
 	  if (at)
 	    {
 	      string com="\"";
-	      com+=value;
+	      com+=s_value;
 	      com+=" / ";
-	      com+=comment;
+	      com+=s_comment;
 	      com+="\"";
-	      at->append_attr(name, type, com.c_str());
+	      at->append_attr( s_name, type, com ) ;
 	    }
 	      
       }
