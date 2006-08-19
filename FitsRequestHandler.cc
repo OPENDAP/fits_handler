@@ -64,7 +64,7 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
     DAS *das = dynamic_cast<DAS *>(dhi.response_handler->get_response_object());
     string fits_error ;
     if( !fits_handler::fits_read_attributes( *das,
-				dhi.container->get_real_name(),
+				dhi.container->access(),
 				fits_error ) )
     {
 	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
@@ -79,7 +79,7 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
     DDS *dds = dynamic_cast<DDS *>(dhi.response_handler->get_response_object());
     string fits_error ;
     if( !fits_handler::fits_read_descriptors( *dds,
-                                 dhi.container->get_real_name(),
+                                 dhi.container->access(),
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
@@ -95,7 +95,7 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
     DDS *dds = dynamic_cast<DDS *>(dhi.response_handler->get_response_object());
     string fits_error ;
     if( !fits_handler::fits_read_descriptors( *dds,
-                                 dhi.container->get_real_name(),
+                                 dhi.container->access(),
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
