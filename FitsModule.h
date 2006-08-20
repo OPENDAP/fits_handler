@@ -40,8 +40,8 @@ class FitsModule : public BESAbstractModule
 public:
     				FitsModule() {}
     virtual		    	~FitsModule() {}
-    virtual void		initialize() ;
-    virtual void		terminate() ;
+    virtual void		initialize( const string &modname ) ;
+    virtual void		terminate( const string &modname ) ;
 } ;
 
 #endif // I_FitsModule_H

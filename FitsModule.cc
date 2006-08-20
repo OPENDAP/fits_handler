@@ -47,14 +47,14 @@ using std::endl ;
 #define FITS_CATALOG "catalog"
 
 void
-FitsModule::initialize()
+FitsModule::initialize( const string &modname )
 {
     if( BESLog::TheLog()->is_verbose() )
 	(*BESLog::TheLog()) << "Initializing Fits Handler:" << endl ;
 
     if( BESLog::TheLog()->is_verbose() )
-	(*BESLog::TheLog()) << "    adding " << FITS_NAME << " request handler" << endl ;
-    BESRequestHandlerList::TheList()->add_handler( FITS_NAME, new FitsRequestHandler( FITS_NAME ) ) ;
+	(*BESLog::TheLog()) << "    adding " << modname << " request handler" << endl ;
+    BESRequestHandlerList::TheList()->add_handler( modname, new FitsRequestHandler( modname ) ) ;
 
     if( BESLog::TheLog()->is_verbose() )
 	(*BESLog::TheLog()) << "    adding " << FITS_CATALOG << " catalog" 
@@ -68,11 +68,11 @@ FitsModule::initialize()
 }
 
 void
-FitsModule::terminate()
+FitsModule::terminate( const string &modname )
 {
     if( BESLog::TheLog()->is_verbose() )
 	(*BESLog::TheLog()) << "Removing Fits Handlers" << endl;
-    BESRequestHandler *rh = BESRequestHandlerList::TheList()->remove_handler( FITS_NAME ) ;
+    BESRequestHandler *rh = BESRequestHandlerList::TheList()->remove_handler( modname ) ;
     if( rh ) delete rh ;
 }
 
