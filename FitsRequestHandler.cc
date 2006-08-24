@@ -34,6 +34,7 @@
 #include "BESResponseHandler.h"
 #include "BESResponseException.h"
 #include "BESResponseNames.h"
+#include "BESDataNames.h"
 #include "FitsResponseNames.h"
 #include "fits_read_attributes.h"
 #include "DAS.h"
@@ -85,7 +86,7 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
     {
 	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
     }
-    BESConstraintFuncs::post_append( dhi ) ;
+    dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     return ret ;
 }
 
@@ -101,7 +102,7 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
     {
 	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
     }
-    BESConstraintFuncs::post_append( dhi ) ;
+    dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     return true ;
 }
 
