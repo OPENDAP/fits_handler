@@ -32,14 +32,15 @@
 
 #include "FitsRequestHandler.h"
 #include "BESResponseHandler.h"
-#include "BESResponseException.h"
+#include "BESHandlerException.h"
 #include "BESResponseNames.h"
 #include "BESDataNames.h"
 #include "FitsResponseNames.h"
 #include "fits_read_attributes.h"
-#include "DAS.h"
+#include "BESDASResponse.h"
 #include "fits_read_descriptors.h"
-#include "DDS.h"
+#include "BESDDSResponse.h"
+#include "BESDataDDSResponse.h"
 #include "BESVersionInfo.h"
 #include "BESConstraintFuncs.h"
 #include "config_fits.h"
@@ -62,13 +63,16 @@ bool
 FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 {
     bool ret = true ;
-    DAS *das = dynamic_cast<DAS *>(dhi.response_handler->get_response_object());
+    BESDASResponse *bdas =
+	dynamic_cast<BESDASResponse *>(dhi.response_handler->get_response_object());
+    DAS *das = bdas->get_das() ;
+
     string fits_error ;
     if( !fits_handler::fits_read_attributes( *das,
 				dhi.container->access(),
 				fits_error ) )
     {
-	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
+	throw BESHandlerException( fits_error, __FILE__, __LINE__ ) ;
     }
     return ret ;
 }
@@ -77,14 +81,17 @@ bool
 FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 {
     bool ret = true ;
-    DDS *dds = dynamic_cast<DDS *>(dhi.response_handler->get_response_object());
+    BESDDSResponse *bdds =
+	dynamic_cast<BESDDSResponse *>(dhi.response_handler->get_response_object());
+    DDS *dds = bdds->get_dds() ;
+
     string fits_error ;
     if( !fits_handler::fits_read_descriptors( *dds,
                                  dhi.container->access(),
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
-	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
+	throw BESHandlerException( fits_error, __FILE__, __LINE__ ) ;
     }
     dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     return ret ;
@@ -93,14 +100,17 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 bool
 FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 {
-    DDS *dds = dynamic_cast<DDS *>(dhi.response_handler->get_response_object());
+    BESDataDDSResponse *bdds =
+	dynamic_cast<BESDataDDSResponse *>(dhi.response_handler->get_response_object());
+    DataDDS *dds = bdds->get_dds() ;
+
     string fits_error ;
     if( !fits_handler::fits_read_descriptors( *dds,
                                  dhi.container->access(),
 				 dhi.container->get_symbolic_name(),
 				 fits_error ) )
     {
-	throw BESResponseException( fits_error, __FILE__, __LINE__ ) ;
+	throw BESHandlerException( fits_error, __FILE__, __LINE__ ) ;
     }
     dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     return true ;
@@ -109,18 +119,9 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 bool
 FitsRequestHandler::fits_build_vers( BESDataHandlerInterface &dhi )
 {
-    bool ret = true ;
     BESVersionInfo *info = dynamic_cast<BESVersionInfo *>(dhi.response_handler->get_response_object());
     info->addHandlerVersion( PACKAGE_NAME, PACKAGE_VERSION ) ;
-    /*
-    info->add_data( (string)"    " + fits_version() + "\n" ) ;
-    float vers = 0.0 ;
-    vers = ffvers( &vers ) ;
-    char buf[16] ;
-    sprintf( buf, "%.3f",vers ) ;
-    info->add_data( (string)"        cfitsio: " + buf + "\n" ) ;
-    */
-    return ret ;
+    return true ;
 }
 
 bool

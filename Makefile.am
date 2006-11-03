@@ -41,14 +41,6 @@ libfits_module_la_CPPFLAGS = $(BES_CPPFLAGS)
 libfits_module_la_LDFLAGS = -avoid-version -module 
 libfits_module_la_LIBADD = libfits_handler.la $(BES_LIBS)
 
-#bes_fits_handler_SOURCES = bes_fits_handler.cc fits_module.cc \
-#			   FitsHandlerApp.cc FitsHandlerApp.h
-#bes_fits_handler_CPPFLAGS = $(BES_CPPFLAGS)
-#bes_fits_handler_LDFLAGS = $(BES_LDFLAGS) 
-#bes_fits_handler_LDADD = libfits_handler.la libfits_module.la $(BES_LDADD)
-#
-#EXTRA_PROGRAMS = bes_fits_handler
-
 EXTRA_DIST = COPYRIGHT COPYING
 
 CLEANFILES = *~
