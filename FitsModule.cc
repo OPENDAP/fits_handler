@@ -76,6 +76,19 @@ FitsModule::terminate( const string &modname )
     if( rh ) delete rh ;
 }
 
+/** @brief dumps information about this object
+ *
+ * Displays the pointer value of this instance
+ *
+ * @param strm C++ i/o stream to dump the information to
+ */
+void
+FitsModule::dump( ostream &strm ) const
+{
+    strm << BESIndent::LMarg << "FitsModule::dump - ("
+			     << (void *)this << ")" << endl ;
+}
+
 extern "C"
 {
     BESAbstractModule *maker()
