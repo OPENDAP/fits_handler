@@ -40,6 +40,8 @@ public:
 			FitsRequestHandler( string name ) ;
     virtual		~FitsRequestHandler( void ) ;
 
+    virtual void	dump( ostream &strm ) const ;
+
     static bool		fits_build_das( BESDataHandlerInterface &dhi ) ;
     static bool		fits_build_dds( BESDataHandlerInterface &dhi ) ;
     static bool		fits_build_data( BESDataHandlerInterface &dhi ) ;

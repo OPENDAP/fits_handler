@@ -143,3 +143,20 @@ FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
     return ret ;
 }
 
+/** @brief dumps information about this object
+ *
+ * Displays the pointer value of this instance, the name of the request
+ * handler, and the names of all registered handler functions
+ *
+ * @param strm C++ i/o stream to dump the information to
+ */
+void
+FitsRequestHandler::dump( ostream &strm ) const
+{
+    strm << BESIndent::LMarg << "FitsRequestHandler::dump - ("
+			     << (void *)this << ")" << endl ;
+    BESIndent::Indent() ;
+    BESRequestHandler::dump( strm ) ;
+    BESIndent::UnIndent() ;
+}
+

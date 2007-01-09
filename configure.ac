@@ -89,7 +89,7 @@ AC_ARG_WITH([cfits_libdir],
 
 AS_IF([test "z$CFITS_PATH_LIBDIR" = "z"],[CFITS_PATH_LIBDIR="$CFITS_PATH/lib"])
 
-AS_IF([test "z$CFITS_PATH_INC" = "z"],[CFITS_PATH_INC="$CFITS_PATH/include/cfitsio"])
+AS_IF([test "z$CFITS_PATH_INC" = "z"],[CFITS_PATH_INC="$CFITS_PATH/include"])
 
 ac_cfits_ok='yes'
 CFITS_LIBS="-lcfitsio"
