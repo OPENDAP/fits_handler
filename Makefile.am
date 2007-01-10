@@ -41,7 +41,7 @@ libfits_module_la_CPPFLAGS = $(BES_CPPFLAGS)
 libfits_module_la_LDFLAGS = -avoid-version -module 
 libfits_module_la_LIBADD = libfits_handler.la $(BES_LIBS)
 
-EXTRA_DIST = COPYRIGHT COPYING
+EXTRA_DIST = COPYRIGHT COPYING fits_handler.spec
 
 CLEANFILES = *~
 

@@ -1,0 +1,173 @@
+2007-01-09  Patrick West <pwest@ucar.edu>
+
+	Added dump method to the request handler for debugging assistance.
+	Modified the configure.ac file to look for includes in the correct
+	place. Updated the .ini file for testing purposes.
+	M    fits-handler/FitsRequestHandler.cc
+	M    fits-handler/FitsRequestHandler.h
+	M    fits-handler/configure.ac
+	M    fits-handler/opendap.ini
+
+2006-11-23  Patrick West <pwest@ucar.edu>
+
+	Added a dump method to the Module class for BES debugging.
+	M    fits-handler/FitsModule.cc
+	M    fits-handler/FitsModule.h
+	M    fits-handler/opendap.ini
+
+2006-11-06  Patrick West <pwest@ucar.edu>
+
+	Was setting BES_LDFLAGS and using BES_LIBS. Now only setting and using
+	BES_LIBS.
+	M    conf/bes.m4
+	M    configure.ac
+
+2006-11-02  Patrick West <pwest@ucar.edu>
+
+	ConstraintEvaluator is now a part of the BESDDSResponse and
+	BESDataDDSResponse classes instead of BESDataHandlerInterface. Any
+	Error exceptions need to be caught in the request handlers and
+	converted into BESHandlerException, which is the non-fatal
+	exception. Removed the building of a bes style cgi application,
+	building only the typical dap style cgi application.
+	D    fits-handler/bes_fits_handler.cc
+	D    fits-handler/FitsHandlerApp.cc
+	D    fits-handler/FitsHandlerApp.h
+	D    fits-handler/fits_module.cc
+	M    fits-handler/FitsRequestHandler.cc
+	M    fits-handler/Makefile.am
+
+2006-09-27  Patrick West <pwest@ucar.edu>
+
+	--without-bes now works for the different handler directories as
+	well as for the dap-server directory. cedar-handler requires bes. If
+	--without-bes is not specified then either --with-bes is looked at
+	if specified, or the bes-config script is looked for.
+	M    fits-handler/configure.ac
+	M    netcdf_handler/configure.ac
+	M    freeform_handler/configure.ac
+	M    hdf4_handler/configure.ac
+	M    hdf5_handler/configure.ac
+	M    jgofs_handler/configure.ac
+	M    cdf-handler/configure.ac
+	M    dap-server/configure.ac
+	M    fits-handler/configure.ac
+	M    netcdf_handler/configure.ac
+	M    freeform_handler/configure.ac
+	M    hdf4_handler/configure.ac
+	M    hdf5_handler/configure.ac
+	M    jgofs_handler/configure.ac
+	M    cdf-handler/configure.ac
+	M    dap-server/configure.ac
+
+2006-09-15  Patrick West <pwest@ucar.edu>
+
+	Changed the _module library to not use version information and to be
+	built as a module. Update the bes.m4 file to use the --modulesdir
+	flag to bes-config to get the name of the module directory, which is
+	lib/bes.  Updated bes.m4 to be like the other handlers bes.m4.
+	M    conf/bes.m4
+	M    configure.ac
+	M    opendap.ini
+	M    Makefile.am
+
+2006-08-24  Patrick West <pwest@ucar.edu>
+
+	Setting the post constraint variable in the data handler interface
+	to be used when sending the response object.
+	M    FitsRequestHandler.cc
+
+2006-08-19  Patrick West <pwest@ucar.edu>
+
+	Passing the name of the module to the initialize and terminate
+	methods of the Module class so that it is set in the bes
+	configuration file instead of hard-coded
+
+2006-08-19  Patrick West <pwest@ucar.edu>
+
+	changed access to file to use access method on Container and added
+	compression parameters to the BES configuraiton file
+
+2006-07-11  Patrick West <pwest@ucar.edu>
+
+	If an attribute doesn't have a name then create one for it in
+	fits_read_attributes. In fits_read_descriptors added the dataset
+	name to the dds and data dds so that client applications could parse
+	it.
+	M    fits_read_attributes.cc
+	M    fits_read_descriptors.cc
+
+2006-07-06  Patrick West <pwest@ucar.edu>
+
+	dap_cmdmodule library renamed to dap_cmd_module so that all loaded module libraries are named <something>_module
+
+2006-06-30  Patrick West <pwest@ucar.edu>
+
+	In the help response added begin and end tags called handler to
+	separate the different hander help responses and added a tag called
+	name within the handler tag to say which handler this help is for
+
+2006-06-29  Patrick West <pwest@ucar.edu>
+
+	distribution check
+
+2006-06-29  Patrick West <pwest@ucar.edu>
+
+	distribution check
+
+2006-06-28  Patrick West <pwest@ucar.edu>
+
+	bes exception updates, cleaned up configuration file
+
+2006-06-14  Patrick West <pwest@ucar.edu>
+
+	configuration updates, bes modules in lib/bes
+
+2006-05-24  Patrick West <pwest@ucar.edu>
+
+	bes module updates
+
+2006-05-10  Patrick West <pwest@ucar.edu>
+
+	default modules loaded in handler app
+
+2006-05-10  Patrick West <pwest@ucar.edu>
+
+	bes enabled
+
+2006-01-18  Patrick West <pwest@ucar.edu>
+
+	up to date configuration with cgi handler using just dap and one
+	using bes
+
+2005-09-28  Patrick West <pwest@ucar.edu>
+
+	up to date with latest bes code
+
+2005-08-31  Patrick West <pwest@ucar.edu>
+
+	Copied etc scripts into this directory
+
+2005-08-22  Patrick West <pwest@ucar.edu>
+
+	using App class for Handler and cleaned up Makefile for Handler
+
+2005-08-08  root
+
+	Auto reset of Subversion properties
+
+2005-08-01  Patrick West <pwest@ucar.edu>
+
+	no need to link in aggregation handler
+
+2005-07-06  Patrick West <pwest@ucar.edu>
+
+	Adding fits handler to OPeNDAP svn trunk
+
+2005-07-05  Patrick West <pwest@ucar.edu>
+
+	Creating fits-hander.
+
+;; Local Variables:
+;; coding: utf-8
+;; End:

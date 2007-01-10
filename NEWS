@@ -1,6 +1,10 @@
 
 $Id: NEWS 14029 2006-06-29 18:10:44Z pwest $
 
+Version 1.0.1
+
+Updates in line with libdap 3.7.4 and bes 3.3.1
+
 Version 1.0.0
 
 This version of the Fits handler includes an executable for use with
