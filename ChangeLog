@@ -1,5 +1,22 @@
 2007-01-09  Patrick West <pwest@ucar.edu>
 
+	Handler naming convention, change dash to underscore.
+	A    http://scm.opendap.org:8090/svn/trunk/fits_handler
+	D    http://scm.opendap.org:8090/svn/trunk/fits-handler
+
+2007-01-09  Patrick West <pwest@ucar.edu>
+
+	Release 1.0.1
+	A    fits-handler/ChangeLog
+	A    fits-handler/fits_handler.spec
+	A    fits-handler/README
+	M    fits-handler/configure.ac
+	A    fits-handler/INSTALL
+	M    fits-handler/Makefile.am
+	M    fits-handler/NEWS
+
+2007-01-09  Patrick West <pwest@ucar.edu>
+
 	Added dump method to the request handler for debugging assistance.
 	Modified the configure.ac file to look for includes in the correct
 	place. Updated the .ini file for testing purposes.
@@ -30,7 +47,7 @@
 	converted into BESHandlerException, which is the non-fatal
 	exception. Removed the building of a bes style cgi application,
 	building only the typical dap style cgi application.
-	D    fits-handler/bes_fits_handler.cc
+	D    fits-handler/bes_fits-handler.cc
 	D    fits-handler/FitsHandlerApp.cc
 	D    fits-handler/FitsHandlerApp.h
 	D    fits-handler/fits_module.cc

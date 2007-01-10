@@ -1,5 +1,5 @@
 Summary:         Fits 3 data handler for the OPeNDAP Data server
-Name:            fits-handler
+Name:            fits_handler
 Version:         1.0.1
 Release:         1
 License:         LGPL

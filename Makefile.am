@@ -1,5 +1,5 @@
 
-# Automake file for fits-handler
+# Automake file for fits_handler
 #
 # 5/17/2005 jhrg
 #
