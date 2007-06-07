@@ -37,7 +37,7 @@
 
 class FitsRequestHandler : public BESRequestHandler {
 public:
-			FitsRequestHandler( string name ) ;
+			FitsRequestHandler( const string &name ) ;
     virtual		~FitsRequestHandler( void ) ;
 
     virtual void	dump( ostream &strm ) const ;

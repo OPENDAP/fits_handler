@@ -45,7 +45,7 @@
 #include "BESConstraintFuncs.h"
 #include "config_fits.h"
 
-FitsRequestHandler::FitsRequestHandler( string name )
+FitsRequestHandler::FitsRequestHandler( const string &name )
     : BESRequestHandler( name )
 {
     add_handler( DAS_RESPONSE, FitsRequestHandler::fits_build_das ) ;
