@@ -37,7 +37,7 @@ using std::endl ;
 #include "FitsModule.h"
 #include "BESRequestHandlerList.h"
 #include "FitsRequestHandler.h"
-#include "BESLog.h"
+#include "BESDebug.h"
 #include "BESContainerStorageList.h"
 #include "BESContainerStorageCatalog.h"
 #include "BESCatalogDirectory.h"
@@ -49,31 +49,37 @@ using std::endl ;
 void
 FitsModule::initialize( const string &modname )
 {
-    if( BESLog::TheLog()->is_verbose() )
-	(*BESLog::TheLog()) << "Initializing Fits Handler:" << endl ;
+    BESDEBUG( "Initializing Fits module " << modname << endl )
 
-    if( BESLog::TheLog()->is_verbose() )
-	(*BESLog::TheLog()) << "    adding " << modname << " request handler" << endl ;
+    BESDEBUG( "    adding " << modname << " request handler" << endl )
     BESRequestHandlerList::TheList()->add_handler( modname, new FitsRequestHandler( modname ) ) ;
 
-    if( BESLog::TheLog()->is_verbose() )
-	(*BESLog::TheLog()) << "    adding " << FITS_CATALOG << " catalog" 
-		      << endl ;
+    BESDEBUG( "    adding " << FITS_CATALOG << " catalog" << endl )
     BESCatalogList::TheCatalogList()->add_catalog( new BESCatalogDirectory( FITS_CATALOG) ) ;
 
-    if( BESLog::TheLog()->is_verbose() )
-	(*BESLog::TheLog()) << "Adding Catalog Container Storage" << endl;
+    BESDEBUG( "    adding catalog container storage " << FITS_CATALOG << endl )
     BESContainerStorageCatalog *csc = new BESContainerStorageCatalog( FITS_CATALOG ) ;
     BESContainerStorageList::TheList()->add_persistence( csc ) ;
+
+    BESDEBUG( "Done Initializing Fits module " << modname << endl )
 }
 
 void
 FitsModule::terminate( const string &modname )
 {
-    if( BESLog::TheLog()->is_verbose() )
-	(*BESLog::TheLog()) << "Removing Fits Handlers" << endl;
+    BESDEBUG( "Cleaning Fits module " << modname << endl )
+
+    BESDEBUG( "    removing " << modname << " request handler" << endl )
     BESRequestHandler *rh = BESRequestHandlerList::TheList()->remove_handler( modname ) ;
     if( rh ) delete rh ;
+
+    BESDEBUG( "    removing catalog container storage" << FITS_CATALOG << endl )
+    BESContainerStorageList::TheList()->del_persistence( FITS_CATALOG ) ;
+
+    BESDEBUG( "    removing " << FITS_CATALOG << " catalog" << endl )
+    BESCatalogList::TheCatalogList()->del_catalog( FITS_CATALOG ) ;
+
+    BESDEBUG( "Done Cleaning Fits module " << modname << endl )
 }
 
 /** @brief dumps information about this object
