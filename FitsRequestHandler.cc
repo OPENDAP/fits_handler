@@ -32,7 +32,8 @@
 
 #include "FitsRequestHandler.h"
 #include "BESResponseHandler.h"
-#include "BESHandlerException.h"
+#include "BESDapError.h"
+#include "InternalErr.h"
 #include "BESResponseNames.h"
 #include "BESDataNames.h"
 #include "FitsResponseNames.h"
@@ -67,12 +68,32 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 	dynamic_cast<BESDASResponse *>(dhi.response_handler->get_response_object());
     DAS *das = bdas->get_das() ;
 
-    string fits_error ;
-    if( !fits_handler::fits_read_attributes( *das,
-				dhi.container->access(),
-				fits_error ) )
+    try
     {
-	throw BESHandlerException( fits_error, __FILE__, __LINE__ ) ;
+	string fits_error ;
+	if( !fits_handler::fits_read_attributes( *das,
+				    dhi.container->access(),
+				    fits_error ) )
+	{
+	    throw BESDapError( fits_error, false, unknown_error,
+			       __FILE__, __LINE__ ) ;
+	}
+    }
+    catch( InternalErr &e )
+    {
+	throw BESDapError( e.get_error_message(), true, e.get_error_code(),
+			   __FILE__, __LINE__ ) ;
+    }
+    catch( Error &e )
+    {
+	throw BESDapError( e.get_error_message(), false,
+			   e.get_error_code(), __FILE__, __LINE__ ) ;
+    }
+    catch( ... )
+    {
+	string err = "Unknown exception caught building cdf das response" ;
+	throw BESDapError( err, true, unknown_error,
+			   __FILE__, __LINE__ ) ;
     }
     return ret ;
 }
@@ -85,15 +106,35 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 	dynamic_cast<BESDDSResponse *>(dhi.response_handler->get_response_object());
     DDS *dds = bdds->get_dds() ;
 
-    string fits_error ;
-    if( !fits_handler::fits_read_descriptors( *dds,
-                                 dhi.container->access(),
-				 dhi.container->get_symbolic_name(),
-				 fits_error ) )
+    try
     {
-	throw BESHandlerException( fits_error, __FILE__, __LINE__ ) ;
+	string fits_error ;
+	if( !fits_handler::fits_read_descriptors( *dds,
+				     dhi.container->access(),
+				     dhi.container->get_symbolic_name(),
+				     fits_error ) )
+	{
+	    throw BESDapError( fits_error, false, unknown_error,
+			       __FILE__, __LINE__ ) ;
+	}
+	dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     }
-    dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
+    catch( InternalErr &e )
+    {
+	throw BESDapError( e.get_error_message(), true, e.get_error_code(),
+			   __FILE__, __LINE__ ) ;
+    }
+    catch( Error &e )
+    {
+	throw BESDapError( e.get_error_message(), false,
+			   e.get_error_code(), __FILE__, __LINE__ ) ;
+    }
+    catch( ... )
+    {
+	string err = "Unknown exception caught building cdf dds response" ;
+	throw BESDapError( err, true, unknown_error,
+			   __FILE__, __LINE__ ) ;
+    }
     return ret ;
 }
 
@@ -104,15 +145,35 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 	dynamic_cast<BESDataDDSResponse *>(dhi.response_handler->get_response_object());
     DataDDS *dds = bdds->get_dds() ;
 
-    string fits_error ;
-    if( !fits_handler::fits_read_descriptors( *dds,
-                                 dhi.container->access(),
-				 dhi.container->get_symbolic_name(),
-				 fits_error ) )
+    try
     {
-	throw BESHandlerException( fits_error, __FILE__, __LINE__ ) ;
+	string fits_error ;
+	if( !fits_handler::fits_read_descriptors( *dds,
+				     dhi.container->access(),
+				     dhi.container->get_symbolic_name(),
+				     fits_error ) )
+	{
+	    throw BESDapError( fits_error, false, unknown_error,
+	                       __FILE__, __LINE__ ) ;
+	}
+	dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     }
-    dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
+    catch( InternalErr &e )
+    {
+	throw BESDapError( e.get_error_message(), true, e.get_error_code(),
+			   __FILE__, __LINE__ ) ;
+    }
+    catch( Error &e )
+    {
+	throw BESDapError( e.get_error_message(), false,
+			   e.get_error_code(), __FILE__, __LINE__ ) ;
+    }
+    catch( ... )
+    {
+	string err = "Unknown exception caught building cdf data response" ;
+	throw BESDapError( err, true, unknown_error,
+			   __FILE__, __LINE__ ) ;
+    }
     return true ;
 }
 
