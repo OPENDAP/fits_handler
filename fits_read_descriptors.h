@@ -39,8 +39,10 @@ using std::string ;
 
 #include "fitsio.h"
 
-class DDS ;
-class Structure ;
+#include "DDS.h"
+#include "Structure.h"
+
+using namespace libdap ;
 
 namespace fits_handler
 {

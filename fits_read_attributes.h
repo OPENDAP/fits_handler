@@ -37,7 +37,9 @@
 
 using std::string ;
 
-class DAS ;
+#include "DAS.h"
+
+using namespace libdap ;
 
 namespace fits_handler
 {
