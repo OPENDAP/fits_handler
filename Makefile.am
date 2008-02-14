@@ -37,7 +37,7 @@ dap_fits_handler_LDADD = libfits_handler.la
 libfits_module_la_SOURCES = $(BES_HANDLER_SRC)
 libfits_module_la_CPPFLAGS = $(BES_CPPFLAGS)
 libfits_module_la_LDFLAGS = -avoid-version -module 
-libfits_module_la_LIBADD = libfits_handler.la $(BES_LIBS)
+libfits_module_la_LIBADD = libfits_handler.la $(BES_DAP_LIBS)
 
 EXTRA_DIST = data COPYRIGHT COPYING fits_handler.spec \
 	bes-fits-data.sh.in OSX_Resources
