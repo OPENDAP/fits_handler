@@ -44,6 +44,7 @@
 #include "BESDataDDSResponse.h"
 #include "BESVersionInfo.h"
 #include "BESConstraintFuncs.h"
+#include "cgi_util.h"
 #include "config_fits.h"
 
 FitsRequestHandler::FitsRequestHandler( const string &name )
@@ -70,10 +71,9 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 
     try
     {
+	string accessed = dhi.container->access() ;
 	string fits_error ;
-	if( !fits_handler::fits_read_attributes( *das,
-				    dhi.container->access(),
-				    fits_error ) )
+	if( !fits_handler::fits_read_attributes( *das, accessed, fits_error ) )
 	{
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
@@ -108,15 +108,28 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 
     try
     {
+	string accessed = dhi.container->access() ;
 	string fits_error ;
-	if( !fits_handler::fits_read_descriptors( *dds,
-				     dhi.container->access(),
+	if( !fits_handler::fits_read_descriptors( *dds, accessed,
 				     dhi.container->get_symbolic_name(),
 				     fits_error ) )
 	{
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
 	}
+
+        DAS das;
+	if( !fits_handler::fits_read_attributes( das, accessed, fits_error ) )
+	{
+	    throw BESDapError( fits_error, false, unknown_error,
+			       __FILE__, __LINE__ ) ;
+	}
+        string name = find_ancillary_file(accessed, "das", "", "");
+        if (!name.empty())
+            das.parse(name);
+        
+        dds->transfer_attributes(&das);
+
 	dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     }
     catch( InternalErr &e )
@@ -147,15 +160,29 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 
     try
     {
+	string accessed = dhi.container->access() ;
 	string fits_error ;
 	if( !fits_handler::fits_read_descriptors( *dds,
-				     dhi.container->access(),
+				     accessed,
 				     dhi.container->get_symbolic_name(),
 				     fits_error ) )
 	{
 	    throw BESDapError( fits_error, false, unknown_error,
 	                       __FILE__, __LINE__ ) ;
 	}
+
+        DAS das;
+	if( !fits_handler::fits_read_attributes( das, accessed, fits_error ) )
+	{
+	    throw BESDapError( fits_error, false, unknown_error,
+			       __FILE__, __LINE__ ) ;
+	}
+        string name = find_ancillary_file(accessed, "das", "", "");
+        if (!name.empty())
+            das.parse(name);
+        
+        dds->transfer_attributes(&das);
+
 	dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
     }
     catch( InternalErr &e )

@@ -1,3 +1,119 @@
+2008-02-26  Patrick West <pwest@ucar.edu>
+
+	Removed the version of Hyrax so we don't keep having to edit the
+	Welcome.html file
+	M    OSX_Resources/Welcome.html
+
+2008-02-26  Patrick West <pwest@ucar.edu>
+
+	Grabbing version information from configure.ac properly.
+	M    OSX_Resources/Info.plist
+	M    configure.ac
+
+2008-02-26  Patrick West <pwest@ucar.edu>
+
+	Updated pkg build for Mac OSX. Automated to use package maker and
+	dropdmg.
+	AM   OSX_Resources/update_mac_package_contents.pl
+	M    OSX_Resources/Info.plist
+	M    OSX_Resources/ReadMe.txt
+	M    Makefile.am
+
+2008-02-20  Patrick West <pwest@ucar.edu>
+
+	Package config used by libdap and bes
+	A    conf/pkg.m4
+
+2008-02-14  Patrick West <pwest@ucar.edu>
+
+	config_fits.h.in is generated, so don't need to have it in svn.
+	Updated configure to use latest and greatest libdap and bes config
+	macros and m4 files.
+	D    config_fits.h.in
+	M    conf/bes.m4
+	M    conf/libdap.m4
+	M    configure.ac
+	M    Makefile.am
+
+2008-02-02  Patrick West <pwest@ucar.edu>
+
+	Added using namespace libdap where needed.
+	M    fits_read_attributes.h
+	M    fits_read_descriptors.h
+
+2008-01-25  Patrick West <pwest@ucar.edu>
+
+	Forgot to add the bes configuration script updater.
+	A    bes-fits-data.sh.in
+
+2008-01-25  Patrick West <pwest@ucar.edu>
+
+	Error/exception handling changes in the BES. Added OSX resource
+	files for building OSX packages. Added sample data files that are
+	installed in the datadir during an install. Added a configuration
+	script to add inforamtion to the bes configuration file.
+	M    FitsRequestHandler.cc
+	A    OSX_Resources
+	AM   OSX_Resources/InstallationCheck
+	A    OSX_Resources/License.txt
+	A    OSX_Resources/Info.plist
+	A    OSX_Resources/InstallationCheck.strings
+	A    OSX_Resources/ReadMe.txt
+	A    OSX_Resources/Description.plist
+	AM   OSX_Resources/background.jpg
+	A    OSX_Resources/Welcome.html
+	M    configure.ac
+	M    Makefile.am
+	A    data
+	A    data/20060328.185927.chp.bsh.fts
+	A    data/20060308.172859.mk4.rpb.fts
+	A    data/20060308.172859.mk4.cpb.fts
+	A    data/20060328.190602.dpm.alr.fts
+
+2007-08-22  Patrick West <pwest@ucar.edu>
+
+	Changed from using Passive classes to parent classes (Structure,
+	Array, Int16, etc...) as Passive functionality moved there.
+	M    bes.conf
+	M    fits_read_descriptors.cc
+
+2007-07-31  Patrick West <pwest@ucar.edu>
+
+	BESDebug modifications, passing context to BESDEBUG and registering
+	debug context in Module classes.
+	M    FitsModule.cc
+
+2007-07-11  Patrick West <pwest@ucar.edu>
+
+	Using BESDebug rather than BESLog. Removing all things added in the
+	module in the terminate method.
+	M    FitsModule.cc
+
+2007-06-07  Patrick West <pwest@ucar.edu>
+
+	Changed the constructor to the request handler class to take a const
+	string & instead of a string.
+	M    FitsRequestHandler.cc
+	M    FitsRequestHandler.h
+
+2007-04-25  Patrick West <pwest@ucar.edu>
+
+	Moving opendap.ini to bes.conf.
+	A    bes.conf
+	D    opendap.ini
+
+2007-01-09  Patrick West <pwest@ucar.edu>
+
+	Moved source from fits-handler to fits_handler. Changed this in the
+	following files and updated the ChangeLog once more before release.
+	M    ChangeLog
+	M    fits_handler.spec
+	M    configure.ac
+	M    Makefile.am
+
+;; Local Variables:
+;; coding: utf-8
+;; End:
 2007-01-09  Patrick West <pwest@ucar.edu>
 
 	Handler naming convention, change dash to underscore.

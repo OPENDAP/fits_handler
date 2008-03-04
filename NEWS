@@ -1,6 +1,16 @@
 
 $Id: NEWS 14029 2006-06-29 18:10:44Z pwest $
 
+Version 1.0.3
+
+Updates in line with libdap 3.8.0 and bes 3.6.0
+
+New pkg build for OSX that is automated using PackageMaker and DropDMG.
+
+Version 1.0.2
+
+Updates in line with libdap 3.7.10 and bes 3.5.3
+
 Version 1.0.1
 
 Updates in line with libdap 3.7.4 and bes 3.3.1

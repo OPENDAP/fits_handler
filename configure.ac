@@ -2,13 +2,31 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(fits_handler, 1.0.2, opendap-tech@opendap.org)
+AC_INIT(fits_handler, 1.0.3, opendap-tech@opendap.org)
 AC_CONFIG_AUX_DIR([conf])
 
 AM_INIT_AUTOMAKE
 
 AC_CONFIG_SRCDIR([FitsModule.h])
 AC_CONFIG_HEADER([config_fits.h])
+
+dnl flags for the compilers and linkers - set these before locating the
+dnl actual tools since some of the AC_PROG macros set these `flag variables'
+dnl to default values otherwise.
+
+AC_CANONICAL_HOST
+AC_SUBST(host)
+
+dnl library visioning: Update these when the interface changes. Generally,
+dnl assume that the interface tracks the major and minor release numbers.
+LIB_FITS_HANDLER_CURRENT=1
+LIB_FITS_HANDLER_AGE=0
+LIB_FITS_HANDLER_REVISION=0
+AC_SUBST(LIB_FITS_HANDLER_CURRENT)
+AC_SUBST(LIB_FITS_HANDLER_AGE)
+AC_SUBST(LIB_FITS_HANDLER_REVISION)
+LIBFITS_HANDLER_VERSION="$LIB_FITS_HANDLER_CURRENT:$LIB_FITS_HANDLER_REVISION:$LIB_FITS_HANDLER_AGE"
+AC_SUBST(LIBFITS_HANDLER_VERSION)
 
 # Checks for programs.
 AC_PROG_CXX
@@ -30,7 +48,7 @@ AC_CHECK_FUNCS([strchr])
 AC_PROG_LIBTOOL
 
 dnl Checks for specific libraries
-AC_CHECK_LIBDAP([3.7.10],
+AC_CHECK_LIBDAP([3.8.0],
  [
   LIBS="$LIBS $DAP_SERVER_LIBS"
   CPPFLAGS="$CPPFLAGS $DAP_CFLAGS"
@@ -38,7 +56,7 @@ AC_CHECK_LIBDAP([3.7.10],
  [ AC_MSG_ERROR([Cannot find libdap])
 ])
   
-AC_CHECK_BES([3.5.3],
+AC_CHECK_BES([3.6.0],
 [
     # I think the AC_SUBST([BES_MODULE_DIR]) in bes.m4 will put that 
     # symbol in the output. Same for BES_CPPFLAGS. jhrg 5/1/06
@@ -122,5 +140,5 @@ dnl fi
 
 OPENDAP_DEBUG_OPTION
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile testsuite/Makefile])
 AC_OUTPUT

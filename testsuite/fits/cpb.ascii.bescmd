@@ -1,0 +1,3 @@
+set container in catalog values cpb,data/fits/20060308.172859.mk4.cpb.fts;
+define d1 as cpb;
+get ascii for d1;

@@ -9,6 +9,8 @@ AUTOMAKE_OPTIONS = foreign check-news
 
 ACLOCAL_AMFLAGS = -I conf
 
+SUBDIRS = testsuite
+
 bin_PROGRAMS = dap_fits_handler
 
 
@@ -22,6 +24,7 @@ dist_bin_SCRIPTS = bes-fits-data.sh
 endif
 
 libfits_handler_la_SOURCES = $(FITSSRCS) $(FITSHDRS)
+libfits_handler_la_LDFLAGS = -version-info $(LIBFITS_HANDLER_VERSION)
 
 FITSSRCS:=fits_read_attributes.cc fits_read_descriptors.cc BESAutoPtr.cc
 

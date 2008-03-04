@@ -79,3 +79,10 @@ NOTES
       `./configure'. If you want the extra features, use:
 
       ./configure --enable-dbnew --enable-debug=2
+
+    - To use BES debugging aids simply pass the -d option to the BES starter
+      script, like so: besctl start -d "bes.debug,fits". This will turn on
+      any debugging in the BES code of fits and dump the debugging
+      statements to the file bes.debug. If you just want it to your screen,
+      replace bes.debug with cerr.
+
