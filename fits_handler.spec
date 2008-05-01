@@ -4,7 +4,7 @@ Version:         1.0.3
 Release:         1
 License:         LGPL
 Group:           System Environment/Daemons 
-Source0:         ftp://ftp.unidata.ucar.edu/pub/opendap/source/%{name}-%{version}.tar.gz
+Source0:         http://www.opendap.org/pub/source/%{name}-%{version}.tar.gz
 URL:             http://www.opendap.org/
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -41,10 +41,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_bindir}/dap_fits_handler
-%{_libdir}/bes/*
-%{_libdir}/lib*.so.*
-%doc COPYING COPYRIGHT NEWS
-%doc README
+%{_bindir}/bes-fits-data.sh
+%{_libdir}/libfits_handler.so.*
+%{_libdir}/bes/libfits_module.so
+%{_datadir}/hyrax/
+%doc COPYING COPYRIGHT NEWS README
 
 %changelog
 * Mon Mar 03 2008 Patrick West <pwest@ucar.edu> 1.0.3-1

@@ -7,6 +7,8 @@ Updates in line with libdap 3.8.0 and bes 3.6.0
 
 New pkg build for OSX that is automated using PackageMaker and DropDMG.
 
+testsuite added for make check to test the installation.
+
 Version 1.0.2
 
 Updates in line with libdap 3.7.10 and bes 3.5.3

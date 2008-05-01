@@ -1,5 +1,22 @@
 #!/bin/sh
 #
+# Check the architecture
+
+# use "i386" or "ppc.*" - nake sure to use a regex for PPC!
+
+architecture="i386.*"
+if arch | grep -v "$architecture"
+then
+    if arch | grep "i386"
+    then
+	# You have an intel mac error message
+	exit 115
+    else
+	# PowerPC message
+	exit 116
+    fi
+fi
+
 # Check to make sure the computer is running 10.3 or later.
 
 version=`uname -a | sed 's/.*Darwin Kernel Version \([0-9.]*\):.*/\1/'`

@@ -1,3 +1,37 @@
+2008-03-03  Patrick West <pwest@ucar.edu>
+	Release 1.0.3. Added testsuite. Updated README and INSTALL.
+	M    ChangeLog
+	A    testsuite
+	A    testsuite/bes.conf.in
+	A    testsuite/common_tests.exp
+	A    testsuite/config
+	A    testsuite/config/unix.exp
+	A    testsuite/fits
+	A    testsuite/fits/cpb.ddx.bescmd.baseline
+	A    testsuite/fits/cpb.das.bescmd
+	A    testsuite/fits/cpb.ascii.bescmd
+	A    testsuite/fits/cpb.das.bescmd.baseline
+	A    testsuite/fits/cpb.ascii.bescmd.baseline
+	A    testsuite/fits/cpb.dds.bescmd
+	A    testsuite/fits/cpb.dds.bescmd.baseline
+	A    testsuite/fits/cpb.ddx.bescmd
+	A    testsuite/besstandalone.fits
+	A    testsuite/besstandalone.fits/cpb.das.exp
+	A    testsuite/besstandalone.fits/cpb.ascii.exp
+	A    testsuite/besstandalone.fits/cpb.dds.exp
+	A    testsuite/besstandalone.fits/cpb.ddx.exp
+	A    testsuite/Makefile.am
+	M    fits_handler.spec
+	M    README
+	M    FitsRequestHandler.cc
+	M    OSX_Resources/InstallationCheck
+	M    OSX_Resources/Info.plist
+	M    OSX_Resources/Welcome.html
+	M    configure.ac
+	M    INSTALL
+	M    Makefile.am
+	M    NEWS
+
 2008-02-26  Patrick West <pwest@ucar.edu>
 
 	Removed the version of Hyrax so we don't keep having to edit the

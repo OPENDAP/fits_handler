@@ -1,8 +1,10 @@
 
 $Id: README 14029 2006-06-14 18:10:44Z jimg $
 
+Updated for Version 1.0.3 (05 March 2008)
+
 This is the OPeNDAP fits Data Handler. It is used along with the OPeNDAP
-DAP Server3 and Server4 1.2 beta.
+DAP Server3 and Hyrax.
 
 For information about building the OPeNDAP netCDF Data Handler, see the
 INSTALL file.

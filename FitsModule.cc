@@ -55,11 +55,27 @@ FitsModule::initialize( const string &modname )
     BESRequestHandlerList::TheList()->add_handler( modname, new FitsRequestHandler( modname ) ) ;
 
     BESDEBUG( "fits", "    adding " << FITS_CATALOG << " catalog" << endl )
-    BESCatalogList::TheCatalogList()->add_catalog( new BESCatalogDirectory( FITS_CATALOG) ) ;
+    if( !BESCatalogList::TheCatalogList()->find_catalog( FITS_CATALOG ) )
+    {
+	BESCatalogList::TheCatalogList()->
+	    add_catalog( new BESCatalogDirectory( FITS_CATALOG) ) ;
+    }
+    else
+    {
+	BESDEBUG( "fits", "    catalog already exists, skipping" << endl )
+    }
 
     BESDEBUG( "fits", "    adding catalog container storage " << FITS_CATALOG << endl )
-    BESContainerStorageCatalog *csc = new BESContainerStorageCatalog( FITS_CATALOG ) ;
-    BESContainerStorageList::TheList()->add_persistence( csc ) ;
+    if( !BESContainerStorageList::TheList()->find_persistence( FITS_CATALOG ) )
+    {
+	BESContainerStorageCatalog *csc =
+	    new BESContainerStorageCatalog( FITS_CATALOG ) ;
+	BESContainerStorageList::TheList()->add_persistence( csc ) ;
+    }
+    else
+    {
+	BESDEBUG( "fits", "    storage already exists, skipping" << endl )
+    }
 
     BESDEBUG( "fits", "    adding fits debug context" << endl )
     BESDebug::Register( "fits" ) ;

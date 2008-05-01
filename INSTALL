@@ -1,7 +1,9 @@
 
 $Id: INSTALL 14029 2006-06-14 18:10:44Z jimg $
 
-Installing the NetCDF handler software for the OPeNDAP server.
+Updated for version 1.0.3 of the OPeNDAP FITS data handler software
+
+Installing the OPeNDAP FITS data handler software
 
 ---------------------------------------------------------------------------
 
