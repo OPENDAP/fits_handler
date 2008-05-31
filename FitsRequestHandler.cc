@@ -42,6 +42,7 @@
 #include "fits_read_descriptors.h"
 #include "BESDDSResponse.h"
 #include "BESDataDDSResponse.h"
+#include "Ancillary.h"
 #include "BESVersionInfo.h"
 #include "BESConstraintFuncs.h"
 #include "cgi_util.h"
@@ -78,6 +79,7 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
 	}
+	Ancillary::read_ancillary_das( *das, accessed ) ;
     }
     catch( InternalErr &e )
     {
@@ -117,6 +119,7 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
 	}
+	Ancillary::read_ancillary_dds( *dds, accessed ) ;
 
         DAS das;
 	if( !fits_handler::fits_read_attributes( das, accessed, fits_error ) )
@@ -124,9 +127,7 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
 	}
-        string name = find_ancillary_file(accessed, "das", "", "");
-        if (!name.empty())
-            das.parse(name);
+	Ancillary::read_ancillary_das( das, accessed ) ;
         
         dds->transfer_attributes(&das);
 
@@ -170,6 +171,7 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 	    throw BESDapError( fits_error, false, unknown_error,
 	                       __FILE__, __LINE__ ) ;
 	}
+	Ancillary::read_ancillary_dds( *dds, accessed ) ;
 
         DAS das;
 	if( !fits_handler::fits_read_attributes( das, accessed, fits_error ) )
@@ -177,9 +179,7 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
 	}
-        string name = find_ancillary_file(accessed, "das", "", "");
-        if (!name.empty())
-            das.parse(name);
+	Ancillary::read_ancillary_das( das, accessed ) ;
         
         dds->transfer_attributes(&das);
 
