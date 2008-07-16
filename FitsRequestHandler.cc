@@ -65,9 +65,11 @@ FitsRequestHandler::~FitsRequestHandler()
 bool
 FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 {
-    bool ret = true ;
-    BESDASResponse *bdas =
-	dynamic_cast<BESDASResponse *>(dhi.response_handler->get_response_object());
+    BESResponseObject *response = dhi.response_handler->get_response_object() ;
+    BESDASResponse *bdas = dynamic_cast < BESDASResponse * >(response) ;
+    if( !bdas )
+	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
+
     DAS *das = bdas->get_das() ;
 
     try
@@ -97,15 +99,17 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 	throw BESDapError( err, true, unknown_error,
 			   __FILE__, __LINE__ ) ;
     }
-    return ret ;
+    return true ;
 }
 
 bool
 FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 {
-    bool ret = true ;
-    BESDDSResponse *bdds =
-	dynamic_cast<BESDDSResponse *>(dhi.response_handler->get_response_object());
+    BESResponseObject *response = dhi.response_handler->get_response_object();
+    BESDDSResponse *bdds = dynamic_cast < BESDDSResponse * >(response);
+    if( !bdds )
+	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
+  
     DDS *dds = bdds->get_dds() ;
 
     try
@@ -149,14 +153,18 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 	throw BESDapError( err, true, unknown_error,
 			   __FILE__, __LINE__ ) ;
     }
-    return ret ;
+
+    return true ;
 }
 
 bool
 FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 {
-    BESDataDDSResponse *bdds =
-	dynamic_cast<BESDataDDSResponse *>(dhi.response_handler->get_response_object());
+    BESResponseObject *response = dhi.response_handler->get_response_object();
+    BESDataDDSResponse *bdds = dynamic_cast < BESDataDDSResponse * >(response);
+    if( !bdds )
+	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
+  
     DataDDS *dds = bdds->get_dds() ;
 
     try
@@ -201,22 +209,31 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 	throw BESDapError( err, true, unknown_error,
 			   __FILE__, __LINE__ ) ;
     }
+
     return true ;
 }
 
 bool
 FitsRequestHandler::fits_build_vers( BESDataHandlerInterface &dhi )
 {
-    BESVersionInfo *info = dynamic_cast<BESVersionInfo *>(dhi.response_handler->get_response_object());
+    BESResponseObject *response = dhi.response_handler->get_response_object();
+    BESVersionInfo *info = dynamic_cast < BESVersionInfo * >(response);
+    if( !info )
+	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
+  
     info->addHandlerVersion( PACKAGE_NAME, PACKAGE_VERSION ) ;
+
     return true ;
 }
 
 bool
 FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
 {
-    bool ret = true ;
-    BESInfo *info = dynamic_cast<BESInfo *>(dhi.response_handler->get_response_object());
+    BESResponseObject *response = dhi.response_handler->get_response_object();
+    BESInfo *info = dynamic_cast<BESInfo *>(response);
+    if( !info )
+	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
+
     info->begin_tag( "Handler" ) ;
     info->add_tag( "name", PACKAGE_NAME ) ;
     string handles = (string)DAS_RESPONSE
@@ -228,7 +245,7 @@ FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
     info->add_tag( "version", PACKAGE_STRING ) ;
     info->end_tag( "Handler" ) ;
 
-    return ret ;
+    return true ;
 }
 
 /** @brief dumps information about this object
