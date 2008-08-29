@@ -70,7 +70,7 @@ BES.module.cmd=@libdir@/bes/libdap_cmd_module.so
 BES.module.ascii=@libdir@/bes/libascii_module.so
 BES.module.usage=@libdir@/bes/libusage_module.so
 BES.module.www=@libdir@/bes/libwww_module.so
-BES.module.fits=@libdir@/bes/libfits_module.so
+BES.module.fits=@abs_top_builddir@/.libs/libfits_module.so
 
 #-----------------------------------------------------------------------#
 # Setting the data location
@@ -94,7 +94,7 @@ BES.module.fits=@libdir@/bes/libfits_module.so
 # to change this to point to your data! At this time the BES does not support
 # multiple RootDirectory values. 3/5/07 jhrg
 
-BES.Catalog.catalog.RootDirectory=@datadir@/hyrax
+BES.Catalog.catalog.RootDirectory=@abs_top_srcdir@
 BES.Data.RootDirectory=/dev/null
 
 # The TypeMatch parameter is a list of handler/module names and a regular
