@@ -9,13 +9,14 @@ AUTOMAKE_OPTIONS = foreign check-news
 
 ACLOCAL_AMFLAGS = -I conf
 
-SUBDIRS = testsuite
-
 bin_PROGRAMS = dap_fits_handler
 
 
 lib_LTLIBRARIES = libfits_handler.la
+
 if OPENDAPSERVER
+
+SUBDIRS = bes-testsuite
 
 lib_besdir=$(prefix)/lib/bes
 lib_bes_LTLIBRARIES = libfits_module.la

@@ -140,5 +140,5 @@ dnl fi
 
 OPENDAP_DEBUG_OPTION
 
-AC_CONFIG_FILES([Makefile testsuite/Makefile])
+AC_CONFIG_FILES([Makefile bes-testsuite/Makefile])
 AC_OUTPUT
