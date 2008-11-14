@@ -103,7 +103,7 @@ main(int argc, char *argv[])
 		throw InternalErr( __FILE__, __LINE__, fits_err ) ;
 	    }
 	    df.read_ancillary_dds(dds);
-	    df.send_data(dds, ce, stdout);
+	    df.send_data(dds, ce, cout);
 	    break;
 	  }
 
@@ -133,7 +133,7 @@ main(int argc, char *argv[])
 
 	    dds.transfer_attributes(&das);
 
-	    df.send_ddx(dds, ce, stdout);
+	    df.send_ddx(dds, ce, cout);
 	    break;
 	  }
 
