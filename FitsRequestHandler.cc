@@ -31,21 +31,24 @@
 //      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
 #include "FitsRequestHandler.h"
-#include "BESResponseHandler.h"
-#include "BESDapError.h"
-#include "InternalErr.h"
-#include "BESResponseNames.h"
-#include "BESDataNames.h"
+#include <BESResponseHandler.h>
+#include <BESDapError.h>
+#include <InternalErr.h>
+#include <BESResponseNames.h>
+#include <BESDataNames.h>
 #include "FitsResponseNames.h"
 #include "fits_read_attributes.h"
-#include "BESDASResponse.h"
+#include <BESDASResponse.h>
 #include "fits_read_descriptors.h"
-#include "BESDDSResponse.h"
-#include "BESDataDDSResponse.h"
-#include "Ancillary.h"
-#include "BESVersionInfo.h"
-#include "BESConstraintFuncs.h"
-#include "cgi_util.h"
+#include <BESDDSResponse.h>
+#include <BESDataDDSResponse.h>
+#include <Ancillary.h>
+#include <BESVersionInfo.h>
+#include <BESConstraintFuncs.h>
+#include <BESServiceRegistry.h>
+#include <BESUtil.h>
+#include <BESConstraintFuncs.h>
+#include <cgi_util.h>
 #include "config_fits.h"
 
 FitsRequestHandler::FitsRequestHandler( const string &name )
@@ -135,7 +138,7 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
         
         dds->transfer_attributes(&das);
 
-	dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
+	BESConstraintFuncs::post_append( dhi ) ;
     }
     catch( InternalErr &e )
     {
@@ -191,7 +194,7 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
         
         dds->transfer_attributes(&das);
 
-	dhi.data[POST_CONSTRAINT] = dhi.container->get_constraint();
+	BESConstraintFuncs::post_append( dhi ) ;
     }
     catch( InternalErr &e )
     {
@@ -221,7 +224,7 @@ FitsRequestHandler::fits_build_vers( BESDataHandlerInterface &dhi )
     if( !info )
 	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
   
-    info->addHandlerVersion( PACKAGE_NAME, PACKAGE_VERSION ) ;
+    info->add_module( PACKAGE_NAME, PACKAGE_VERSION ) ;
 
     return true ;
 }
@@ -234,16 +237,18 @@ FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
     if( !info )
 	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
 
-    info->begin_tag( "Handler" ) ;
-    info->add_tag( "name", PACKAGE_NAME ) ;
-    string handles = (string)DAS_RESPONSE
-                     + "," + DDS_RESPONSE
-                     + "," + DATA_RESPONSE
-                     + "," + HELP_RESPONSE
-                     + "," + VERS_RESPONSE ;
-    info->add_tag( "handles", handles ) ;
-    info->add_tag( "version", PACKAGE_STRING ) ;
-    info->end_tag( "Handler" ) ;
+    map<string,string> attrs ;
+    attrs["name"] = PACKAGE_NAME ;
+    attrs["version"] = PACKAGE_VERSION ;
+    list<string> services ;
+    BESServiceRegistry::TheRegistry()->services_handled( FITS_NAME, services );
+    if( services.size() > 0 )
+    {
+	string handles = BESUtil::implode( services, ',' ) ;
+	attrs["handles"] = handles ;
+    }
+    info->begin_tag( "module", &attrs ) ;
+    info->end_tag( "module" ) ;
 
     return true ;
 }
