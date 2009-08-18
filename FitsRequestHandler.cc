@@ -34,8 +34,8 @@
 #include <BESResponseHandler.h>
 #include <BESDapError.h>
 #include <InternalErr.h>
+#include <BESDapNames.h>
 #include <BESResponseNames.h>
-#include <BESDataNames.h>
 #include "FitsResponseNames.h"
 #include "fits_read_attributes.h"
 #include <BESDASResponse.h>
