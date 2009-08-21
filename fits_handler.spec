@@ -40,7 +40,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/dap_fits_handler
 %{_bindir}/bes-fits-data.sh
 %{_libdir}/libfits_handler.so.*
 %{_libdir}/bes/libfits_module.so
