@@ -58,11 +58,8 @@ AC_CHECK_LIBDAP([3.9.2],
   
 AC_CHECK_BES([3.7.2],
 [
-    # I think the AC_SUBST([BES_MODULE_DIR]) in bes.m4 will put that 
-    # symbol in the output. Same for BES_CPPFLAGS. jhrg 5/1/06
-    AM_CONDITIONAL([OPENDAPSERVER], [true])
 ],
-[ AM_CONDITIONAL([OPENDAPSERVER], [false])
+[ AC_MSG_ERROR([Cannot find bes])
 ])
 
 dnl Check for the cfits library.

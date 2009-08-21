@@ -9,23 +9,11 @@ AUTOMAKE_OPTIONS = foreign check-news
 
 ACLOCAL_AMFLAGS = -I conf
 
-bin_PROGRAMS = dap_fits_handler
-
-
-lib_LTLIBRARIES = libfits_handler.la
-
-if OPENDAPSERVER
-
 SUBDIRS = bes-testsuite
 
 lib_besdir=$(prefix)/lib/bes
 lib_bes_LTLIBRARIES = libfits_module.la
 dist_bin_SCRIPTS = bes-fits-data.sh
-
-endif
-
-libfits_handler_la_SOURCES = $(FITSSRCS) $(FITSHDRS)
-libfits_handler_la_LDFLAGS = -version-info $(LIBFITS_HANDLER_VERSION)
 
 FITSSRCS:=fits_read_attributes.cc fits_read_descriptors.cc BESAutoPtr.cc
 
@@ -34,9 +22,6 @@ FITSHDRS:=fits_read_attributes.h fits_read_descriptors.h BESAutoPtr.h config_fit
 BES_HANDLER_SRC = FitsRequestHandler.cc FitsModule.cc \
 		  FitsRequestHandler.h FitsResponseNames.h \
 		  FitsModule.h
-
-dap_fits_handler_SOURCES = dap_fits_handler.cc
-dap_fits_handler_LDADD = libfits_handler.la
 
 libfits_module_la_SOURCES = $(FITSSRCS) $(FITSHDRS) $(BES_HANDLER_SRC)
 libfits_module_la_CPPFLAGS = $(BES_CPPFLAGS)
@@ -47,8 +32,6 @@ EXTRA_DIST = data COPYRIGHT COPYING fits_handler.spec \
 	bes-fits-data.sh.in OSX_Resources
 
 CLEANFILES = *~
-
-if OPENDAPSERVER
 
 CLEANFILES += bes-fits-data.sh
 
@@ -74,8 +57,6 @@ bes-conf: bes-fits-data.sh
 	else \
 	    ./bes-fits-data.sh $$bes_prefix/etc/bes/bes.conf $$bes_prefix/lib/bes ; \
 	fi)
-
-endif
 
 ###########################################################################
 
