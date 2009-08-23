@@ -50,15 +50,15 @@ using std::endl ;
 void
 FitsModule::initialize( const string &modname )
 {
-    BESDEBUG( "fits", "Initializing Fits module " << modname << endl )
+    BESDEBUG( "fits", "Initializing Fits module " << modname << endl ) ;
 
-    BESDEBUG( "fits", "    adding " << modname << " request handler" << endl )
+    BESDEBUG( "fits", "    adding " << modname << " request handler" << endl ) ;
     BESRequestHandlerList::TheList()->add_handler( modname, new FitsRequestHandler( modname ) ) ;
 
-    BESDEBUG( "fits", modname << " handles dap services" << endl )
+    BESDEBUG( "fits", modname << " handles dap services" << endl ) ;
     BESDapService::handle_dap_service( modname ) ;
 
-    BESDEBUG( "fits", "    adding " << FITS_CATALOG << " catalog" << endl )
+    BESDEBUG( "fits", "    adding " << FITS_CATALOG << " catalog" << endl ) ;
     if( !BESCatalogList::TheCatalogList()->ref_catalog( FITS_CATALOG ) )
     {
 	BESCatalogList::TheCatalogList()->
@@ -66,10 +66,11 @@ FitsModule::initialize( const string &modname )
     }
     else
     {
-	BESDEBUG( "fits", "    catalog already exists, skipping" << endl )
+	BESDEBUG( "fits", "    catalog already exists, skipping" << endl) ;
     }
 
-    BESDEBUG( "fits", "    adding catalog container storage " << FITS_CATALOG << endl )
+    BESDEBUG( "fits", "    adding catalog container storage "
+		      << FITS_CATALOG << endl ) ;
     if( !BESContainerStorageList::TheList()->ref_persistence( FITS_CATALOG ) )
     {
 	BESContainerStorageCatalog *csc =
@@ -78,31 +79,33 @@ FitsModule::initialize( const string &modname )
     }
     else
     {
-	BESDEBUG( "fits", "    storage already exists, skipping" << endl )
+	BESDEBUG( "fits", "    storage already exists, skipping" << endl) ;
     }
 
-    BESDEBUG( "fits", "    adding fits debug context" << endl )
+    BESDEBUG( "fits", "    adding fits debug context" << endl ) ;
     BESDebug::Register( "fits" ) ;
 
-    BESDEBUG( "fits", "Done Initializing Fits module " << modname << endl )
+    BESDEBUG( "fits", "Done Initializing Fits module " << modname << endl ) ;
 }
 
 void
 FitsModule::terminate( const string &modname )
 {
-    BESDEBUG( "fits", "Cleaning Fits module " << modname << endl )
+    BESDEBUG( "fits", "Cleaning Fits module " << modname << endl ) ;
 
-    BESDEBUG( "fits", "    removing " << modname << " request handler" << endl )
+    BESDEBUG( "fits", "    removing " << modname
+		      << " request handler" << endl ) ;
     BESRequestHandler *rh = BESRequestHandlerList::TheList()->remove_handler( modname ) ;
     if( rh ) delete rh ;
 
-    BESDEBUG( "fits", "    removing catalog container storage" << FITS_CATALOG << endl )
+    BESDEBUG( "fits", "    removing catalog container storage"
+		      << FITS_CATALOG << endl ) ;
     BESContainerStorageList::TheList()->deref_persistence( FITS_CATALOG ) ;
 
-    BESDEBUG( "fits", "    removing " << FITS_CATALOG << " catalog" << endl )
+    BESDEBUG( "fits", "    removing " << FITS_CATALOG << " catalog" << endl ) ;
     BESCatalogList::TheCatalogList()->deref_catalog( FITS_CATALOG ) ;
 
-    BESDEBUG( "fits", "Done Cleaning Fits module " << modname << endl )
+    BESDEBUG( "fits", "Done Cleaning Fits module " << modname << endl ) ;
 }
 
 /** @brief dumps information about this object
