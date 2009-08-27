@@ -5,7 +5,8 @@ AC_PREREQ(2.59)
 AC_INIT(fits_handler, 1.0.3, opendap-tech@opendap.org)
 AC_CONFIG_AUX_DIR([conf])
 
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE(1.10)
+AC_CONFIG_TESTDIR(bes-testsuite, [.])
 
 AC_CONFIG_SRCDIR([FitsModule.h])
 AC_CONFIG_HEADER([config_fits.h])
@@ -137,5 +138,7 @@ dnl fi
 
 OPENDAP_DEBUG_OPTION
 
-AC_CONFIG_FILES([Makefile bes-testsuite/Makefile])
+AC_CONFIG_FILES([Makefile
+		 bes-testsuite/atlocal
+		 bes-testsuite/Makefile])
 AC_OUTPUT
