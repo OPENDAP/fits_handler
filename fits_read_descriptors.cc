@@ -44,7 +44,7 @@ using fits_handler::ltoa ;
 #include "Float32.h"
 #include "Float64.h"
 #include "BESAutoPtr.cc"
-#include "cgi_util.h"
+#include "mime_util.h"
 
 #define buffsize 1000
 

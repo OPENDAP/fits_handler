@@ -48,7 +48,6 @@
 #include <BESServiceRegistry.h>
 #include <BESUtil.h>
 #include <BESConstraintFuncs.h>
-#include <cgi_util.h>
 #include "config_fits.h"
 
 FitsRequestHandler::FitsRequestHandler( const string &name )
