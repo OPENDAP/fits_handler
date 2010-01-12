@@ -13,7 +13,6 @@ SUBDIRS = bes-testsuite
 
 lib_besdir=$(prefix)/lib/bes
 lib_bes_LTLIBRARIES = libfits_module.la
-dist_bin_SCRIPTS = bes-fits-data.sh
 
 FITSSRCS:=fits_read_attributes.cc fits_read_descriptors.cc BESAutoPtr.cc
 
@@ -29,34 +28,25 @@ libfits_module_la_LDFLAGS = -avoid-version -module
 libfits_module_la_LIBADD = $(BES_DAP_LIBS)
 
 EXTRA_DIST = data COPYRIGHT COPYING fits_handler.spec \
-	bes-fits-data.sh.in OSX_Resources
+	fits.conf.in OSX_Resources
 
-CLEANFILES = *~
-
-CLEANFILES += bes-fits-data.sh
+CLEANFILES = *~ fits.conf
 
 sample_datadir = $(datadir)/hyrax/data/fits
 sample_data_DATA = data/20060308.172859.mk4.cpb.fts data/20060308.172859.mk4.rpb.fts data/20060328.185927.chp.bsh.fts data/20060328.190602.dpm.alr.fts
 
+install-data-local: fits.conf
+	@currdate=`date +"%y%m%d%H%M"`; \
+	test -d $(DESTDIR)$(sysconfdir)/bes || $(MKDIR_P) $(DESTDIR)$(sysconfdir)/bes; \
+	test -d $(DESTDIR)$(sysconfdir)/bes/modules || $(MKDIR_P) $(DESTDIR)$(sysconfdir)/bes/modules; \
+	test -f $(DESTDIR)$(sysconfdir)/bes/modules/fits.conf && mv -f $(DESTDIR)$(sysconfdir)/bes/modules/fits.conf $(DESTDIR)$(sysconfdir)/bes/modules/fits.conf.$$currdate; \
+	$(INSTALL_DATA) fits.conf $(DESTDIR)$(sysconfdir)/bes/modules/fits.conf
 
-do_subst = sed -e 's,[@]sysconfdir[@],$(sysconfdir),g' \
-		   	   -e 's,[@]libdir[@],$(libdir),g' \
-		   	   -e 's,[@]datadir[@],$(datadir),g'
+uninstall-local:
+	rm -f $(DESTDIR)$(sysconfdir)/bes/modules/fits.conf
 
-bes-fits-data.sh: bes-fits-data.sh.in config.status
-	$(do_subst) < $(srcdir)/bes-fits-data.sh.in > bes-fits-data.sh
-	chmod +x bes-fits-data.sh
-
-# This makes sure that the handler modifies the bes which configure found
-# even when distcheck is run.
-bes-conf: bes-fits-data.sh
-	(bes_prefix=`bes-config --prefix` ; \
-	if test "$$bes_prefix" = "/usr" ; \
-	 then \
-	    ./bes-fits-data.sh /etc/bes/bes.conf /usr/lib/bes ;\
-	else \
-	    ./bes-fits-data.sh $$bes_prefix/etc/bes/bes.conf $$bes_prefix/lib/bes ; \
-	fi)
+fits.conf: fits.conf.in config.status
+	sed -e "s%[@]bes_modules_dir[@]%${lib_besdir}%" $< > fits.conf
 
 ###########################################################################
 
