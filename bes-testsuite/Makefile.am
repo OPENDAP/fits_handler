@@ -17,17 +17,18 @@ noinst_DATA = bes.conf
 
 CLEANFILES = *.log *.sum site.exp
 
-EXTRA_DIST = fits_handlerTest.at $(TESTSUITE) atlocal.in fits bes.conf.in
+EXTRA_DIST = fits fits_handlerTest.at $(TESTSUITE) atlocal.in $(srcdir)/package.m4 bes.conf.in
 
-DISTCLEANFILES = bes.conf $(srcdir)/package.m4 fits_handlerTest
+DISTCLEANFILES = bes.conf
 
 bes.conf: bes.conf.in ../config.status
+	@my_topdir=`echo ${abs_top_srcdir} | sed 's/\(.*\)\/\(.[^\/]*\)\/\.\./\1/g'`; \
 	sed -e "s%[@]pkgdatadir[@]%${pkgdatadir}%" \
 		-e "s%[@]modulesdir[@]%${BES_MODULE_DIR}%" \
 		-e "s%[@]sysconfdir[@]%${sysconfdir}%" \
 		-e "s%[@]libdir[@]%${libdir}%" \
 		-e "s%[@]datadir[@]%${datadir}%" \
-		-e "s%[@]abs_top_srcdir[@]%${abs_top_srcdir}%" \
+		-e "s%[@]abs_top_srcdir[@]%$$my_topdir%" \
 		-e "s%[@]abs_top_builddir[@]%${abs_top_builddir}%" \
 		-e "s%[@]bindir[@]%${bindir}%" $< > bes.conf
 
