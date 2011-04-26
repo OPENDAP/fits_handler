@@ -72,10 +72,10 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
     if( !bdas )
 	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
 
-    DAS *das = bdas->get_das() ;
-
     try
     {
+	bdas->set_container( dhi.container->get_symbolic_name() ) ;
+	DAS *das = bdas->get_das();
 	string accessed = dhi.container->access() ;
 	string fits_error ;
 	if( !fits_handler::fits_read_attributes( *das, accessed, fits_error ) )
@@ -112,10 +112,11 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
     if( !bdds )
 	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
   
-    DDS *dds = bdds->get_dds() ;
 
     try
     {
+	bdds->set_container( dhi.container->get_symbolic_name() ) ;
+	DDS *dds = bdds->get_dds();
 	string accessed = dhi.container->access() ;
 	string fits_error ;
 	if( !fits_handler::fits_read_descriptors( *dds, accessed,
@@ -127,15 +128,17 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 	}
 	Ancillary::read_ancillary_dds( *dds, accessed ) ;
 
-        DAS das;
-	if( !fits_handler::fits_read_attributes( das, accessed, fits_error ) )
+        DAS *das = new DAS ;
+	BESDASResponse bdas( das ) ;
+	bdas.set_container( dhi.container->get_symbolic_name() ) ;
+	if( !fits_handler::fits_read_attributes( *das, accessed, fits_error ) )
 	{
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
 	}
-	Ancillary::read_ancillary_das( das, accessed ) ;
+	Ancillary::read_ancillary_das( *das, accessed ) ;
         
-        dds->transfer_attributes(&das);
+        dds->transfer_attributes(das);
 
 	BESConstraintFuncs::post_append( dhi ) ;
     }
@@ -167,10 +170,11 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
     if( !bdds )
 	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
   
-    DataDDS *dds = bdds->get_dds() ;
 
     try
     {
+	bdds->set_container( dhi.container->get_symbolic_name() ) ;
+	DataDDS *dds = bdds->get_dds();
 	string accessed = dhi.container->access() ;
 	string fits_error ;
 	if( !fits_handler::fits_read_descriptors( *dds,
@@ -183,15 +187,17 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 	}
 	Ancillary::read_ancillary_dds( *dds, accessed ) ;
 
-        DAS das;
-	if( !fits_handler::fits_read_attributes( das, accessed, fits_error ) )
+        DAS *das = new DAS ;
+	BESDASResponse bdas( das ) ;
+	bdas.set_container( dhi.container->get_symbolic_name() ) ;
+	if( !fits_handler::fits_read_attributes( *das, accessed, fits_error ) )
 	{
 	    throw BESDapError( fits_error, false, unknown_error,
 			       __FILE__, __LINE__ ) ;
 	}
-	Ancillary::read_ancillary_das( das, accessed ) ;
+	Ancillary::read_ancillary_das( *das, accessed ) ;
         
-        dds->transfer_attributes(&das);
+        dds->transfer_attributes(das);
 
 	BESConstraintFuncs::post_append( dhi ) ;
     }
