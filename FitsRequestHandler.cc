@@ -84,6 +84,7 @@ FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
 			       __FILE__, __LINE__ ) ;
 	}
 	Ancillary::read_ancillary_das( *das, accessed ) ;
+	bdas->clear_container( ) ;
     }
     catch( InternalErr &e )
     {
