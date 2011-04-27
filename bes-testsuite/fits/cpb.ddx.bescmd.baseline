@@ -4,7 +4,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns="http://xml.opendap.org/ns/DAP2"
 xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/dap2.xsd">
 
-    <Attribute name="HDU_1" type="Container">
+
+    <Structure name="HDU_1">
         <Attribute name="SIMPLE" type="String">
             <value>&quot;T / FITS file: MLSO Mark-4 K-coronameter&quot;</value>
         </Attribute>
@@ -195,8 +196,393 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
         <Attribute name="key_66" type="String">
             <value>&quot; /   ----------------------------------------------------------------------&quot;</value>
         </Attribute>
-    </Attribute>
-    <Attribute name="HDU_2" type="Container">
+        <Structure name="key_1">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_2">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_3">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_4">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_5">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_6">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_7">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_8">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_9">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_10">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_11">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_12">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_13">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_14">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_15">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_16">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_17">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_18">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_19">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_20">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_21">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_22">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_23">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_24">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_25">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_26">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_27">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_28">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_29">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_30">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_31">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_32">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_33">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_34">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_35">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_36">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_37">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_38">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_39">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_40">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_41">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_42">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_43">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_44">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_45">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_46">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_47">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_48">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_49">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_50">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_51">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_52">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_53">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_54">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_55">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_56">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_57">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_58">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_59">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_60">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_61">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_62">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_63">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_64">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_65">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_66">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_67">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_68">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_69">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_70">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_71">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_72">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_73">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_74">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_75">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_76">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Array name="HDU_1_IMAGE">
+            <Int16/>
+            <dimension name="NAXIS0" size="720"/>
+            <dimension name="NAXIS1" size="384"/>
+        </Array>
+    </Structure>
+    <Structure name="HDU_2">
         <Attribute name="XTENSION" type="String">
             <value>&quot;&apos;IMAGE   &apos; / FITS EXTENSION&quot;</value>
         </Attribute>
@@ -558,1007 +944,615 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
         <Attribute name="DSCANPHI" type="String">
             <value>&quot;28.71 / BYTES 880-883 [F]: depolscan ANGLE [DEGREES].&quot;</value>
         </Attribute>
-    </Attribute>
-
-    <Structure name="cpb">
-        <Structure name="HDU_1">
-            <Structure name="key_1">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_2">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_3">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_4">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_5">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_6">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_7">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_8">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_9">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_10">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_11">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_12">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_13">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_14">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_15">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_16">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_17">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_18">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_19">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_20">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_21">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_22">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_23">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_24">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_25">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_26">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_27">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_28">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_29">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_30">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_31">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_32">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_33">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_34">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_35">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_36">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_37">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_38">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_39">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_40">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_41">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_42">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_43">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_44">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_45">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_46">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_47">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_48">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_49">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_50">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_51">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_52">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_53">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_54">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_55">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_56">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_57">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_58">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_59">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_60">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_61">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_62">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_63">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_64">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_65">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_66">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_67">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_68">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_69">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_70">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_71">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_72">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_73">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_74">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_75">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_76">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Array name="HDU_1_IMAGE">
-                <Int16/>
-                <dimension name="NAXIS0" size="720"/>
-                <dimension name="NAXIS1" size="384"/>
-            </Array>
+        <Structure name="key_1">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
         </Structure>
-        <Structure name="HDU_2">
-            <Structure name="key_1">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_2">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_3">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_4">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_5">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_6">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_7">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_8">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_9">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_10">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_11">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_12">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_13">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_14">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_15">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_16">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_17">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_18">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_19">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_20">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_21">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_22">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_23">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_24">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_25">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_26">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_27">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_28">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_29">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_30">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_31">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_32">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_33">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_34">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_35">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_36">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_37">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_38">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_39">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_40">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_41">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_42">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_43">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_44">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_45">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_46">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_47">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_48">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_49">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_50">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_51">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_52">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_53">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_54">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_55">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_56">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_57">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_58">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_59">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_60">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_61">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_62">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_63">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_64">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_65">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_66">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_67">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_68">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_69">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_70">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_71">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_72">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_73">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_74">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_75">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_76">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_77">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_78">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_79">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_80">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_81">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_82">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_83">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_84">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_85">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_86">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_87">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_88">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_89">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_90">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_91">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_92">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_93">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_94">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_95">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_96">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_97">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_98">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_99">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_100">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_101">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_102">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_103">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_104">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_105">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_106">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_107">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_108">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_109">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_110">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_111">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_112">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_113">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_114">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_115">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_116">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_117">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_118">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_119">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_120">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Structure name="key_121">
-                <String name="name"/>
-                <String name="value"/>
-                <String name="comment"/>
-            </Structure>
-            <Array name="HDU_2_IMAGE">
-                <Byte/>
-                <dimension name="NAXIS0" size="1024"/>
-            </Array>
+        <Structure name="key_2">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
         </Structure>
+        <Structure name="key_3">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_4">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_5">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_6">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_7">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_8">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_9">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_10">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_11">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_12">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_13">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_14">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_15">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_16">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_17">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_18">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_19">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_20">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_21">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_22">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_23">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_24">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_25">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_26">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_27">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_28">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_29">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_30">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_31">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_32">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_33">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_34">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_35">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_36">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_37">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_38">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_39">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_40">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_41">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_42">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_43">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_44">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_45">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_46">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_47">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_48">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_49">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_50">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_51">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_52">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_53">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_54">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_55">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_56">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_57">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_58">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_59">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_60">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_61">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_62">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_63">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_64">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_65">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_66">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_67">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_68">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_69">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_70">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_71">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_72">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_73">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_74">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_75">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_76">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_77">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_78">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_79">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_80">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_81">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_82">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_83">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_84">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_85">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_86">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_87">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_88">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_89">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_90">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_91">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_92">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_93">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_94">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_95">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_96">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_97">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_98">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_99">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_100">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_101">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_102">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_103">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_104">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_105">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_106">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_107">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_108">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_109">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_110">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_111">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_112">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_113">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_114">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_115">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_116">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_117">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_118">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_119">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_120">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Structure name="key_121">
+            <String name="name"/>
+            <String name="value"/>
+            <String name="comment"/>
+        </Structure>
+        <Array name="HDU_2_IMAGE">
+            <Byte/>
+            <dimension name="NAXIS0" size="1024"/>
+        </Array>
     </Structure>
 
     <dataBLOB href=""/>

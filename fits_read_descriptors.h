@@ -47,13 +47,13 @@ using namespace libdap ;
 namespace fits_handler
 {
     bool fits_read_descriptors( DDS &dds, const string &filename,
-			   const string &name, string &error ) ;
+			        string &error ) ;
 
-    int process_hdu_image( fitsfile *fptr,Structure & ) ;
+    int process_hdu_image( fitsfile *fptr, DDS &dds ) ;
 
-    int process_hdu_ascii_table( fitsfile *fptr, Structure & ) ;
+    int process_hdu_ascii_table( fitsfile *fptr, DDS &dds ) ;
 
-    int process_hdu_binary_table( fitsfile *fptr, Structure & ) ;
+    int process_hdu_binary_table( fitsfile *fptr, DDS &dds ) ;
 
     void process_status( int status, string &error ) ;
 

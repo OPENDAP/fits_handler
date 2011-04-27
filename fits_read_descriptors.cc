@@ -66,9 +66,8 @@ fits_handler::process_status( int status, string &error )
 
 bool
 fits_handler::fits_read_descriptors( DDS &dds, const string &filename,
-				     const string &name, string &error )
+				     string &error )
 {
-  BESAutoPtr<Structure> container(new Structure(name, filename));
   char tmp [100];
   fitsfile *fptr;
   int status=0;
@@ -80,6 +79,7 @@ fits_handler::fits_read_descriptors( DDS &dds, const string &filename,
       error+=filename;
       return false;
     }
+  dds.set_dataset_name(name_path(filename));
   for (ii = 1; !(fits_movabs_hdu(fptr, ii, &hdutype, &status) ); ii++) 
     {
       hdu="HDU_";
@@ -91,17 +91,17 @@ fits_handler::fits_read_descriptors( DDS &dds, const string &filename,
 	{
 	case IMAGE_HDU:
 	  str+="_IMAGE";
-	  status=process_hdu_image(fptr,*container);
+	  status=process_hdu_image(fptr,dds);
 	  process_status(status,error);
 	  break;
 	case ASCII_TBL:
 	  str+="_ASCII";
-	  status=process_hdu_ascii_table(fptr,*container);
+	  status=process_hdu_ascii_table(fptr,dds);
 	  process_status(status,error);
 	  break;
 	case BINARY_TBL:
 	  str+="_BINARY";
-	  status=process_hdu_binary_table(fptr,*container);
+	  status=process_hdu_binary_table(fptr,dds);
 	  process_status(status,error);
 	  break;
 	default:
@@ -122,15 +122,15 @@ fits_handler::fits_read_descriptors( DDS &dds, const string &filename,
       process_status(status,error);
       return false;
     }
-  dds.add_var(container.get());
-  dds.set_dataset_name(name_path(filename));
   return true;
 }
 
 int
-fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
+fits_handler::process_hdu_image(fitsfile *fptr,DDS &dds)
 {
-  BESAutoPtr<Structure> container(new Structure(hdu, c.dataset()));
+  string datasetname = dds.get_dataset_name() ;
+
+  BESAutoPtr<Structure> container( new Structure( hdu, datasetname ) ) ;
   int status=0;
   int anynull, nfound;
   long fpixel;
@@ -148,14 +148,14 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       keya+=ttt;
       if ( fits_read_keyn(fptr, jj, name, value, comment, &status) )
 	return status;
-      BESAutoPtr<Structure> st(new Structure(keya, c.dataset()));
-      BESAutoPtr<Str> s1(new Str("name", c.dataset()));
+      BESAutoPtr<Structure> st( new Structure( keya, datasetname ) ) ;
+      BESAutoPtr<Str> s1( new Str( "name", datasetname ) ) ;
       string ppp=name;
       s1->set_value(ppp);
-      BESAutoPtr<Str> s2(new Str("value", c.dataset()));
+      BESAutoPtr<Str> s2( new Str( "value", datasetname ) ) ;
       ppp=value;
       s2->set_value(ppp);
-      BESAutoPtr<Str> s3(new Str("comment", c.dataset()));
+      BESAutoPtr<Str> s3( new Str( "comment", datasetname ) ) ;
       ppp=comment;
       s3->set_value(ppp);
       st->add_var(s1.get());
@@ -178,8 +178,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
     {
     case BYTE_IMG:
       {
-	BESAutoPtr<Byte> in(new Byte (str, c.dataset()));
-	BESAutoPtr<Array> arr(new Array(str, c.dataset(),in.get()));
+	BESAutoPtr<Byte> in( new Byte( str, datasetname ) ) ;
+	BESAutoPtr<Array> arr( new Array( str, datasetname, in.get() ) ) ;
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -199,8 +199,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
     case SHORT_IMG:
       {
 	
-	BESAutoPtr<Int16> in(new Int16 (str, c.dataset()));
-	BESAutoPtr<Array> arr(new Array(str, c.dataset(),in.get()));
+	BESAutoPtr<Int16> in( new Int16( str, datasetname ) ) ;
+	BESAutoPtr<Array> arr( new Array( str, datasetname, in.get() ) ) ;
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -219,8 +219,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       break;
     case LONG_IMG:
       {
-	BESAutoPtr<Int32> in(new Int32 (str, c.dataset()));
-	BESAutoPtr<Array> arr(new Array(str, c.dataset(),in.get()));
+	BESAutoPtr<Int32> in( new Int32( str, datasetname ) ) ;
+	BESAutoPtr<Array> arr( new Array( str, datasetname, in.get() ) ) ;
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -239,8 +239,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       break;
     case FLOAT_IMG:
       {
-	BESAutoPtr<Float32> in(new Float32 (str, c.dataset()));
-	BESAutoPtr<Array> arr(new Array(str, c.dataset(),in.get()));
+	BESAutoPtr<Float32> in( new Float32( str, datasetname ) ) ;
+	BESAutoPtr<Array> arr( new Array( str, datasetname, in.get() ) ) ;
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -259,8 +259,8 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       break;
     case DOUBLE_IMG:
       {
-	BESAutoPtr<Float64> in(new Float64 (str, c.dataset()));
-	BESAutoPtr<Array> arr(new Array(str, c.dataset(),in.get()));
+	BESAutoPtr<Float64> in( new Float64( str, datasetname ) ) ;
+	BESAutoPtr<Array> arr( new Array( str, datasetname, in.get() ) ) ;
 	long npixels=1;
 	for (register int w=0; w<number_axes; w++){
 	  string name_of_axy="NAXIS";
@@ -281,14 +281,15 @@ fits_handler::process_hdu_image(fitsfile *fptr,Structure &c)
       status=1;
       break;
     }   
-  c.add_var(container.get());
+  dds.add_var( container.get() ) ;
   return status;
 }
 
 int
-fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
+fits_handler::process_hdu_ascii_table( fitsfile *fptr, DDS &dds )
 {
-  BESAutoPtr<Structure> container(new Structure(hdu, c.dataset()));
+  string datasetname = dds.get_dataset_name() ;
+  BESAutoPtr<Structure> container( new Structure( hdu, datasetname ) ) ;
   int status=0;
   int nfound, anynull;
   int ncols;
@@ -309,14 +310,14 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
       keya+=ttt;
       if ( fits_read_keyn(fptr, jj, name, value, comment, &status) )
 	return status;
-      BESAutoPtr<Structure> st(new Structure(keya, c.dataset()));
-      BESAutoPtr<Str> s1(new Str("name", c.dataset()));
+      BESAutoPtr<Structure> st( new Structure( keya, datasetname ) ) ;
+      BESAutoPtr<Str> s1( new Str( "name", datasetname ) ) ;
       string ppp=name;
       s1->set_value(ppp);
-      BESAutoPtr<Str> s2(new Str("value", c.dataset()));
+      BESAutoPtr<Str> s2( new Str( "value", datasetname ) ) ;
       ppp=value;
       s2->set_value(ppp);
-      BESAutoPtr<Str> s3(new Str("comment", c.dataset()));
+      BESAutoPtr<Str> s3( new Str( "comment", datasetname ) ) ;
       ppp=comment;
       s3->set_value(ppp);
       st->add_var(s1.get());
@@ -367,7 +368,7 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
   // wasn't that fun ? :)
 
 
-  BESAutoPtr<Structure> table(new Structure(str, c.dataset()));
+  BESAutoPtr<Structure> table( new Structure( str, datasetname ) ) ;
  
   for (int h=0; h<ncols; h++)
     {
@@ -379,8 +380,8 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	case TSTRING:
 	  {
 	    int p;
-	    BESAutoPtr<Str> in(new Str(ttype[h], c.dataset()));
-	    BESAutoPtr<Array> arr(new Array(ttype[h], c.dataset(),in.get()));
+	    BESAutoPtr<Str> in( new Str( ttype[h], datasetname ) ) ;
+	    BESAutoPtr<Array> arr( new Array(ttype[h], datasetname, in.get() ));
 	    arr->append_dim(nrows);
 	    char strnull[10]="";
 	    char **name=new char* [nrows];
@@ -412,8 +413,8 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TSHORT:
 	  {
-	    BESAutoPtr<Int16> in (new Int16(ttype[h], c.dataset()));
-	    BESAutoPtr<Array> arr(new Array(ttype[h], c.dataset(),in.get()));
+	    BESAutoPtr<Int16> in ( new Int16( ttype[h], datasetname ) ) ;
+	    BESAutoPtr<Array> arr( new Array( ttype[h], datasetname, in.get()));
 	    arr->append_dim(nrows);
 	    dods_int16 nullval=0;
 	    BESAutoPtr<dods_int16> buffer(new  dods_int16 [nrows],true);
@@ -424,8 +425,8 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TLONG:
 	  {
-	    BESAutoPtr<Int32> in(new Int32(ttype[h], c.dataset()));
-	    BESAutoPtr<Array> arr(new Array(ttype[h], c.dataset(),in.get()));
+	    BESAutoPtr<Int32> in( new Int32( ttype[h], datasetname ) ) ;
+	    BESAutoPtr<Array> arr( new Array(ttype[h], datasetname, in.get() ));
 	    arr->append_dim(nrows);
 	    dods_int32 nullval=0;
 	    BESAutoPtr<dods_int32> buffer(new dods_int32[nrows],true);
@@ -436,8 +437,8 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TFLOAT:
 	  {
-	    BESAutoPtr<Float32> in(new Float32(ttype[h], c.dataset()));
-	    BESAutoPtr<Array> arr(new Array(ttype[h], c.dataset(),in.get()));
+	    BESAutoPtr<Float32> in( new Float32( ttype[h], datasetname ) ) ;
+	    BESAutoPtr<Array> arr( new Array( ttype[h], datasetname, in.get()));
 	    arr->append_dim(nrows);
 	    dods_float32 nullval=0;
 	    BESAutoPtr<dods_float32> buffer(new dods_float32[nrows],true);
@@ -448,8 +449,8 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	  break;
 	case TDOUBLE:
 	  {
-	    BESAutoPtr<Float64> in(new Float64(ttype[h], c.dataset()));
-	    BESAutoPtr<Array> arr(new Array(ttype[h], c.dataset(),in.get()));
+	    BESAutoPtr<Float64> in( new Float64( ttype[h], datasetname ) ) ;
+	    BESAutoPtr<Array> arr( new Array(ttype[h], datasetname, in.get() ));
 	    arr->append_dim(nrows);
 	    dods_float64 nullval=0;
 	    BESAutoPtr<dods_float64> buffer(new dods_float64[nrows],true);
@@ -461,12 +462,12 @@ fits_handler::process_hdu_ascii_table(fitsfile *fptr,Structure &c)
 	}
     }
   container->add_var(table.get());
-  c.add_var(container.get());
+  dds.add_var(container.get());
   return status;
 }
 
 int
-fits_handler::process_hdu_binary_table(fitsfile *fptr,Structure &c)
+fits_handler::process_hdu_binary_table(fitsfile *fptr,DDS &dds)
 {
   return 0;
 }

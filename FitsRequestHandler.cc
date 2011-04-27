@@ -120,7 +120,6 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
 	string accessed = dhi.container->access() ;
 	string fits_error ;
 	if( !fits_handler::fits_read_descriptors( *dds, accessed,
-				     dhi.container->get_symbolic_name(),
 				     fits_error ) )
 	{
 	    throw BESDapError( fits_error, false, unknown_error,
@@ -140,7 +139,9 @@ FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
         
         dds->transfer_attributes(das);
 
-	BESConstraintFuncs::post_append( dhi ) ;
+	bdds->set_constraint( dhi ) ;
+
+	bdds->clear_container( ) ;
     }
     catch( InternalErr &e )
     {
@@ -177,9 +178,7 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
 	DataDDS *dds = bdds->get_dds();
 	string accessed = dhi.container->access() ;
 	string fits_error ;
-	if( !fits_handler::fits_read_descriptors( *dds,
-				     accessed,
-				     dhi.container->get_symbolic_name(),
+	if( !fits_handler::fits_read_descriptors( *dds, accessed,
 				     fits_error ) )
 	{
 	    throw BESDapError( fits_error, false, unknown_error,
@@ -199,7 +198,9 @@ FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
         
         dds->transfer_attributes(das);
 
-	BESConstraintFuncs::post_append( dhi ) ;
+	bdds->set_constraint( dhi ) ;
+
+	bdds->clear_container( ) ;
     }
     catch( InternalErr &e )
     {
