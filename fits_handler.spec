@@ -1,6 +1,6 @@
 Summary:         Fits 3 data handler for the OPeNDAP Data server
 Name:            fits_handler
-Version:         1.0.4
+Version:         1.0.6
 Release:         1
 License:         LGPL
 Group:           System Environment/Daemons 
@@ -8,8 +8,8 @@ Source0:         http://www.opendap.org/pub/source/%{name}-%{version}.tar.gz
 URL:             http://www.opendap.org/
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:   libdap-devel >= 3.10.2 netcdf-devel
-BuildRequires:   bes-devel >= 3.8.3
+BuildRequires:   libdap-devel >= 3.11.1
+BuildRequires:   bes-devel >= 3.9.1
 
 %description
 This is the fits data handler for our data server. It reads fits 3
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING COPYRIGHT NEWS README
 
 %changelog
+* Mon Jun 30 2011 Patrick West <pwest@ucar.edu> 1.0.6-1
+- Release 1.0.6
+
 * Mon Mar 03 2008 Patrick West <pwest@ucar.edu> 1.0.3-1
 - Release 1.0.3
 

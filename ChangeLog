@@ -1,3 +1,44 @@
+2011-04-26  Patrick West <pwest@ucar.edu>
+
+	Cleared the container after building the DAS.
+	M    FitsRequestHandler.cc
+
+2011-04-26  Patrick West <pwest@ucar.edu>
+
+	Made this handler more like the others, where if the format of the
+	request is for dap2, then the additional structure for the container.
+	M    FitsRequestHandler.cc
+	M    bes-testsuite/fits/cpb.ddx.bescmd.baseline
+	M    bes-testsuite/fits/cpb.data.bescmd.baseline
+	M    bes-testsuite/fits/cpb.dds.bescmd.baseline
+	M    fits_read_descriptors.cc
+	M    fits_read_descriptors.h
+
+2011-04-26  Patrick West <pwest@ucar.edu>
+
+	Using the containers correctly in the dap responses.
+	M    bes-testsuite/fits/cpb.das.bescmd
+	M    bes-testsuite/fits/cpb.data.bescmd
+	M    bes-testsuite/fits/cpb.dds.bescmd
+	M    bes-testsuite/fits/cpb.ddx.bescmd
+	M    FitsRequestHandler.cc
+
+2010-07-15  Patrick West <pwest@ucar.edu>
+
+	Added include of dependent dap.conf
+
+2010-06-05  Patrick West <pwest@ucar.edu>
+
+	Ability to run distcheck. Updated for new release.
+	M    ChangeLog
+	M    bes-testsuite/Makefile.am
+	M    configure.ac
+	M    INSTALL
+	M    NEWS
+
+;; Local Variables:
+;; coding: utf-8
+;; End:
 2010-06-05  Patrick West <pwest@ucar.edu>
 
 	Updated ddx response

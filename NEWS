@@ -1,6 +1,10 @@
 
 $Id: NEWS 14029 2006-06-29 18:10:44Z pwest $
 
+Version 1.0.6
+
+Updates in line with libdap 3.11.x and bes 3.9.x
+
 Version 1.0.5
 
 Updates in line with libdap 3.10.x and bes 3.8.x

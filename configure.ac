@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(fits_handler, 1.0.5, opendap-tech@opendap.org)
+AC_INIT(fits_handler, 1.0.6, opendap-tech@opendap.org)
 AC_CONFIG_AUX_DIR([conf])
 AC_CONFIG_MACRO_DIR([conf])
 
@@ -50,7 +50,7 @@ AC_CHECK_FUNCS([strchr])
 AC_PROG_LIBTOOL
 
 dnl Checks for specific libraries
-AC_CHECK_LIBDAP([3.10.2],
+AC_CHECK_LIBDAP([3.11.1],
  [
   LIBS="$LIBS $DAP_SERVER_LIBS"
   CPPFLAGS="$CPPFLAGS $DAP_CFLAGS"
@@ -58,7 +58,7 @@ AC_CHECK_LIBDAP([3.10.2],
  [ AC_MSG_ERROR([Cannot find libdap])
 ])
   
-AC_CHECK_BES([3.8.3],
+AC_CHECK_BES([3.9.1],
 [
 ],
 [ AC_MSG_ERROR([Cannot find bes])
