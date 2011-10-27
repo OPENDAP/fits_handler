@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Dataset name="20060308.172859.mk4.cpb.fts"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://xml.opendap.org/ns/DAP2"
-xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/dap2.xsd">
-
-
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Dataset name="20060308.172859.mk4.cpb.fts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xml.opendap.org/ns/DAP2" xsi:schemaLocation="http://xml.opendap.org/ns/DAP2 http://xml.opendap.org/dap/dap2.xsd">
     <Structure name="HDU_1">
         <Attribute name="SIMPLE" type="String">
             <value>&quot;T / FITS file: MLSO Mark-4 K-coronameter&quot;</value>
@@ -25,40 +20,40 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;T / extension(s) possible&quot;</value>
         </Attribute>
         <Attribute name="ORIGIN" type="String">
-            <value>&quot;&apos;HAO&apos; / High Altitude Observatory (HAO)&quot;</value>
+            <value>&quot;'HAO' / High Altitude Observatory (HAO)&quot;</value>
         </Attribute>
         <Attribute name="TELESCOP" type="String">
-            <value>&quot;&apos;Mk4&apos; / Mark-4 K-Coronameter (Mk4)&quot;</value>
+            <value>&quot;'Mk4' / Mark-4 K-Coronameter (Mk4)&quot;</value>
         </Attribute>
         <Attribute name="INSTRUME" type="String">
-            <value>&quot;&apos;Dalsa&apos; / rotating 2048-element Dalsa linear array&quot;</value>
+            <value>&quot;'Dalsa' / rotating 2048-element Dalsa linear array&quot;</value>
         </Attribute>
         <Attribute name="DATE-OBS" type="String">
-            <value>&quot;&apos;2006-03-08&apos; / observation date: CCYY-MM-DD [2006 DOY 067]&quot;</value>
+            <value>&quot;'2006-03-08' / observation date: CCYY-MM-DD [2006 DOY 067]&quot;</value>
         </Attribute>
         <Attribute name="TIME-OBS" type="String">
-            <value>&quot;&apos;17:28:59&apos; / observation time: HH:MM:SS&quot;</value>
+            <value>&quot;'17:28:59' / observation time: HH:MM:SS&quot;</value>
         </Attribute>
         <Attribute name="OBJECT" type="String">
-            <value>&quot;&apos;corona&apos; / white light [700-1080 nanometers]&quot;</value>
+            <value>&quot;'corona' / white light [700-1080 nanometers]&quot;</value>
         </Attribute>
         <Attribute name="TYPE-OBS" type="String">
-            <value>&quot;&apos;pB&apos; / polarization Brightness&quot;</value>
+            <value>&quot;'pB' / polarization Brightness&quot;</value>
         </Attribute>
         <Attribute name="VIGNET" type="String">
-            <value>&quot;&apos;N&apos; / image vignetted: [Y or N]&quot;</value>
+            <value>&quot;'N' / image vignetted: [Y or N]&quot;</value>
         </Attribute>
         <Attribute name="NIMAVG" type="String">
             <value>&quot;1 / number of images averaged&quot;</value>
         </Attribute>
         <Attribute name="DATAFORM" type="String">
-            <value>&quot;&apos;Polar&apos; / Mk4 data form&quot;</value>
+            <value>&quot;'Polar' / Mk4 data form&quot;</value>
         </Attribute>
         <Attribute name="COORDNAM" type="String">
-            <value>&quot;&apos;Heliocentric&apos; / coordinate system&quot;</value>
+            <value>&quot;'Heliocentric' / coordinate system&quot;</value>
         </Attribute>
         <Attribute name="CTYPE1" type="String">
-            <value>&quot;&apos;Position Angle&apos; / axis 1 type: Position Angle [CCW]&quot;</value>
+            <value>&quot;'Position Angle' / axis 1 type: Position Angle [CCW]&quot;</value>
         </Attribute>
         <Attribute name="CRPIX1" type="String">
             <value>&quot;0.00 / Position Angle Solar North [pixel]&quot;</value>
@@ -73,7 +68,7 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;0.00 / Position Angle rotation [deg.] from reference&quot;</value>
         </Attribute>
         <Attribute name="CTYPE2" type="String">
-            <value>&quot;&apos;Radius&apos; / axis 2 type  Radius&quot;</value>
+            <value>&quot;'Radius' / axis 2 type  Radius&quot;</value>
         </Attribute>
         <Attribute name="CRPIX2" type="String">
             <value>&quot;-178.28 / Radius Sun Center [PIXEL]&quot;</value>
@@ -109,7 +104,7 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;2040 / Carrington Rotation number&quot;</value>
         </Attribute>
         <Attribute name="BUNIT" type="String">
-            <value>&quot;&apos;Bsun&apos; / magnitude units&quot;</value>
+            <value>&quot;'Bsun' / magnitude units&quot;</value>
         </Attribute>
         <Attribute name="BSCALE" type="String">
             <value>&quot;1.000000e-10 / physical = data * BSCALE + BZERO&quot;</value>
@@ -130,10 +125,10 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;5.000e-07 / max. display value (      6000)&quot;</value>
         </Attribute>
         <Attribute name="DIRAXIS1" type="String">
-            <value>&quot;&apos;RIGHT&apos; / display direction for axis 1 [X]&quot;</value>
+            <value>&quot;'RIGHT' / display direction for axis 1 [X]&quot;</value>
         </Attribute>
         <Attribute name="DIRAXIS2" type="String">
-            <value>&quot;&apos;UP&apos; / display direction for axis 2 [Y]&quot;</value>
+            <value>&quot;'UP' / display direction for axis 2 [Y]&quot;</value>
         </Attribute>
         <Attribute name="TMIN" type="String">
             <value>&quot;0.00 / START BARREL ANGLE [DEGREES]&quot;</value>
@@ -148,22 +143,22 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;2.85 / outer field-of-view limit [Rsun]&quot;</value>
         </Attribute>
         <Attribute name="TSCPFILE" type="String">
-            <value>&quot;&apos;06d067.18_22.mk4.tscpinv&apos; / TSCP file&quot;</value>
+            <value>&quot;'06d067.18_22.mk4.tscpinv' / TSCP file&quot;</value>
         </Attribute>
         <Attribute name="REFFILE" type="String">
-            <value>&quot;&apos;06d067.18_16.mk4.q&apos; / reference file&quot;</value>
+            <value>&quot;'06d067.18_16.mk4.q' / reference file&quot;</value>
         </Attribute>
         <Attribute name="CVERSION" type="String">
-            <value>&quot;&apos;Version 2.1&apos; / calibration version&quot;</value>
+            <value>&quot;'Version 2.1' / calibration version&quot;</value>
         </Attribute>
         <Attribute name="DATE-CAL" type="String">
-            <value>&quot;&apos;2006-03-09&apos; / Mk4 calibration date :       CCYY-MM-DD&quot;</value>
+            <value>&quot;'2006-03-09' / Mk4 calibration date :       CCYY-MM-DD&quot;</value>
         </Attribute>
         <Attribute name="DATE" type="String">
-            <value>&quot;&apos;2006-03-09&apos; / date of FITS file creation : CCYY-MM-DD&quot;</value>
+            <value>&quot;'2006-03-09' / date of FITS file creation : CCYY-MM-DD&quot;</value>
         </Attribute>
         <Attribute name="VERSION" type="String">
-            <value>&quot;&apos;Mk4 v2.12&apos; / mk4fits software version&quot;</value>
+            <value>&quot;'Mk4 v2.12' / mk4fits software version&quot;</value>
         </Attribute>
         <Attribute name="key_54" type="String">
             <value>&quot; /   ----------------------------------------------------------------------&quot;</value>
@@ -178,7 +173,7 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot; /   in units of Bsun, which is a ratio of brightness of the corona to the&quot;</value>
             <value>&quot; /   mean brightness of the solar disk.  To convert integer pixel values&quot;</value>
             <value>&quot; /   to Bsun units, multiply each pixel value by BSCALE &amp; add BZERO.&quot;</value>
-            <value>&quot; /   Intensity data is *QUANTITATIVELY* useful only when BUNIT=&apos;Bsun&apos;.&quot;</value>
+            <value>&quot; /   Intensity data is *QUANTITATIVELY* useful only when BUNIT='Bsun'.&quot;</value>
             <value>&quot; /   The Mark-4 K-coronameter (Mk4) observes the lower corona [700-950 nm]&quot;</value>
             <value>&quot; /   from ~1.10 to ~2.85 solar radii [Rsun], using a 2048-element linear&quot;</value>
             <value>&quot; /   Dalsa array (sampled to 384 pixels) aligned along a radial direction&quot;</value>
@@ -584,7 +579,7 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
     </Structure>
     <Structure name="HDU_2">
         <Attribute name="XTENSION" type="String">
-            <value>&quot;&apos;IMAGE   &apos; / FITS EXTENSION&quot;</value>
+            <value>&quot;'IMAGE   ' / FITS EXTENSION&quot;</value>
         </Attribute>
         <Attribute name="BITPIX" type="String">
             <value>&quot;8 / MIXTURE OF CHAR[C], INT[I], FLOAT[F] VARIABLES&quot;</value>
@@ -602,7 +597,7 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;1 / EXTENSION GCOUNT&quot;</value>
         </Attribute>
         <Attribute name="EXTNAME" type="String">
-            <value>&quot;&apos;MK4_HSKP&apos; / MLSO/MK4 BINARY HEADER EXTENSION&quot;</value>
+            <value>&quot;'MK4_HSKP' / MLSO/MK4 BINARY HEADER EXTENSION&quot;</value>
         </Attribute>
         <Attribute name="COMMENT" type="String">
             <value>&quot; /  KEYWORDS &amp; PARAMETERS BELOW DESCRIBE THE MK4 BINARY HEADER CONTENTS:&quot;</value>
@@ -801,37 +796,37 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;2272980 / BYTES 252-255 [I]: CAL TIME: HERTZ UNITS&quot;</value>
         </Attribute>
         <Attribute name="TSCPFILE" type="String">
-            <value>&quot;&apos;06d067.18_22.mk4.tscpinv&apos; / BYTES 256-319 [C]: TSCP FILE&quot;</value>
+            <value>&quot;'06d067.18_22.mk4.tscpinv' / BYTES 256-319 [C]: TSCP FILE&quot;</value>
         </Attribute>
         <Attribute name="REFFILE" type="String">
-            <value>&quot;&apos;06d067.18_16.mk4.q&apos; / BYTES 320-383 [C]: REFERENCE FILE&quot;</value>
+            <value>&quot;'06d067.18_16.mk4.q' / BYTES 320-383 [C]: REFERENCE FILE&quot;</value>
         </Attribute>
         <Attribute name="CVERSION" type="String">
-            <value>&quot;&apos;Version 2.1&apos; / BYTES 384-447 [C]: VERSION&quot;</value>
+            <value>&quot;'Version 2.1' / BYTES 384-447 [C]: VERSION&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME1" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 448-467 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 448-467 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME2" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 468-487 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 468-487 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME3" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 488-507 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 488-507 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME4" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 508-527 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 508-527 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME5" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 528-547 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 528-547 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME6" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 548-567 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 548-567 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME7" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 568-587 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 568-587 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="AVGTIME8" type="String">
-            <value>&quot;&apos;                    &apos; / BYTES 588-607 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
+            <value>&quot;'                    ' / BYTES 588-607 [C]: IMAGE TIMES FOR AVERAGE&quot;</value>
         </Attribute>
         <Attribute name="JULDATE0" type="String">
             <value>&quot;37864.885400 / BYTES 608-615 [D]: START DATE FOR INST. PARAM.&quot;</value>
@@ -924,10 +919,10 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <value>&quot;300 / BYTES 732-735 [I]: RING REFERENCE HEIGHT.&quot;</value>
         </Attribute>
         <Attribute name="CORRECT0" type="String">
-            <value>&quot;&apos;gain_0.200309022115&apos; / BYTES 736-799 [C]: CORRECT #0 FILE.&quot;</value>
+            <value>&quot;'gain_0.200309022115' / BYTES 736-799 [C]: CORRECT #0 FILE.&quot;</value>
         </Attribute>
         <Attribute name="CORRECT1" type="String">
-            <value>&quot;&apos;gain_1.200309022115&apos; / BYTES 800-863 [C]: CORRECT #1 FILE.&quot;</value>
+            <value>&quot;'gain_1.200309022115' / BYTES 800-863 [C]: CORRECT #1 FILE.&quot;</value>
         </Attribute>
         <Attribute name="QUXFORM" type="String">
             <value>&quot;7.27 / BYTES 864-867 [F]: quXform ANGLE [DEGREES].&quot;</value>
@@ -1554,6 +1549,5 @@ xsi:schemaLocation="http://xml.opendap.org/ns/DAP2  http://xml.opendap.org/dap/d
             <dimension name="NAXIS0" size="1024"/>
         </Array>
     </Structure>
-
     <dataBLOB href=""/>
 </Dataset>
