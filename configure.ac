@@ -19,7 +19,7 @@ AC_CONFIG_SRCDIR([configure.ac])
 AC_CONFIG_HEADER([config_fits.h])
 
 dnl flags for the compilers and linkers - set these before locating the
-dnl actual tools since some of the AC_PROG macros set these `flag variables'
+dnl actual tools since some of the AC_PROG macros set these 'flag variables'
 dnl to default values otherwise.
 
 AC_CANONICAL_HOST
@@ -92,13 +92,18 @@ AS_IF([test -n "$CFITS_PATH"],[CFITS_PATH_LIBDIR="$CFITS_PATH/lib"])
 AS_IF([test -n "$CFITS_PATH"],[CFITS_PATH_INC="$CFITS_PATH/include"])
 
 
-
-ac_cfits_ok='yes'
+ac_cfits_save_LDFLAGS="$LDFLAGS"
+LDFLAGS="$LDFLAGS -L$CFITS_PATH_LIBDIR"
+AC_CHECK_LIB(fits_is_url_absolute, cfitsio,
+[ac_cfits_ok='yes'
 CFITS_LIBS="-lcfitsio"
 CFITS_LDFLAGS="-L${CFITS_PATH_LIBDIR}" 
-
 AC_SUBST([CFITS_LDFLAGS])
-AC_SUBST([CFITS_LIBS])
+AC_SUBST([CFITS_LIBS])],
+
+[ac_cfits_ok='no']
+)
+LDFLAGS="$ac_cfits_save_LDFLAGS"
 
 CFITS_CPPFLAGS=
 ac_cfits_h='no'
