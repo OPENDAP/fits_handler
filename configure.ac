@@ -76,21 +76,22 @@ AC_DEFUN([AC_CHECK_CFITS],
 AC_ARG_WITH([cfits],
             [AS_HELP_STRING([--with-cfits=ARG],[cfits directory])],
             [CFITS_PATH=${withval}], 
-            [CFITS_PATH="/usr/local/cfits"])
+            [CFITS_PATH=""])
 
 AC_ARG_WITH([cfits_inc],
             [AS_HELP_STRING([--with-cfits-include=ARG],[cfits include directory])],
             [CFITS_PATH_INC=${withval}], 
-            [CFITS_PATH_INC=""])
+            [CFITS_PATH_INC="/usr/include/cfitsio"])
 
 AC_ARG_WITH([cfits_libdir],
             [AS_HELP_STRING([--with-cfits-libdir=ARG],[cfits library directory])],
             [CFITS_PATH_LIBDIR=${withval}], 
-            [CFITS_PATH_LIBDIR=""])
+            [CFITS_PATH_LIBDIR="/usr/lib"])
 
-AS_IF([test "z$CFITS_PATH_LIBDIR" = "z"],[CFITS_PATH_LIBDIR="$CFITS_PATH/lib"])
+AS_IF([test -n "$CFITS_PATH"],[CFITS_PATH_LIBDIR="$CFITS_PATH/lib"])
+AS_IF([test -n "$CFITS_PATH"],[CFITS_PATH_INC="$CFITS_PATH/include"])
 
-AS_IF([test "z$CFITS_PATH_INC" = "z"],[CFITS_PATH_INC="$CFITS_PATH/include"])
+
 
 ac_cfits_ok='yes'
 CFITS_LIBS="-lcfitsio"
