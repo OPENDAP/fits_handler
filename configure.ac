@@ -94,7 +94,7 @@ AS_IF([test -n "$CFITS_PATH"],[CFITS_PATH_INC="$CFITS_PATH/include"])
 
 ac_cfits_save_LDFLAGS="$LDFLAGS"
 LDFLAGS="$LDFLAGS -L$CFITS_PATH_LIBDIR"
-AC_CHECK_LIB(fits_is_url_absolute, cfitsio,
+AC_CHECK_LIB(cfitsio, fits_is_url_absolute, 
 [ac_cfits_ok='yes'
 CFITS_LIBS="-lcfitsio"
 CFITS_LDFLAGS="-L${CFITS_PATH_LIBDIR}" 
