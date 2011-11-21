@@ -40,8 +40,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/bes-fits-data.sh
-%{_libdir}/libfits_handler.so.*
+#%{_bindir}/bes-fits-data.sh
+#%{_libdir}/libfits_handler.so.*
+#%{_libdir}/bes/libfits_module.so
+%dir %{_sysconfdir}/bes/
+%dir %{_sysconfdir}/bes/modules
+%config(noreplace) %{_sysconfdir}/bes/modules/fits.conf
 %{_libdir}/bes/libfits_module.so
 %{_datadir}/hyrax/
 %doc COPYING COPYRIGHT NEWS README
