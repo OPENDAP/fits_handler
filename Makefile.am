@@ -11,7 +11,7 @@ ACLOCAL_AMFLAGS = -I conf
 
 SUBDIRS = bes-testsuite
 
-lib_besdir=$(prefix)/lib/bes
+lib_besdir=$(libdir)/bes
 lib_bes_LTLIBRARIES = libfits_module.la
 
 FITSSRCS:=fits_read_attributes.cc fits_read_descriptors.cc BESAutoPtr.cc
