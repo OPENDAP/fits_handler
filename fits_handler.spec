@@ -45,6 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/bes/modules/fits.conf
 %{_libdir}/bes/libfits_module.so
 %{_datadir}/hyrax/
+
 %doc COPYING COPYRIGHT NEWS README
 
 %changelog
