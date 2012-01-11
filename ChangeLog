@@ -1,3 +1,88 @@
+2012-01-09  James Gallagher <jgallagher@opendap.org>
+
+	Code review.
+
+2012-01-09  Patrick West <pwest@ucar.edu>
+
+	Was using prefix in defining the library directory instead of libdir.
+	M    fits_handler.spec
+	M    Makefile.am
+
+2011-11-21  Nathan Potter <ndp@coas.oregonstate.edu>
+
+	added log dump
+
+2011-11-21  Nathan Potter <ndp@coas.oregonstate.edu>
+
+	Patching RPM production rules.
+
+2011-11-21  Nathan Potter <ndp@coas.oregonstate.edu>
+
+2011-11-17  Nathan Potter <ndp@coas.oregonstate.edu>
+
+	removing unused macro files from fits_handler config
+
+2011-11-17  Nathan Potter <ndp@coas.oregonstate.edu>
+
+	More changes to fits_handler configure
+
+2011-11-17  Nathan Potter <ndp@coas.oregonstate.edu>
+
+	More changes to fits_handler configure
+
+2011-11-17  Nathan Potter <ndp@coas.oregonstate.edu>
+
+	Fixing configure check for cfits
+
+2011-10-26  James Gallagher <jgallagher@opendap.org>
+
+	Fixed a DDX baseline
+
+	M    bes-testsuite/fits/cpb.ddx.bescmd.baseline
+
+2011-10-23  James Gallagher <jgallagher@opendap.org>
+
+	Modified configure so that this code builds only the so version of the library by default.
+
+2011-09-22  James Gallagher <jgallagher@opendap.org>
+
+	Hyrax 1.8
+
+	A    http://scm.opendap.org/svn/branch/fits_handler/1.0.7
+
+2011-06-30  Patrick West <pwest@ucar.edu>
+
+	Up to date to libdap 3.11.1 and bes 3.9.1
+	M    ChangeLog
+	M    fits_handler.spec
+	M    configure.ac
+	M    NEWS
+
+2011-04-26  Patrick West <pwest@ucar.edu>
+
+	Cleared the container after building the DAS.
+	M    FitsRequestHandler.cc
+
+2011-04-26  Patrick West <pwest@ucar.edu>
+
+	Made this handler more like the others, where if the format of the
+	request is for dap2, then the additional structure for the container.
+	M    FitsRequestHandler.cc
+	M    bes-testsuite/fits/cpb.ddx.bescmd.baseline
+	M    bes-testsuite/fits/cpb.data.bescmd.baseline
+	M    bes-testsuite/fits/cpb.dds.bescmd.baseline
+	M    fits_read_descriptors.cc
+	M    fits_read_descriptors.h
+
+2011-04-25  Patrick West <pwest@ucar.edu>
+
+	Using the containers correctly in the dap responses.
+	M    bes-testsuite/fits/cpb.das.bescmd
+	M    bes-testsuite/fits/cpb.data.bescmd
+	M    bes-testsuite/fits/cpb.dds.bescmd
+	M    bes-testsuite/fits/cpb.ddx.bescmd
+	M    FitsRequestHandler.cc
+
 2011-04-26  Patrick West <pwest@ucar.edu>
 
 	Cleared the container after building the DAS.
@@ -36,9 +121,6 @@
 	M    INSTALL
 	M    NEWS
 
-;; Local Variables:
-;; coding: utf-8
-;; End:
 2010-06-05  Patrick West <pwest@ucar.edu>
 
 	Updated ddx response
@@ -207,9 +289,6 @@
 	<prefix>/etc/bes/bes.conf.
 	D    bes.conf
 
-;; Local Variables:
-;; coding: utf-8
-;; End:
 2008-03-03  Patrick West <pwest@ucar.edu>
 	Release 1.0.3. Added testsuite. Updated README and INSTALL.
 	M    ChangeLog
@@ -546,7 +625,3 @@
 2005-07-05  Patrick West <pwest@ucar.edu>
 
 	Creating fits-hander.
-
-;; Local Variables:
-;; coding: utf-8
-;; End:

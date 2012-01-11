@@ -1,5 +1,10 @@
 
-$Id: NEWS 14029 2006-06-29 18:10:44Z pwest $
+Version 1.0.7
+
+This is the first version of the handler that has been part of the
+standard Hyrax release set.
+
+Build fixes.
 
 Version 1.0.6
 
