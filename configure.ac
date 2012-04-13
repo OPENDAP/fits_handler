@@ -2,18 +2,24 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(fits_handler, 1.0.6, opendap-tech@opendap.org)
+AC_INIT(fits_handler, 1.0.7, opendap-tech@opendap.org)
 AC_CONFIG_AUX_DIR([conf])
 AC_CONFIG_MACRO_DIR([conf])
 
 AM_INIT_AUTOMAKE(1.10)
+
+# The handler is a shared object library, so we don't normally need
+# the static lib. Override this default by specifying `--enable-static',
+# which can make running unit tests with valgrind far more pleasant. 
+AM_DISABLE_STATIC
+
 AC_CONFIG_TESTDIR(bes-testsuite, [.])
 
 AC_CONFIG_SRCDIR([configure.ac])
 AC_CONFIG_HEADER([config_fits.h])
 
 dnl flags for the compilers and linkers - set these before locating the
-dnl actual tools since some of the AC_PROG macros set these `flag variables'
+dnl actual tools since some of the AC_PROG macros set these 'flag variables'
 dnl to default values otherwise.
 
 AC_CANONICAL_HOST
@@ -70,28 +76,35 @@ AC_DEFUN([AC_CHECK_CFITS],
 AC_ARG_WITH([cfits],
             [AS_HELP_STRING([--with-cfits=ARG],[cfits directory])],
             [CFITS_PATH=${withval}], 
-            [CFITS_PATH="/usr/local/cfits"])
+            [CFITS_PATH=""])
 
 AC_ARG_WITH([cfits_inc],
             [AS_HELP_STRING([--with-cfits-include=ARG],[cfits include directory])],
             [CFITS_PATH_INC=${withval}], 
-            [CFITS_PATH_INC=""])
+            [CFITS_PATH_INC="/usr/include/cfitsio"])
 
 AC_ARG_WITH([cfits_libdir],
             [AS_HELP_STRING([--with-cfits-libdir=ARG],[cfits library directory])],
             [CFITS_PATH_LIBDIR=${withval}], 
-            [CFITS_PATH_LIBDIR=""])
+            [CFITS_PATH_LIBDIR="/usr/lib"])
 
-AS_IF([test "z$CFITS_PATH_LIBDIR" = "z"],[CFITS_PATH_LIBDIR="$CFITS_PATH/lib"])
+AS_IF([test -n "$CFITS_PATH"],[CFITS_PATH_LIBDIR="$CFITS_PATH/lib"])
+AS_IF([test -n "$CFITS_PATH"],[CFITS_PATH_INC="$CFITS_PATH/include"])
 
-AS_IF([test "z$CFITS_PATH_INC" = "z"],[CFITS_PATH_INC="$CFITS_PATH/include"])
 
-ac_cfits_ok='yes'
+ac_cfits_save_LDFLAGS="$LDFLAGS"
+LDFLAGS="$LDFLAGS -L$CFITS_PATH_LIBDIR"
+AC_CHECK_LIB(cfitsio, fits_is_url_absolute, 
+
+[ac_cfits_ok='yes'
 CFITS_LIBS="-lcfitsio"
 CFITS_LDFLAGS="-L${CFITS_PATH_LIBDIR}" 
-
 AC_SUBST([CFITS_LDFLAGS])
-AC_SUBST([CFITS_LIBS])
+AC_SUBST([CFITS_LIBS])],
+
+[ac_cfits_ok='no']
+)
+LDFLAGS="$ac_cfits_save_LDFLAGS"
 
 CFITS_CPPFLAGS=
 ac_cfits_h='no'

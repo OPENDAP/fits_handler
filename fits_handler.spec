@@ -1,18 +1,20 @@
-Summary:         Fits 3 data handler for the OPeNDAP Data server
+Summary:         FITS data handler for the OPeNDAP Data server
 Name:            fits_handler
-Version:         1.0.6
+Version:         1.0.7
 Release:         1
-License:         LGPL
+License:         LGPLv2+
 Group:           System Environment/Daemons 
 Source0:         http://www.opendap.org/pub/source/%{name}-%{version}.tar.gz
 URL:             http://www.opendap.org/
+Requires:        libdap >= 3.11.0
+Requires:        bes >= 3.9.0
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:   libdap-devel >= 3.11.1
-BuildRequires:   bes-devel >= 3.9.1
+BuildRequires:   libdap-devel >= 3.11.0
+BuildRequires:   bes-devel >= 3.9.0
 
 %description
-This is the fits data handler for our data server. It reads fits 3
+This is the fits data handler for our data server. It reads fits
 files and returns DAP responses that are compatible with DAP2 and the
 dap-server software.
 
@@ -25,11 +27,9 @@ make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT install
+make DESTDIR=$RPM_BUILD_ROOT install INSTALL="install -p"
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.so
-rm -f $RPM_BUILD_ROOT%{_libdir}/bes/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/bes/libfits_module.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -40,13 +40,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/bes-fits-data.sh
-%{_libdir}/libfits_handler.so.*
+%dir %{_sysconfdir}/bes/
+%dir %{_sysconfdir}/bes/modules
+%config(noreplace) %{_sysconfdir}/bes/modules/fits.conf
 %{_libdir}/bes/libfits_module.so
 %{_datadir}/hyrax/
+
 %doc COPYING COPYRIGHT NEWS README
 
 %changelog
+* Mon Jan 09 2012 Patrick West <westp@rpi.edu> 1.0.6-2
+- Release 1.0.6
+
 * Mon Jun 30 2011 Patrick West <pwest@ucar.edu> 1.0.6-1
 - Release 1.0.6
 
