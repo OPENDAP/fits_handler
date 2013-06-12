@@ -45,8 +45,9 @@ using std::string;
 
 using fits_handler::ltoa;
 
-#include "AttrTable.h"
-#include "DAS.h"
+#include <AttrTable.h>
+#include <DAS.h>
+
 
 static const char STRING[] = "String";
 static const char BYTE[] = "Byte";
@@ -70,7 +71,7 @@ bool fits_handler::fits_read_attributes(DAS &das, const string &filename, string
         return false;
     }
     for (ii = 1; !(fits_movabs_hdu(fptr, ii, &hdutype, &status)); ii++) {
-#if 0
+#if 1
         at=new AttrTable();
 #endif
         /* get no. of keywords */
@@ -97,7 +98,7 @@ bool fits_handler::fits_read_attributes(DAS &das, const string &filename, string
                 s_name = (string) "key_" + tmp;
             }
 
-            at = new AttrTable();
+            //at = new AttrTable();
             if (at) {   // Is this needed? jhrg 1.9.12
                 string com = "\"";
                 com += s_value;
