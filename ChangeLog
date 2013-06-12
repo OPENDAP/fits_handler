@@ -1,3 +1,51 @@
+2013-06-12  James Gallagher <jgallagher@opendap.org>
+
+	Fixed a mistake in the processing of attributes in the FITS
+	handler. Also fixed a potential resource leak n the attribute
+	processing code since the code could exit leaving the data file
+	open. Made some other refactoring changes that removed unneeded
+	variables.
+
+2013-06-12  James Gallagher <jgallagher@opendap.org>
+
+	Repaired the fits handler's attribute processing.
+
+	M    fits_read_attributes.cc
+
+2013-06-12  James Gallagher <jgallagher@opendap.org>
+
+	Fixed the test baselines; the handler was not returning the
+	correct attributes and the baselines were incorrectly checked in
+	with the broken attributes.
+
+2013-01-20  James Gallagher <jgallagher@opendap.org>
+
+	Merged the hyrax 1.8 branch to the trunk.
+
+	_M   .
+	M    bes-testsuite/fits/cpb.ddx.bescmd.baseline
+	M    bes-testsuite/fits/cpb.das.bescmd.baseline
+
+2012-04-13  James Gallagher <jgallagher@opendap.org>
+
+	After merge with hyrax 1.8 release branch and full build w/o test
+	failures.
+
+	_M   .
+	A  + foo
+	D    conf/cdf_header.m4
+	D    conf/cdf.m4
+	M    ChangeLog
+	M    fits_read_attributes.cc
+	M    fits_handler.spec
+	M    README
+	M    bes-testsuite/fits/cpb.ddx.bescmd.baseline
+	M    configure.ac
+	M    fits_read_descriptors.cc
+	M    INSTALL
+	M    Makefile.am
+	M    NEWS
+
 2012-01-09  James Gallagher <jgallagher@opendap.org>
 
 	Code review.
