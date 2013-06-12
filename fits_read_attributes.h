@@ -22,8 +22,8 @@
 //
 // You can contact University Corporation for Atmospheric Research at
 // 3080 Center Green Drive, Boulder, CO 80301
- 
-// (c) COPYRIGHT University Corporation for Atmostpheric Research 2004-2005
+
+// (c) COPYRIGHT University Corporation for Atmospheric Research 2004-2005
 // Please read the full copyright statement in the file COPYRIGHT_UCAR.
 //
 // Authors:
@@ -35,20 +35,15 @@
 
 #include <string>
 
-using std::string ;
+using std::string;
 
-#include "DAS.h"
+#include <DAS.h>
 
-using namespace libdap ;
+using namespace libdap;
 
-namespace fits_handler
-{
-    bool fits_read_attributes( DAS &das,
-                               const string &filename,
-			       string &error ) ;
-
-    char *ltoa( long val, char *buf, int base ) ;
+namespace fits_handler {
+bool fits_read_attributes(DAS &das, const string &filename, string &error);
+char *ltoa(long val, char *buf, int base);
 }
 
 #endif // fits_read_attributes_h_
-
