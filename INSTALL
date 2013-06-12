@@ -1,5 +1,5 @@
 
-Updated for version 1.0.7 of the OPeNDAP FITS data handler software
+Updated for version 1.0.8 of the OPeNDAP FITS data handler software
 
 Installing the OPeNDAP FITS data handler software
 
@@ -46,28 +46,3 @@ REQUIREMENTS
     cfitsio version 3.0, although any recent version should work fine. If the
     configure script cannot find your copy of libcfitsio, use the
     --with-cfits options to tell it where to look (see configure --help).
-
-NOTES
-
-  o DEBUGGING AIDS
-
-    - The OPeNDAP libdap library includes the following debugging aids that
-      may be of help to you in developing new applications.
-
-    - DBG: simple program instrumentation -- see the file debug.h distributed
-      with libdap (which is installed in the libdap header directory; use
-      'config-libdap --cflags' and look at the value if -I).
-
-    - DBG2: more elaborate program instrumentation -- by convention this is
-      used for output that is half a page or more, while DEBUG is used for
-      single line output.
-
-    - To build with program instrumentation use `--enable-debug=<level>'
-      where <level> is 1 or 2.
-
-    - To use BES debugging aids simply pass the -d option to the BES starter
-      script, like so: besctl start -d "bes.debug,fits". This will turn on
-      any debugging in the BES code of fits and dump the debugging
-      statements to the file bes.debug. If you just want it to your screen,
-      replace bes.debug with cerr.
-
