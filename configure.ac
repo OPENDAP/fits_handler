@@ -16,7 +16,7 @@ AM_DISABLE_STATIC
 AC_CONFIG_TESTDIR(bes-testsuite, [.])
 
 AC_CONFIG_SRCDIR([configure.ac])
-AC_CONFIG_HEADER([config_fits.h])
+AC_CONFIG_HEADER([config.h])
 
 dnl flags for the compilers and linkers - set these before locating the
 dnl actual tools since some of the AC_PROG macros set these 'flag variables'
@@ -142,17 +142,13 @@ AC_CHECK_CFITS(
    ]
 )
 
-dnl if test "$CFITS_PATH"
-dnl then
-dnl     AC_MSG_RESULT([$CFITS_PATH])
-dnl     LDFLAGS="$LDFLAGS -L${CFITS_PATH}/lib"
-dnl     LIBS="$LIBS -lcfitsio"
-dnl     CPPFLAGS="$CPPFLAGS -I${CFITS_PATH}/include"
-dnl fi
-
-OPENDAP_DEBUG_OPTION
+DODS_GCOV_VALGRIND
 
 AC_CONFIG_FILES([Makefile
 		 bes-testsuite/atlocal
 		 bes-testsuite/Makefile])
+		
+AC_CONFIG_FILES([bes-testsuite/generate_metadata_baseline.sh], [chmod +x bes-testsuite/generate_metadata_baseline.sh])
+AC_CONFIG_FILES([bes-testsuite/generate_data_baseline.sh], [chmod +x bes-testsuite/generate_data_baseline.sh])
+
 AC_OUTPUT

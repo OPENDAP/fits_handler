@@ -22,7 +22,7 @@
 //
 // You can contact University Corporation for Atmospheric Research at
 // 3080 Center Green Drive, Boulder, CO 80301
- 
+
 // (c) COPYRIGHT University Corporation for Atmostpheric Research 2004-2005
 // Please read the full copyright statement in the file COPYRIGHT_UCAR.
 //
@@ -33,30 +33,76 @@
 #ifndef BESAutoPtr_h_
 #define BESAutoPtr_h_ 1
 
-template <class T>
-class BESAutoPtr
-{
+template<class T>
+class BESAutoPtr {
 private:
-    T* p;
-    bool _is_vector;
+	T* p;
+	bool _is_vector;
 
-    // disable copy constructor.
-    template <class U> BESAutoPtr(BESAutoPtr<U> &){};
+	// disable copy constructor.
+	template<class U> BESAutoPtr(BESAutoPtr<U> &) { }
 
-    // disable overloaded = operator.
-    template <class U> BESAutoPtr<T>& operator= (BESAutoPtr<U> &){ return *this ; }
+
+	// disable overloaded = operator.
+	template<class U> BESAutoPtr<T>& operator=(BESAutoPtr<U> &)
+	{
+		return *this;
+	}
 
 public:
-    explicit BESAutoPtr(T* pointed=0, bool v=false) ;
-    ~BESAutoPtr() ;
+	explicit BESAutoPtr(T* pointed = 0, bool v = false)
+	{
+		p = pointed;
+		_is_vector = v;
+	}
 
-    T* set(T *pointed, bool v=false) ;
-    T* get() const ;
-    T* operator ->() const ;
-    T& operator *() const ;
-    T* release() ;
-    void reset() ;
+	~BESAutoPtr()
+	{
+		if (_is_vector)
+			delete[] p;
+		else
+			delete p;
+		p = 0;
+	}
+
+	T* set(T *pointed, bool v = false)
+	{
+		T* temp = p;
+		p = pointed;
+		_is_vector = v;
+		return temp;
+	}
+
+	T* get() const
+	{
+		return p;
+	}
+
+	T* operator ->() const
+	{
+		return p;
+	}
+
+	T& operator *() const
+	{
+		return *p;
+	}
+
+	T* release()
+	{
+		T* old = p;
+		p = 0;
+		return old;
+	}
+
+	void reset()
+	{
+		if (_is_vector)
+			delete[] p;
+		else
+			delete p;
+		p = 0;
+	}
 };
 
 #endif // BESAutoPtr_h_
-

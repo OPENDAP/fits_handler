@@ -30,57 +30,21 @@
 //      pwest       Patrick West <pwest@ucar.edu>
 //      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <assert.h>
+// #include <stdlib.h>
+// #include <ctype.h>
 
 #include <string>
-
-using std::string;
+#include <sstream>
 
 #include <fitsio.h>
-
-#include "fits_read_attributes.h"
-
-using fits_handler::ltoa;
 
 #include <AttrTable.h>
 #include <DAS.h>
 
-#if 0
-static const char STRING[] = "String";
-static const char BYTE[] = "Byte";
-static const char INT32[] = "Int32";
-static const char FLOAT64[] = "Float64";
-#endif
+#include "fits_read_attributes.h"
 
-char *
-fits_handler::ltoa(long val, /* value to be converted */
-char *buf, /* output string         */
-int base) /* conversion base       */
-{
-    ldiv_t r; /* result of val / base  */
-
-    if (base > 36 || base < 2) /* no conversion if wrong base */
-    {
-        *buf = '\0';
-        return buf;
-    }
-    if (val < 0)
-        *buf++ = '-';
-    r = ldiv(labs(val), base);
-
-    /* output digits of val/base first */
-
-    if (r.quot > 0)
-        buf = ltoa(r.quot, buf, base);
-    /* output last digit */
-
-    *buf++ = "0123456789abcdefghijklmnopqrstuvwxyz"[(int) r.rem];
-    *buf = '\0';
-    return buf;
-}
+using namespace libdap;
+using namespace std;
 
 bool fits_handler::fits_read_attributes(DAS &das, const string &filename, string &error)
 {
@@ -128,9 +92,14 @@ bool fits_handler::fits_read_attributes(DAS &das, const string &filename, string
 #endif
             string s_name = name;
             if (s_name.empty()/* == ""*/) {
+            	ostringstream oss;
+            	oss << "key_" << jj;
+            	s_name = oss.str();
+#if 0
             	char tmp[100];
                 ltoa(jj, tmp, 10);
                 s_name = (string) "key_" + tmp;
+#endif
             }
 
             {
@@ -143,12 +112,15 @@ bool fits_handler::fits_read_attributes(DAS &das, const string &filename, string
             }
 
         }
-
+#if 0
         string str = "HDU_";
         char tmp[100];
         ltoa(ii, tmp, 10);
         str.append(tmp);
-        das.add_table(str, at);
+#endif
+        ostringstream oss;
+        oss << "HDU_" << ii;
+        das.add_table(oss.str(), at);
     }
 
     if (status == END_OF_FILE) /* status values are defined in fitsioc.h */

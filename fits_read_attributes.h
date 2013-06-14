@@ -35,15 +35,10 @@
 
 #include <string>
 
-using std::string;
-
-#include <DAS.h>
-
-using namespace libdap;
+class libdap::DAS;
 
 namespace fits_handler {
-bool fits_read_attributes(DAS &das, const string &filename, string &error);
-char *ltoa(long val, char *buf, int base);
+	bool fits_read_attributes(libdap::DAS &das, const std::string &filename, std::string &error);
 }
 
 #endif // fits_read_attributes_h_
