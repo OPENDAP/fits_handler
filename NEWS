@@ -1,3 +1,9 @@
+version 1.0.9
+
+Added tests.
+
+Fixed a memory bug in the build of the DDS.
+
 Version 1.0.8
 
 Fixed tests and the way attributes are built.

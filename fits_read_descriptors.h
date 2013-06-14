@@ -35,29 +35,22 @@
 
 #include <string>
 
-using std::string ;
-
-#include "fitsio.h"
-
-#include "DDS.h"
-#include "Structure.h"
-
-using namespace libdap ;
+class libdap::DDS;
 
 namespace fits_handler
 {
-    bool fits_read_descriptors( DDS &dds, const string &filename,
-			        string &error ) ;
+    bool fits_read_descriptors( libdap::DDS &dds, const std::string &filename, std::string &error ) ;
 
-    int process_hdu_image( fitsfile *fptr, DDS &dds ) ;
+    int process_hdu_image( fitsfile *fptr, libdap::DDS &dds, const std::string &hdu, const std::string &str ) ;
 
-    int process_hdu_ascii_table( fitsfile *fptr, DDS &dds ) ;
-
-    int process_hdu_binary_table( fitsfile *fptr, DDS &dds ) ;
-
-    void process_status( int status, string &error ) ;
-
+    int process_hdu_ascii_table( fitsfile *fptr, libdap::DDS &dds, const std::string &hdu, const std::string &str ) ;
+#if 0
+    int process_hdu_binary_table( fitsfile *fptr, libdap::DDS &dds ) ;
+#endif
+    void process_status( int status, std::string &error ) ;
+#if 0
     char *ltoa( long val, char *buf, int base ) ;
+#endif
 }
 
 #endif // fits_read_descriptors_h_

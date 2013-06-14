@@ -1,3 +1,43 @@
+2013-06-14  James Gallagher <jgallagher@opendap.org>
+
+	Fix for the bug where info responses were not working for some of
+	the datasets. The problem turned out to be that the cfitsio
+	library seems to treat TLONG not as a 32-bit int but as a 64-bit
+	int. Image that were typed 'long' were being read into an array of
+	32-bit ints and that was overwriting memory. I added 12 tests,
+	including some for datasets that triggered this bug.
+
+2013-06-12  James Gallagher <jgallagher@opendap.org>
+
+	Source release hacks... bumped the version to 1.0.8
+
+	M    ChangeLog
+	M    fits_handler.spec
+	M    README
+	M    configure.ac
+	M    INSTALL
+	M    NEWS
+
+2013-06-12  James Gallagher <jgallagher@opendap.org>
+
+	Fixed a mistake in the processing of attributes in the FITS
+	handler. Also fixed a potential resource leak n the attribute
+	processing code since the code could exit leaving the data file
+	open. Made some other refactoring changes that removed unneeded
+	variables.
+
+2013-06-12  James Gallagher <jgallagher@opendap.org>
+
+	Repaired the fits hadnler's attribute processing.
+
+	M    fits_read_attributes.cc
+
+2013-06-12  James Gallagher <jgallagher@opendap.org>
+
+	Fixed the test baselines; the handler was not returning the
+	correct attribtues and the baselines were incorrectly checked in
+	with the broken attributes.
+
 2013-06-12  James Gallagher <jgallagher@opendap.org>
 
 	Fixed a mistake in the processing of attributes in the FITS

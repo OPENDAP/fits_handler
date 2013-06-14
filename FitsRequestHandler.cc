@@ -22,7 +22,7 @@
 //
 // You can contact University Corporation for Atmospheric Research at
 // 3080 Center Green Drive, Boulder, CO 80301
- 
+
 // (c) COPYRIGHT University Corporation for Atmostpheric Research 2004-2005
 // Please read the full copyright statement in the file COPYRIGHT_UCAR.
 //
@@ -30,234 +30,198 @@
 //      pwest       Patrick West <pwest@ucar.edu>
 //      jgarcia     Jose Garcia <jgarcia@ucar.edu>
 
+#include "config.h"
+
+#include <DAS.h>
+#include <DDS.h>
+#include <Ancillary.h>
+#include <InternalErr.h>
+
 #include "FitsRequestHandler.h"
 #include <BESResponseHandler.h>
 #include <BESDapError.h>
-#include <InternalErr.h>
+
 #include <BESDapNames.h>
 #include <BESResponseNames.h>
-#include "FitsResponseNames.h"
-#include "fits_read_attributes.h"
 #include <BESDASResponse.h>
-#include "fits_read_descriptors.h"
+
 #include <BESDDSResponse.h>
 #include <BESDataDDSResponse.h>
-#include <Ancillary.h>
+
 #include <BESVersionInfo.h>
 #include <BESConstraintFuncs.h>
 #include <BESServiceRegistry.h>
 #include <BESUtil.h>
-#include <BESConstraintFuncs.h>
-#include "config_fits.h"
 
-FitsRequestHandler::FitsRequestHandler( const string &name )
-    : BESRequestHandler( name )
+#include <fitsio.h>
+
+#include "FitsResponseNames.h"
+#include "fits_read_attributes.h"
+#include "fits_read_descriptors.h"
+
+FitsRequestHandler::FitsRequestHandler(const string &name) :
+		BESRequestHandler(name)
 {
-    add_handler( DAS_RESPONSE, FitsRequestHandler::fits_build_das ) ;
-    add_handler( DDS_RESPONSE, FitsRequestHandler::fits_build_dds ) ;
-    add_handler( DATA_RESPONSE, FitsRequestHandler::fits_build_data ) ;
-    add_handler( VERS_RESPONSE, FitsRequestHandler::fits_build_vers ) ;
-    add_handler( HELP_RESPONSE, FitsRequestHandler::fits_build_help ) ;
+	add_handler(DAS_RESPONSE, FitsRequestHandler::fits_build_das);
+	add_handler(DDS_RESPONSE, FitsRequestHandler::fits_build_dds);
+	add_handler(DATA_RESPONSE, FitsRequestHandler::fits_build_data);
+	add_handler(VERS_RESPONSE, FitsRequestHandler::fits_build_vers);
+	add_handler(HELP_RESPONSE, FitsRequestHandler::fits_build_help);
 }
 
 FitsRequestHandler::~FitsRequestHandler()
 {
 }
 
-bool
-FitsRequestHandler::fits_build_das( BESDataHandlerInterface &dhi )
+bool FitsRequestHandler::fits_build_das(BESDataHandlerInterface &dhi)
 {
-    BESResponseObject *response = dhi.response_handler->get_response_object() ;
-    BESDASResponse *bdas = dynamic_cast < BESDASResponse * >(response) ;
-    if( !bdas )
-	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
+	BESResponseObject *response = dhi.response_handler->get_response_object();
+	BESDASResponse *bdas = dynamic_cast<BESDASResponse *>(response);
+	if (!bdas) throw BESInternalError("cast error", __FILE__, __LINE__);
 
-    try
-    {
-	bdas->set_container( dhi.container->get_symbolic_name() ) ;
-	DAS *das = bdas->get_das();
-	string accessed = dhi.container->access() ;
-	string fits_error ;
-	if( !fits_handler::fits_read_attributes( *das, accessed, fits_error ) )
-	{
-	    throw BESDapError( fits_error, false, unknown_error,
-			       __FILE__, __LINE__ ) ;
+	try {
+		bdas->set_container(dhi.container->get_symbolic_name());
+		DAS *das = bdas->get_das();
+		string accessed = dhi.container->access();
+		string fits_error;
+		if (!fits_handler::fits_read_attributes(*das, accessed, fits_error)) {
+			throw BESDapError(fits_error, false, unknown_error, __FILE__, __LINE__);
+		}
+		Ancillary::read_ancillary_das(*das, accessed);
+		bdas->clear_container();
 	}
-	Ancillary::read_ancillary_das( *das, accessed ) ;
-	bdas->clear_container( ) ;
-    }
-    catch( InternalErr &e )
-    {
-	throw BESDapError( e.get_error_message(), true, e.get_error_code(),
-			   __FILE__, __LINE__ ) ;
-    }
-    catch( Error &e )
-    {
-	throw BESDapError( e.get_error_message(), false,
-			   e.get_error_code(), __FILE__, __LINE__ ) ;
-    }
-    catch( ... )
-    {
-	string err = "Unknown exception caught building cdf das response" ;
-	throw BESDapError( err, true, unknown_error,
-			   __FILE__, __LINE__ ) ;
-    }
-    return true ;
+	catch( InternalErr &e ) {
+		throw BESDapError(e.get_error_message(), true, e.get_error_code(), __FILE__, __LINE__);
+	}
+	catch( Error &e ) {
+		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
+	}
+	catch( ... ) {
+		string err = "Unknown exception caught building FITS das response";
+		throw BESDapError(err, true, unknown_error, __FILE__, __LINE__);
+	}
+	return true;
 }
 
-bool
-FitsRequestHandler::fits_build_dds( BESDataHandlerInterface &dhi )
+bool FitsRequestHandler::fits_build_dds(BESDataHandlerInterface &dhi)
 {
-    BESResponseObject *response = dhi.response_handler->get_response_object();
-    BESDDSResponse *bdds = dynamic_cast < BESDDSResponse * >(response);
-    if( !bdds )
-	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
-  
+	BESResponseObject *response = dhi.response_handler->get_response_object();
+	BESDDSResponse *bdds = dynamic_cast<BESDDSResponse *>(response);
+	if (!bdds) throw BESInternalError("cast error", __FILE__, __LINE__);
 
-    try
-    {
-	bdds->set_container( dhi.container->get_symbolic_name() ) ;
-	DDS *dds = bdds->get_dds();
-	string accessed = dhi.container->access() ;
-	string fits_error ;
-	if( !fits_handler::fits_read_descriptors( *dds, accessed,
-				     fits_error ) )
-	{
-	    throw BESDapError( fits_error, false, unknown_error,
-			       __FILE__, __LINE__ ) ;
+	try {
+		bdds->set_container(dhi.container->get_symbolic_name());
+		DDS *dds = bdds->get_dds();
+		string accessed = dhi.container->access();
+		string fits_error;
+
+		if (!fits_handler::fits_read_descriptors(*dds, accessed, fits_error)) {
+			throw BESDapError(fits_error, false, unknown_error, __FILE__, __LINE__);
+		}
+
+		Ancillary::read_ancillary_dds(*dds, accessed);
+		DAS *das = new DAS;
+		BESDASResponse bdas(das);
+		bdas.set_container(dhi.container->get_symbolic_name());
+		if (!fits_handler::fits_read_attributes(*das, accessed, fits_error)) {
+			throw BESDapError(fits_error, false, unknown_error, __FILE__, __LINE__);
+		}
+		Ancillary::read_ancillary_das(*das, accessed);
+
+		dds->transfer_attributes(das);
+
+		bdds->set_constraint(dhi);
+
+		bdds->clear_container();
 	}
-	Ancillary::read_ancillary_dds( *dds, accessed ) ;
-
-        DAS *das = new DAS ;
-	BESDASResponse bdas( das ) ;
-	bdas.set_container( dhi.container->get_symbolic_name() ) ;
-	if( !fits_handler::fits_read_attributes( *das, accessed, fits_error ) )
-	{
-	    throw BESDapError( fits_error, false, unknown_error,
-			       __FILE__, __LINE__ ) ;
+	catch( InternalErr &e ) {
+		throw BESDapError(e.get_error_message(), true, e.get_error_code(), __FILE__, __LINE__);
 	}
-	Ancillary::read_ancillary_das( *das, accessed ) ;
-        
-        dds->transfer_attributes(das);
+	catch( Error &e ) {
+		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
+	}
+	catch( ... ) {
+		string err = "Unknown exception caught building FITS dds response";
+		throw BESDapError(err, true, unknown_error, __FILE__, __LINE__);
+	}
 
-	bdds->set_constraint( dhi ) ;
-
-	bdds->clear_container( ) ;
-    }
-    catch( InternalErr &e )
-    {
-	throw BESDapError( e.get_error_message(), true, e.get_error_code(),
-			   __FILE__, __LINE__ ) ;
-    }
-    catch( Error &e )
-    {
-	throw BESDapError( e.get_error_message(), false,
-			   e.get_error_code(), __FILE__, __LINE__ ) ;
-    }
-    catch( ... )
-    {
-	string err = "Unknown exception caught building cdf dds response" ;
-	throw BESDapError( err, true, unknown_error,
-			   __FILE__, __LINE__ ) ;
-    }
-
-    return true ;
+	return true;
 }
 
-bool
-FitsRequestHandler::fits_build_data( BESDataHandlerInterface &dhi )
+bool FitsRequestHandler::fits_build_data(BESDataHandlerInterface &dhi)
 {
-    BESResponseObject *response = dhi.response_handler->get_response_object();
-    BESDataDDSResponse *bdds = dynamic_cast < BESDataDDSResponse * >(response);
-    if( !bdds )
-	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
-  
+	BESResponseObject *response = dhi.response_handler->get_response_object();
+	BESDataDDSResponse *bdds = dynamic_cast<BESDataDDSResponse *>(response);
+	if (!bdds) throw BESInternalError("cast error", __FILE__, __LINE__);
 
-    try
-    {
-	bdds->set_container( dhi.container->get_symbolic_name() ) ;
-	DataDDS *dds = bdds->get_dds();
-	string accessed = dhi.container->access() ;
-	string fits_error ;
-	if( !fits_handler::fits_read_descriptors( *dds, accessed,
-				     fits_error ) )
-	{
-	    throw BESDapError( fits_error, false, unknown_error,
-	                       __FILE__, __LINE__ ) ;
+	try {
+		bdds->set_container(dhi.container->get_symbolic_name());
+		DataDDS *dds = bdds->get_dds();
+		string accessed = dhi.container->access();
+		string fits_error;
+		if (!fits_handler::fits_read_descriptors(*dds, accessed, fits_error)) {
+			throw BESDapError(fits_error, false, unknown_error, __FILE__, __LINE__);
+		}
+		Ancillary::read_ancillary_dds(*dds, accessed);
+
+		DAS *das = new DAS;
+		BESDASResponse bdas(das);
+		bdas.set_container(dhi.container->get_symbolic_name());
+		if (!fits_handler::fits_read_attributes(*das, accessed, fits_error)) {
+			throw BESDapError(fits_error, false, unknown_error, __FILE__, __LINE__);
+		}
+		Ancillary::read_ancillary_das(*das, accessed);
+
+		dds->transfer_attributes(das);
+
+		bdds->set_constraint(dhi);
+
+		bdds->clear_container();
 	}
-	Ancillary::read_ancillary_dds( *dds, accessed ) ;
-
-        DAS *das = new DAS ;
-	BESDASResponse bdas( das ) ;
-	bdas.set_container( dhi.container->get_symbolic_name() ) ;
-	if( !fits_handler::fits_read_attributes( *das, accessed, fits_error ) )
-	{
-	    throw BESDapError( fits_error, false, unknown_error,
-			       __FILE__, __LINE__ ) ;
+	catch( InternalErr &e ) {
+		throw BESDapError(e.get_error_message(), true, e.get_error_code(), __FILE__, __LINE__);
 	}
-	Ancillary::read_ancillary_das( *das, accessed ) ;
-        
-        dds->transfer_attributes(das);
+	catch( Error &e ) {
+		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
+	}
+	catch( ... ) {
+		string err = "Unknown exception caught building FITS data response";
+		throw BESDapError(err, true, unknown_error, __FILE__, __LINE__);
+	}
 
-	bdds->set_constraint( dhi ) ;
-
-	bdds->clear_container( ) ;
-    }
-    catch( InternalErr &e )
-    {
-	throw BESDapError( e.get_error_message(), true, e.get_error_code(),
-			   __FILE__, __LINE__ ) ;
-    }
-    catch( Error &e )
-    {
-	throw BESDapError( e.get_error_message(), false,
-			   e.get_error_code(), __FILE__, __LINE__ ) ;
-    }
-    catch( ... )
-    {
-	string err = "Unknown exception caught building cdf data response" ;
-	throw BESDapError( err, true, unknown_error,
-			   __FILE__, __LINE__ ) ;
-    }
-
-    return true ;
+	return true;
 }
 
-bool
-FitsRequestHandler::fits_build_vers( BESDataHandlerInterface &dhi )
+bool FitsRequestHandler::fits_build_vers(BESDataHandlerInterface &dhi)
 {
-    BESResponseObject *response = dhi.response_handler->get_response_object();
-    BESVersionInfo *info = dynamic_cast < BESVersionInfo * >(response);
-    if( !info )
-	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
-  
-    info->add_module( PACKAGE_NAME, PACKAGE_VERSION ) ;
+	BESResponseObject *response = dhi.response_handler->get_response_object();
+	BESVersionInfo *info = dynamic_cast<BESVersionInfo *>(response);
+	if (!info) throw BESInternalError("cast error", __FILE__, __LINE__);
 
-    return true ;
+	info->add_module(PACKAGE_NAME, PACKAGE_VERSION);
+
+	return true;
 }
 
-bool
-FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
+bool FitsRequestHandler::fits_build_help(BESDataHandlerInterface &dhi)
 {
-    BESResponseObject *response = dhi.response_handler->get_response_object();
-    BESInfo *info = dynamic_cast<BESInfo *>(response);
-    if( !info )
-	throw BESInternalError( "cast error", __FILE__, __LINE__ ) ;
+	BESResponseObject *response = dhi.response_handler->get_response_object();
+	BESInfo *info = dynamic_cast<BESInfo *>(response);
+	if (!info) throw BESInternalError("cast error", __FILE__, __LINE__);
 
-    map<string,string> attrs ;
-    attrs["name"] = PACKAGE_NAME ;
-    attrs["version"] = PACKAGE_VERSION ;
-    list<string> services ;
-    BESServiceRegistry::TheRegistry()->services_handled( FITS_NAME, services );
-    if( services.size() > 0 )
-    {
-	string handles = BESUtil::implode( services, ',' ) ;
-	attrs["handles"] = handles ;
-    }
-    info->begin_tag( "module", &attrs ) ;
-    info->end_tag( "module" ) ;
+	map<string, string> attrs;
+	attrs["name"] = PACKAGE_NAME;
+	attrs["version"] = PACKAGE_VERSION;
+	list<string> services;
+	BESServiceRegistry::TheRegistry()->services_handled(FITS_NAME, services);
+	if (services.size() > 0) {
+		string handles = BESUtil::implode(services, ',');
+		attrs["handles"] = handles;
+	}
+	info->begin_tag("module", &attrs);
+	info->end_tag("module");
 
-    return true ;
+	return true;
 }
 
 /** @brief dumps information about this object
@@ -267,13 +231,11 @@ FitsRequestHandler::fits_build_help( BESDataHandlerInterface &dhi )
  *
  * @param strm C++ i/o stream to dump the information to
  */
-void
-FitsRequestHandler::dump( ostream &strm ) const
+void FitsRequestHandler::dump(ostream &strm) const
 {
-    strm << BESIndent::LMarg << "FitsRequestHandler::dump - ("
-			     << (void *)this << ")" << endl ;
-    BESIndent::Indent() ;
-    BESRequestHandler::dump( strm ) ;
-    BESIndent::UnIndent() ;
+	strm << BESIndent::LMarg << "FitsRequestHandler::dump - (" << (void *) this << ")" << endl;
+	BESIndent::Indent();
+	BESRequestHandler::dump(strm);
+	BESIndent::UnIndent();
 }
 
