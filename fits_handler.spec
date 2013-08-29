@@ -1,6 +1,6 @@
 Summary:         FITS data handler for the OPeNDAP Data server
 Name:            fits_handler
-Version:         1.0.9
+Version:         1.0.10
 Release:         1
 License:         LGPLv2+
 Group:           System Environment/Daemons 

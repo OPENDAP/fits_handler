@@ -1,5 +1,20 @@
 2013-06-14  James Gallagher <jgallagher@opendap.org>
 
+	Release 1.0.9
+
+	M    ChangeLog
+	M    fits_handler.spec
+	M    README
+	M    configure.ac
+	M    INSTALL
+	M    NEWS
+
+2013-06-14  James Gallagher <jgallagher@opendap.org>
+
+	Fix for the bug where info responses were not working for some of the datasets. The problem turned out to be that the cfitsio library seems to treat TLONG not as a 32-bit int but as a 64-bit int. Image that were typed 'long' were being read into an array of 32-bit ints and that was overwriting memory. I added 12 tests, including some for datasets that triggered this bug.
+
+2013-06-14  James Gallagher <jgallagher@opendap.org>
+
 	Fix for the bug where info responses were not working for some of
 	the datasets. The problem turned out to be that the cfitsio
 	library seems to treat TLONG not as a 32-bit int but as a 64-bit
