@@ -35,10 +35,12 @@
 
 #include <string>
 
-class libdap::DAS;
+namespace libdap {
+    class DAS;
+}
 
 namespace fits_handler {
-	bool fits_read_attributes(libdap::DAS &das, const std::string &filename, std::string &error);
+    bool fits_read_attributes(libdap::DAS &das, const std::string &filename, std::string &error);
 }
 
 #endif // fits_read_attributes_h_
