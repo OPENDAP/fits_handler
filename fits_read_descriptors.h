@@ -35,10 +35,11 @@
 
 #include <string>
 
-class libdap::DDS;
+namespace  libdap {
+    class DDS;
+}
 
-namespace fits_handler
-{
+namespace fits_handler {
     bool fits_read_descriptors( libdap::DDS &dds, const std::string &filename, std::string &error ) ;
 
     int process_hdu_image( fitsfile *fptr, libdap::DDS &dds, const std::string &hdu, const std::string &str ) ;

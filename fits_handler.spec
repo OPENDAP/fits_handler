@@ -1,17 +1,17 @@
 Summary:         FITS data handler for the OPeNDAP Data server
 Name:            fits_handler
-Version:         1.0.10
+Version:         1.0.11
 Release:         1
 License:         LGPLv2+
 Group:           System Environment/Daemons 
 Source0:         http://www.opendap.org/pub/source/%{name}-%{version}.tar.gz
 URL:             http://www.opendap.org/
-Requires:        libdap >= 3.11.0
-Requires:        bes >= 3.9.0
+Requires:        libdap >= 3.13.0
+Requires:        bes >= 3.13.0
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:   libdap-devel >= 3.11.0
-BuildRequires:   bes-devel >= 3.9.0
+BuildRequires:   libdap-devel >= 3.13.0
+BuildRequires:   bes-devel >= 3.13.0
 
 %description
 This is the fits data handler for our data server. It reads fits
