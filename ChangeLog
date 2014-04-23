@@ -1,3 +1,40 @@
+2014-03-26  James Gallagher <jgallagher@opendap.org>
+
+	fixed namespace libdap
+
+	M    fits_read_attributes.h
+	M    fits_read_descriptors.h
+
+2013-10-01  James Gallagher <jgallagher@opendap.org>
+
+	Updated the FSF address in the copyright headers
+
+2013-09-26  James Gallagher <jgallagher@opendap.org>
+
+	removed -fno-defer-pop from all copies of Makefile.am since the new OSX compiler prints warnings about it and it seems to not make a difference with newer g++ versions.
+
+2013-08-28  Nathan Potter <ndp@opendap.org>
+
+	fits_handler: Updating version number, changelog, etc. for pending Hyrax 1.9 release
+
+2013-06-14  James Gallagher <jgallagher@opendap.org>
+
+	Release 1.0.9
+
+	M    ChangeLog
+	M    fits_handler.spec
+	M    README
+	M    configure.ac
+	M    INSTALL
+	M    NEWS
+
+2013-06-14  James Gallagher <jgallagher@opendap.org>
+
+	Fix for the bug where info responses were not working for some of the datasets. The problem turned out to be that the cfitsio library seems to treat TLONG not as a 32-bit int but as a 64-bit int. Image that were typed 'long' were being read into an array of 32-bit ints and that was overwriting memory. I added 12 tests, including some for datasets that triggered this bug.
+
+;; Local Variables:
+;; coding: utf-8
+;; End:
 2013-06-14  James Gallagher <jgallagher@opendap.org>
 
 	Release 1.0.9
