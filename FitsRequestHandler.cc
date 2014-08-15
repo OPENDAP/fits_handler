@@ -1,7 +1,7 @@
 // FitsRequestHandler.cc
 
 // This file is part of fits_handler, a data handler for the OPeNDAP data
-// server. 
+// server.
 
 // Copyright (c) 2004,2005 University Corporation for Atmospheric Research
 // Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
@@ -10,12 +10,12 @@
 // modify it under the terms of the GNU Lesser General Public
 // License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
-// 
+//
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -34,19 +34,21 @@
 
 #include <DAS.h>
 #include <DDS.h>
+#include <DMR.h>
+#include <D4BaseTypeFactory.h>
 #include <Ancillary.h>
 #include <InternalErr.h>
+#include <mime_util.h>
 
-#include "FitsRequestHandler.h"
 #include <BESResponseHandler.h>
 #include <BESDapError.h>
 
 #include <BESDapNames.h>
 #include <BESResponseNames.h>
 #include <BESDASResponse.h>
-
 #include <BESDDSResponse.h>
 #include <BESDataDDSResponse.h>
+#include <BESDMRResponse.h>
 
 #include <BESVersionInfo.h>
 #include <BESConstraintFuncs.h>
@@ -55,9 +57,11 @@
 
 #include <fitsio.h>
 
-#include "FitsResponseNames.h"
+#include "FitsRequestHandler.h"
 #include "fits_read_attributes.h"
 #include "fits_read_descriptors.h"
+
+#define FITS_NAME "fits"
 
 FitsRequestHandler::FitsRequestHandler(const string &name) :
 		BESRequestHandler(name)
@@ -65,6 +69,10 @@ FitsRequestHandler::FitsRequestHandler(const string &name) :
 	add_handler(DAS_RESPONSE, FitsRequestHandler::fits_build_das);
 	add_handler(DDS_RESPONSE, FitsRequestHandler::fits_build_dds);
 	add_handler(DATA_RESPONSE, FitsRequestHandler::fits_build_data);
+
+	add_handler(DMR_RESPONSE, FitsRequestHandler::fits_build_dmr);
+	add_handler(DAP4DATA_RESPONSE, FitsRequestHandler::fits_build_dmr);
+
 	add_handler(VERS_RESPONSE, FitsRequestHandler::fits_build_vers);
 	add_handler(HELP_RESPONSE, FitsRequestHandler::fits_build_help);
 }
@@ -97,8 +105,7 @@ bool FitsRequestHandler::fits_build_das(BESDataHandlerInterface &dhi)
 		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
 	}
 	catch( ... ) {
-		string err = "Unknown exception caught building FITS das response";
-		throw BESDapError(err, true, unknown_error, __FILE__, __LINE__);
+		throw BESDapError("Unknown exception caught building FITS das response", true, unknown_error, __FILE__, __LINE__);
 	}
 	return true;
 }
@@ -188,6 +195,69 @@ bool FitsRequestHandler::fits_build_data(BESDataHandlerInterface &dhi)
 		string err = "Unknown exception caught building FITS data response";
 		throw BESDapError(err, true, unknown_error, __FILE__, __LINE__);
 	}
+
+	return true;
+}
+
+/**
+ * Build a DMR object. This method builds a DMR by first building a DDS
+ * that is loaded with attributes and then using that to make a DMR. This
+ * method can be used by both the DAP4 metadata and data responses - because
+ * the DMR is the C++ object used for both by libdap.
+ *
+ * @note The CSV handler has a version of this method that contains some
+ * more commentary.
+ *
+ * @param dhi
+ * @return true or throws an exception on error
+ */
+bool FitsRequestHandler::fits_build_dmr(BESDataHandlerInterface &dhi)
+{
+	string data_path = dhi.container->access();
+
+	BaseTypeFactory factory;
+	DDS dds(&factory, name_path(data_path), "3.2");
+	dds.filename(data_path);
+
+	try {
+		string fits_error;
+
+		if (!fits_handler::fits_read_descriptors(dds, data_path, fits_error))
+			throw BESDapError(fits_error, false, unknown_error, __FILE__, __LINE__);
+
+		DAS das;
+		if (!fits_handler::fits_read_attributes(das, data_path, fits_error))
+			throw BESDapError(fits_error, false, unknown_error, __FILE__, __LINE__);
+		Ancillary::read_ancillary_das(das, data_path);
+
+		dds.transfer_attributes(&das);
+	}
+	catch( InternalErr &e ) {
+		throw BESDapError(e.get_error_message(), true, e.get_error_code(), __FILE__, __LINE__);
+	}
+	catch( Error &e ) {
+		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
+	}
+	catch( ... ) {
+		throw BESDapError("Unknown exception caught building FITS data response", true, unknown_error, __FILE__, __LINE__);
+	}
+
+	// Make a DMR using the DDS
+	DMR *built_dmr = new DMR(new D4BaseTypeFactory, dds);
+
+	// Extract the DMR Response object - this holds the DMR used by the
+	// other parts of the framework.
+	BESResponseObject *response = dhi.response_handler->get_response_object();
+	BESDMRResponse &bdmr = dynamic_cast<BESDMRResponse &>(*response);
+
+	// Remove the existing DMR and set the newly made one
+	DMR *dmr = bdmr.get_dmr();
+	delete dmr->factory();
+	delete dmr;
+	bdmr.set_dmr(built_dmr);	// BESDMRResponse will delete this object
+
+	bdmr.set_dap4_constraint(dhi);
+	bdmr.set_dap4_function(dhi);
 
 	return true;
 }
