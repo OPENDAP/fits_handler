@@ -239,7 +239,7 @@ bool FitsRequestHandler::fits_build_dmr(BESDataHandlerInterface &dhi)
 		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
 	}
 	catch( ... ) {
-		throw BESDapError("Unknown exception caught building FITS data response", true, unknown_error, __FILE__, __LINE__);
+		throw BESDapError("Unknown exception caught building FITS DMR response", true, unknown_error, __FILE__, __LINE__);
 	}
 
 	// Make a DMR using the DDS
