@@ -242,8 +242,6 @@ bool FitsRequestHandler::fits_build_dmr(BESDataHandlerInterface &dhi)
 		throw BESDapError("Unknown exception caught building FITS DMR response", true, unknown_error, __FILE__, __LINE__);
 	}
 
-	// Make a DMR using the DDS
-	DMR *built_dmr = new DMR(new D4BaseTypeFactory, dds);
 
 	// Extract the DMR Response object - this holds the DMR used by the
 	// other parts of the framework.
@@ -252,9 +250,8 @@ bool FitsRequestHandler::fits_build_dmr(BESDataHandlerInterface &dhi)
 
 	// Remove the existing DMR and set the newly made one
 	DMR *dmr = bdmr.get_dmr();
-	delete dmr->factory();
-	delete dmr;
-	bdmr.set_dmr(built_dmr);	// BESDMRResponse will delete this object
+	dmr->set_factory(new D4BaseTypeFactory);
+	dmr->build_using_dds(dds);
 
 	bdmr.set_dap4_constraint(dhi);
 	bdmr.set_dap4_function(dhi);
