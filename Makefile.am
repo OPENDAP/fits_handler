@@ -9,6 +9,13 @@ AUTOMAKE_OPTIONS = foreign check-news
 
 ACLOCAL_AMFLAGS = -I conf
 
+if DAP_MODULES
+AM_CPPFLAGS = $(CFITS_CPPFLAGS) -I$(top_srcdir)/dispatch -I$(top_srcdir)/dap $(DAP_CFLAGS)
+LIBADD = $(CFITS_LDFLAGS) $(CFITS_LIBS) $(DAP_SERVER_LIBS) $(DAP_CLIENT_LIBS)
+else
+AM_CPPFLAGS = $(BES_CPPFLAGS) # or wahtever was set here or in ..._CPPFLAGS
+LIBADD = $(BES_DAP_LIBS)      # and ..._LIBADD
+endif
 SUBDIRS = . bes-testsuite
 
 lib_besdir=$(libdir)/bes
@@ -24,9 +31,9 @@ BES_HANDLER_SRC = FitsRequestHandler.cc FitsModule.cc \
 		  FitsModule.h
 
 libfits_module_la_SOURCES = $(FITSSRCS) $(FITSHDRS) $(BES_HANDLER_SRC)
-libfits_module_la_CPPFLAGS = $(BES_CPPFLAGS)
+# libfits_module_la_CPPFLAGS = $(BES_CPPFLAGS)
 libfits_module_la_LDFLAGS = -avoid-version -module 
-libfits_module_la_LIBADD = $(BES_DAP_LIBS)
+libfits_module_la_LIBADD = $(LIBADD)
 
 EXTRA_DIST = data COPYRIGHT COPYING fits_handler.spec \
 	fits.conf.in OSX_Resources
@@ -46,7 +53,7 @@ install-data-local: fits.conf
 uninstall-local:
 	rm -f $(DESTDIR)$(sysconfdir)/bes/modules/fits.conf
 
-fits.conf: fits.conf.in config.status
+fits.conf: fits.conf.in $(top_srcdir)/config.status
 	sed -e "s%[@]bes_modules_dir[@]%${lib_besdir}%" $< > fits.conf
 
 ###########################################################################

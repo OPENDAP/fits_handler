@@ -8,6 +8,8 @@ AC_CONFIG_MACRO_DIR([conf])
 
 AM_INIT_AUTOMAKE(1.10)
 
+AM_CONDITIONAL([DAP_MODULES], [false])
+
 # The handler is a shared object library, so we don't normally need
 # the static lib. Override this default by specifying `--enable-static',
 # which can make running unit tests with valgrind far more pleasant. 
@@ -146,7 +148,8 @@ DODS_GCOV_VALGRIND
 
 AC_CONFIG_FILES([Makefile
 		 bes-testsuite/atlocal
-		 bes-testsuite/Makefile])
+		 bes-testsuite/Makefile
+		 bes-testsuite/bes.conf])
 		
 AC_CONFIG_FILES([bes-testsuite/generate_metadata_baseline.sh], [chmod +x bes-testsuite/generate_metadata_baseline.sh])
 AC_CONFIG_FILES([bes-testsuite/generate_data_baseline.sh], [chmod +x bes-testsuite/generate_data_baseline.sh])
