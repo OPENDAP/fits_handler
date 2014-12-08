@@ -1,7 +1,7 @@
 // FitsRequestHandler.cc
 
 // This file is part of fits_handler, a data handler for the OPeNDAP data
-// server. 
+// server.
 
 // Copyright (c) 2004,2005 University Corporation for Atmospheric Research
 // Author: Patrick West <pwest@ucar.edu> and Jose Garcia <jgarcia@ucar.edu>
@@ -10,12 +10,12 @@
 // modify it under the terms of the GNU Lesser General Public
 // License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
-// 
+//
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -198,7 +198,10 @@ bool FitsRequestHandler::fits_build_vers(BESDataHandlerInterface &dhi)
 	BESVersionInfo *info = dynamic_cast<BESVersionInfo *>(response);
 	if (!info) throw BESInternalError("cast error", __FILE__, __LINE__);
 
-	info->add_module(PACKAGE_NAME, PACKAGE_VERSION);
+#if 0
+    info->add_module(PACKAGE_NAME, PACKAGE_VERSION);
+#endif
+    info->add_module(MODULE_NAME, MODULE_VERSION);
 
 	return true;
 }
@@ -210,8 +213,12 @@ bool FitsRequestHandler::fits_build_help(BESDataHandlerInterface &dhi)
 	if (!info) throw BESInternalError("cast error", __FILE__, __LINE__);
 
 	map<string, string> attrs;
-	attrs["name"] = PACKAGE_NAME;
-	attrs["version"] = PACKAGE_VERSION;
+    attrs["name"] = MODULE_NAME ;
+    attrs["version"] = MODULE_VERSION ;
+#if 0
+    attrs["name"] = PACKAGE_NAME;
+    attrs["version"] = PACKAGE_VERSION;
+#endif
 	list<string> services;
 	BESServiceRegistry::TheRegistry()->services_handled(FITS_NAME, services);
 	if (services.size() > 0) {
