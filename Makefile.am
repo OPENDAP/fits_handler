@@ -24,7 +24,8 @@ lib_bes_LTLIBRARIES = libfits_module.la
 FITSSRCS:=fits_read_attributes.cc fits_read_descriptors.cc
 # BESAutoPtr.cc
 
-FITSHDRS:=fits_read_attributes.h fits_read_descriptors.h BESAutoPtr.h config.h
+FITSHDRS:=fits_read_attributes.h fits_read_descriptors.h BESAutoPtr.h 
+# config.h
 
 BES_HANDLER_SRC = FitsRequestHandler.cc FitsModule.cc \
 		  FitsRequestHandler.h FitsResponseNames.h \
