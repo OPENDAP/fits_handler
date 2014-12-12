@@ -146,6 +146,13 @@ AC_CHECK_CFITS(
 
 DODS_GCOV_VALGRIND
 
+## This sets up the special symbols used to build the bes.conf file for
+## the tests. Previously, this was done in the Makefile.am down in the
+## test directory, but building the bes.conf here works better with
+## autoconf overall and esp. with the 'modules' build. jhrg 11/19/14
+modulesdir=$BES_MODULE_DIR
+AC_SUBST(modulesdir)
+
 AC_CONFIG_FILES([Makefile
 		 bes-testsuite/atlocal
 		 bes-testsuite/Makefile
