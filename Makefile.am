@@ -35,8 +35,7 @@ FITSHDRS:=fits_read_attributes.h fits_read_descriptors.h BESAutoPtr.h
 # config.h
 
 BES_HANDLER_SRC = FitsRequestHandler.cc FitsModule.cc \
-		  FitsRequestHandler.h FitsResponseNames.h \
-		  FitsModule.h
+		  FitsRequestHandler.h FitsModule.h
 
 libfits_module_la_SOURCES = $(FITSSRCS) $(FITSHDRS) $(BES_HANDLER_SRC)
 # libfits_module_la_CPPFLAGS = $(BES_CPPFLAGS)
