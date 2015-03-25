@@ -46,6 +46,8 @@ atlocal
 
 ## fits specific files
 
+fits.conf
+
 bes-testsuite/bes.conf
 bes-testsuite/fits_handlerTest
 bes-testsuite/generate_data_baseline.sh
