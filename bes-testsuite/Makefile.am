@@ -43,12 +43,13 @@ AUTOM4TE = autom4te
  
 TESTSUITE = $(srcdir)/fits_handlerTest
 
-check-local: atconfig atlocal $(TESTSUITE)
+check-local: atconfig atlocal $(srcdir)/package.m4 $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' $(TESTSUITEFLAGS);
 
 clean-local:
 	test ! -f '$(TESTSUITE)' || $(SHELL) '$(TESTSUITE)' --clean
-
+	-rm $(srcdir)/package.m4 
+	
 distclean-local:
 	-rm atconfig
 
