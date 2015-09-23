@@ -15,12 +15,13 @@ TEST_COV_FLAGS = -ftest-coverage -fprofile-arcs
 
 noinst_DATA = bes.conf
 
-CLEANFILES = *.log *.sum $(TESTSUITE) $(srcdir)/package.m4
+CLEANFILES = bes.conf
 
 EXTRA_DIST = fits $(TESTSUITE).at $(TESTSUITE) atlocal.in \
-$(srcdir)/package.m4 bes.conf.in bes.conf.modules.in
+$(srcdir)/package.m4 bes.conf.in bes.conf.modules.in \
+generate_data_baselines.sh generate_metadata_baselines.sh
 
-DISTCLEANFILES = bes.conf atconfig
+DISTCLEANFILES = atconfig generate_data_baselines.sh generate_metadata_baselines.sh
 
 if DAP_MODULES
 BES_CONF_IN = bes.conf.modules.in
@@ -48,6 +49,7 @@ check-local: atconfig atlocal $(srcdir)/package.m4 $(TESTSUITE)
 
 clean-local:
 	test ! -f '$(TESTSUITE)' || $(SHELL) '$(TESTSUITE)' --clean
+	-rm -f $(TESTSUITE) $(srcdir)/package.m4 
 
 AUTOTEST = $(AUTOM4TE) --language=autotest
 $(TESTSUITE): $(srcdir)/fits_handlerTest.at $(srcdir)/package.m4
