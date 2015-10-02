@@ -18,8 +18,7 @@ noinst_DATA = bes.conf
 CLEANFILES = bes.conf
 
 EXTRA_DIST = fits $(TESTSUITE).at $(TESTSUITE) atlocal.in \
-$(srcdir)/package.m4 bes.conf.in bes.conf.modules.in \
-generate_data_baselines.sh generate_metadata_baselines.sh
+$(srcdir)/package.m4 bes.conf.in bes.conf.modules.in
 
 DISTCLEANFILES = atconfig generate_data_baselines.sh generate_metadata_baselines.sh
 
@@ -36,7 +35,6 @@ bes.conf: $(BES_CONF_IN) $(top_srcdir)/configure.ac
 	@clean_abs_top_srcdir=`echo ${abs_top_srcdir} | sed 's/\(.*\)\/\(.[^\/]*\)\/\.\./\1/g'`; \
 	sed -e "s%[@]abs_top_srcdir[@]%$$clean_abs_top_srcdir%" \
 		-e "s%[@]abs_top_builddir[@]%${abs_top_builddir}%" $< > bes.conf
-
 
 ############## Autotest follows #####################
 
