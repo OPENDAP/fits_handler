@@ -104,6 +104,9 @@ bool FitsRequestHandler::fits_build_das(BESDataHandlerInterface &dhi)
 	catch( Error &e ) {
 		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
 	}
+    catch (BESError &e) {
+        throw;
+    }
 	catch( ... ) {
 		throw BESDapError("Unknown exception caught building FITS das response", true, unknown_error, __FILE__, __LINE__);
 	}
@@ -147,6 +150,9 @@ bool FitsRequestHandler::fits_build_dds(BESDataHandlerInterface &dhi)
 	catch( Error &e ) {
 		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
 	}
+    catch (BESError &e) {
+        throw;
+    }
 	catch( ... ) {
 		string err = "Unknown exception caught building FITS dds response";
 		throw BESDapError(err, true, unknown_error, __FILE__, __LINE__);
@@ -191,6 +197,9 @@ bool FitsRequestHandler::fits_build_data(BESDataHandlerInterface &dhi)
 	catch( Error &e ) {
 		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
 	}
+    catch (BESError &e) {
+        throw;
+    }
 	catch( ... ) {
 		string err = "Unknown exception caught building FITS data response";
 		throw BESDapError(err, true, unknown_error, __FILE__, __LINE__);
@@ -238,6 +247,9 @@ bool FitsRequestHandler::fits_build_dmr(BESDataHandlerInterface &dhi)
 	catch( Error &e ) {
 		throw BESDapError(e.get_error_message(), false, e.get_error_code(), __FILE__, __LINE__);
 	}
+    catch (BESError &e) {
+        throw;
+    }
 	catch( ... ) {
 		throw BESDapError("Unknown exception caught building FITS DMR response", true, unknown_error, __FILE__, __LINE__);
 	}
