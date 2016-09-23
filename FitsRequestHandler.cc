@@ -34,6 +34,7 @@
 
 #include <DAS.h>
 #include <DDS.h>
+#include <DataDDS.h>
 #include <DMR.h>
 #include <D4BaseTypeFactory.h>
 #include <Ancillary.h>
@@ -60,6 +61,8 @@
 #include "FitsRequestHandler.h"
 #include "fits_read_attributes.h"
 #include "fits_read_descriptors.h"
+
+using namespace libdap;
 
 #define FITS_NAME "fits"
 
