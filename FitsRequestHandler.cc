@@ -172,7 +172,7 @@ bool FitsRequestHandler::fits_build_data(BESDataHandlerInterface &dhi)
 
 	try {
 		bdds->set_container(dhi.container->get_symbolic_name());
-		DataDDS *dds = bdds->get_dds();
+		DDS *dds = bdds->get_dds();
 		string accessed = dhi.container->access();
 		string fits_error;
 		if (!fits_handler::fits_read_descriptors(*dds, accessed, fits_error)) {
